@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://dgriqn6k1fogp"]
+
+[node name="opciones" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -341.0
+offset_top = -190.5
+offset_right = 341.0
+offset_bottom = 190.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 40
+
+[node name="HB" type="HBoxContainer" parent="MC"]
+layout_mode = 2
+alignment = 1
+
+[node name="label" type="VBoxContainer" parent="MC/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MC/HB/label"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "FullScreen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MC/HB/label"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "BGM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="MC/HB/label"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "SFX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="MC/HB/label"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "UI Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="MC/HB/label"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "lan"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="accion" type="VBoxContainer" parent="MC/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="full" type="CheckButton" parent="MC/HB/accion" groups=["boton"]]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../Button")
+flat = true
+
+[node name="bgm" type="HSlider" parent="MC/HB/accion" groups=["boton"]]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 3
+min_value = -80.0
+max_value = 0.0
+
+[node name="sfx" type="HSlider" parent="MC/HB/accion" groups=["boton"]]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 3
+min_value = -80.0
+max_value = 0.0
+
+[node name="ui" type="HSlider" parent="MC/HB/accion" groups=["boton"]]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 3
+min_value = -80.0
+max_value = 0.0
+
+[node name="Button" type="Button" parent="MC/HB/accion" groups=["boton"]]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_bottom = NodePath("../full")
+text = "langu"
+
+[connection signal="toggled" from="MC/HB/accion/full" to="." method="_on_full_toggled"]
+[connection signal="value_changed" from="MC/HB/accion/bgm" to="." method="_on_bgm_value_changed"]
+[connection signal="value_changed" from="MC/HB/accion/sfx" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="MC/HB/accion/ui" to="." method="_on_ui_value_changed"]
+[connection signal="button_down" from="MC/HB/accion/Button" to="." method="_on_button_button_down"]
