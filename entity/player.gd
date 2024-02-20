@@ -1,9 +1,9 @@
-extends CharacterBody2D
-const SPEED=9000
+class_name Player extends DigimonBase
+const SPEEDMOVE=9000
 var time:float=0.0
-var player_name:String="rodrigo2"
 var digimon_id:float=1
 var data:Array[float]=[]
+
 var life:float=100.0:
 	get:
 		return life+(life*Iniload.statsplus["life"])
@@ -26,6 +26,7 @@ var will:float=102.0:
 	get:
 		return will+(will*Iniload.statsplus["will"])
 var fighter:float
+
 var input_vector:Vector2=Vector2.ZERO
 func _ready():
 	dead()
@@ -37,13 +38,13 @@ func _physics_process(delta):
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 	#gracias a xXtumbaBurrasXx del discord de godot por la idea
-	velocity=input_vector*SPEED*delta
+	velocity=input_vector*SPEEDMOVE*delta
 	move_and_slide()
 func dead():
 	var save_data={
-	"player_name":player_name,
-	"digimon_id":digimon_id,
 	"time":time,
+	"digimon_name":digimon_name,
+	"digimon_id":digimon_id,
 	"life":life,
 	"energy":energy,
 	"attack":attack,

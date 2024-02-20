@@ -33,11 +33,13 @@ func save_config():
 func load_userdata():
 	var con=ConfigFile.new()
 	var _err=con.load(USERDATA)
-	unlock_evo=con.get_value("meta_progesion","unlock_evo")
-	statsplus=con.get_value("meta_progesion","statsplus")
+	if con.has_section("meta_progesion"):
+		unlock_evo=con.get_value("meta_progesion","unlock_evo")
+		statsplus=con.get_value("meta_progesion","statsplus")
+		run_number=con.get_value("meta_progesion","run_number")
 
 func savedead(data:Dictionary):
-	var section="("+str(run_number)+")"+data["player_name"]
+	var section="("+str(run_number)+")"+data["digimon_name"]
 	run_number+=1
 	var con=ConfigFile.new()
 	var _err=con.load(USERDATA)
@@ -49,7 +51,7 @@ func savedead(data:Dictionary):
 	for key in data.keys():
 		if key !="player_name":
 			con.set_value(section,key,data[key])
-			if  key =="digimon_id" or key =="time":continue
+			if  key =="digimon_id" or key =="time" or key =="digimon_name":continue
 			else:
 				statsplus[key]+=(data[key]/10000)
 	

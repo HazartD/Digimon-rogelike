@@ -6,10 +6,10 @@ uid="uid://cw26saf68l3hp"
 
 [deps]
 
-files=["res://data base/Base.name.translation", "res://data base/Base.life.translation", "res://data base/Base.energy.translation", "res://data base/Base.attack.translation", "res://data base/Base.defend.translation", "res://data base/Base.speed.translation", "res://data base/Base.inteligent.translation", "res://data base/Base.will.translation", "res://data base/Base.fighter%.translation"]
+files=["res://data base/Base.digimon.translation", "res://data base/Base.life.translation", "res://data base/Base.energy.translation", "res://data base/Base.attack.translation", "res://data base/Base.defend.translation", "res://data base/Base.speed.translation", "res://data base/Base.inteligent.translation", "res://data base/Base.will.translation", "res://data base/Base.fighter%.translation", "res://data base/Base.ia.translation"]
 
 source_file="res://data base/Base.csv"
-dest_files=["res://data base/Base.name.translation", "res://data base/Base.life.translation", "res://data base/Base.energy.translation", "res://data base/Base.attack.translation", "res://data base/Base.defend.translation", "res://data base/Base.speed.translation", "res://data base/Base.inteligent.translation", "res://data base/Base.will.translation", "res://data base/Base.fighter%.translation"]
+dest_files=["res://data base/Base.digimon.translation", "res://data base/Base.life.translation", "res://data base/Base.energy.translation", "res://data base/Base.attack.translation", "res://data base/Base.defend.translation", "res://data base/Base.speed.translation", "res://data base/Base.inteligent.translation", "res://data base/Base.will.translation", "res://data base/Base.fighter%.translation", "res://data base/Base.ia.translation"]
 
 [params]
 

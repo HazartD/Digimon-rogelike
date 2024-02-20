@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dk8fu0yl5ipxe"]
+
+[ext_resource type="Script" path="res://entity/digimon_base.gd" id="1_hbmn8"]
+
+[node name="digimon_base" type="CharacterBody2D"]
+script = ExtResource("1_hbmn8")
