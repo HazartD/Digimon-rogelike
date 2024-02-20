@@ -1,4 +1,4 @@
-class_name Player extends DigimonBase
+class_name Player extends CharacterBody2D
 const SPEEDMOVE=9000
 var time:float=0.0
 var digimon_id:float=1
