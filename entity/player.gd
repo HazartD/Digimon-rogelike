@@ -3,7 +3,7 @@ const SPEEDMOVE=9000
 var time:float=0.0
 var digimon_id:float=1
 var data:Array[float]=[]
-
+var player_name:String
 var life:float=100.0:
 	get:
 		return life+(life*Iniload.statsplus["life"])
@@ -26,7 +26,9 @@ var will:float=102.0:
 	get:
 		return will+(will*Iniload.statsplus["will"])
 var fighter:float
-
+var air_move:bool
+var groud_move:bool
+var water_move:bool
 var input_vector:Vector2=Vector2.ZERO
 func _ready():
 	dead()
@@ -43,7 +45,7 @@ func _physics_process(delta):
 func dead():
 	var save_data={
 	"time":time,
-	"digimon_name":digimon_name,
+	"player_name":player_name,
 	"digimon_id":digimon_id,
 	"life":life,
 	"energy":energy,
