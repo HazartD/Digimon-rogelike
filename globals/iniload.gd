@@ -1,7 +1,7 @@
 extends Node
 # funciona como creo pero tube que crear las carpetas y el archivo vacio manualmente
 var statsplus:Dictionary={"life":0.000,"energy":0.000,"attack":0.000,"defend":0.000,"speed":0.000,"inteligent":0.000,"will":0.000}
-var unlock_evo:Dictionary={}#son los id del digimon desbloqueado
+var unlock_evo:Dictionary={}#son los id del digimon desbloqueado y su true false
 var run_number:int=1
 const USERDATA="user://HazartD/DR/Userdata.ini"
 const CONFIG="user://HazartD/DR/Config.ini"
@@ -50,7 +50,7 @@ func savedead(data:Dictionary):
 	for key in data.keys():
 		if key !="player_name":
 			con.set_value(section,key,data[key])
-			if  key =="digimon_id" or key =="time" or key =="player_name":continue
+			if  key =="digimon_id" or key =="time" or key =="player_name" or key =="fighter":continue
 			else:
 				statsplus[key]+=(data[key]/10000)
 	

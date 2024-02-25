@@ -1,6 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk8fu0yl5ipxe"]
+[gd_scene load_steps=4 format=3 uid="uid://dkw7j82rs3vny"]
 
-[ext_resource type="Script" path="res://entity/digimon_base.gd" id="1_hbmn8"]
+[ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_1s7v2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvuf0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
 
 [node name="digimon_base" type="CharacterBody2D"]
-script = ExtResource("1_hbmn8")
+script = ExtResource("1_1s7v2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="patas" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hvuf0")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+
+[node name="Name" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -23.5
+offset_top = -26.0
+offset_right = 23.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Name"
+
+[node name="AtackBar" type="HBoxContainer" parent="Name"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="prepcion" type="Area2D" parent="."]
+
+[node name="prepcion" type="CollisionShape2D" parent="prepcion"]
+shape = SubResource("CircleShape2D_tjlny")
+
+[connection signal="sprite_frames_changed" from="sprite" to="." method="_on_sprite_frames_changed"]

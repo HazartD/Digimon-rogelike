@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk8fu0yl5ipxe"]
+
+[ext_resource type="Script" path="res://entity/digimon_base.gd" id="1_hbmn8"]
+[ext_resource type="Texture2D" uid="uid://dhp1xbrosiyr8" path="res://img/don.jpg" id="2_t4oco"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87my5"]
+atlas = ExtResource("2_t4oco")
+region = Rect2(105, 0, 65, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqp7u"]
+atlas = ExtResource("2_t4oco")
+region = Rect2(0, 0, 65, 62)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_se1hb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87my5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqp7u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="digimon_base" type="CharacterBody2D"]
+script = ExtResource("1_hbmn8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_se1hb")
+frame = 1
+frame_progress = 0.324355
+
+[node name="Don" type="Sprite2D" parent="."]
+texture = ExtResource("2_t4oco")
+hframes = 2
+region_rect = Rect2(0, 0, 65.3554, 62.3817)
