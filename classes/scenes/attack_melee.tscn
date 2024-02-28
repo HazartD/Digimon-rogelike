@@ -1,6 +1,15 @@
-[gd_scene format=3 uid="uid://druvk3tfimras"]
+[gd_scene load_steps=2 format=3 uid="uid://druvk3tfimras"]
+
+[sub_resource type="GDScript" id="GDScript_r17vf"]
+script/source = "extends AttackAction
+
+func _on_accionado():
+	pass # Replace with function body.
+"
 
 [node name="Attack_melee" type="Sprite2D"]
+script = SubResource("GDScript_r17vf")
+Type = 1
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0

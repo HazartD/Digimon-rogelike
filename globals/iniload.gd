@@ -8,7 +8,7 @@ const CONFIG="user://HazartD/DR/Config.ini"
 enum Locations{NATURE_SPIRIT}
 var location:Locations=Locations.NATURE_SPIRIT
 func _init():
-	DirAccess.make_dir_absolute("user://HazartD/DR")
+	DirAccess.make_dir_absolute("user://HazartD/DR/screenshot")
 	DirAccess.open("user://HazartD/DR")
 	if FileAccess.file_exists(USERDATA):load_userdata()
 	else:
@@ -50,7 +50,7 @@ func savedead(data:Dictionary):
 	for key in data.keys():
 		if key !="player_name":
 			con.set_value(section,key,data[key])
-			if  key =="digimon_id" or key =="time" or key =="player_name" or key =="fighter":continue
+			if  key =="digimon_id" or key =="time" or key =="player_name" or key =="fighter" or key =="dead cause":continue
 			else:
 				statsplus[key]+=(data[key]/10000)
 	

@@ -16,5 +16,4 @@ func _ready():
 #			print(a)
 		base[new_digimon_data[0] as int]=new_digimon_data
 		print(new_digimon_data)
-
-#	print(base)
+	print(base)

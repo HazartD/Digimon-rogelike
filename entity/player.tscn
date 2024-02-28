@@ -1,14 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://cijy8axnp86ko"]
+[gd_scene load_steps=2 format=3 uid="uid://cijy8axnp86ko"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_5f2fg"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_csk4t"]
-
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="Node"]
 script = ExtResource("1_5f2fg")
+air_move = null
+groud_move = null
+water_move = null
+IA_type = null
+attribute = null
+Evo_level = null
+Digimon_Id = null
+digimon_name = null
+_life = null
+_energy = null
+_attack = null
+_defend = null
+_speed = null
+_inteligent = null
+_will = null
+life = null
+energy = null
+attack = null
+defend = null
+speed = null
+inteligent = null
+will = null
+fighter = null
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_csk4t")
-frame_progress = 0.513857
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

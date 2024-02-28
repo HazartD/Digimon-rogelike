@@ -1,20 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkw7j82rs3vny"]
+[gd_scene load_steps=12 format=3 uid="uid://dkw7j82rs3vny"]
 
-[ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_1s7v2"]
+[ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_88qll"]
+[ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_1i2bc"]
+[ext_resource type="Script" path="res://classes/attack.gd" id="2_ons6w"]
+[ext_resource type="SpriteFrames" uid="uid://da8dhkppqrc73" path="res://img/animation_resouse/digimon_base.tres" id="3_6osqx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvuf0"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iq6tj"]
+seed = 75
+frequency = 0.1
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jmxvr"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_iq6tj")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_obs1s"]
+frequency = 0.1
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i2bsv"]
+width = 100
+height = 100
+generate_mipmaps = false
+as_normal_map = true
+noise = SubResource("FastNoiseLite_obs1s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
+shader = ExtResource("2_1i2bc")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 1.0
+shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_i2bsv")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_jmxvr")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
 
-[node name="digimon_base" type="CharacterBody2D"]
-script = ExtResource("1_1s7v2")
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="digimon_body" type="CharacterBody2D"]
+script = ExtResource("1_88qll")
+Digimon_Id = 6
+air_move = true
+groud_move = true
+attribute = 2
+Evo_level = 2
 
 [node name="patas" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_hvuf0")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_sto4q")
+sprite_frames = ExtResource("3_6osqx")
+
+[node name="prepcion" type="Area2D" parent="."]
+
+[node name="prepcion" type="CollisionShape2D" parent="prepcion"]
+shape = SubResource("CircleShape2D_tjlny")
 
 [node name="Name" type="Label" parent="."]
 anchors_preset = 7
@@ -44,9 +84,15 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="prepcion" type="Area2D" parent="."]
+[node name="Attack" type="Sprite2D" parent="Name/AtackBar"]
+position = Vector2(20, 0)
+script = ExtResource("2_ons6w")
+Type = {
+"EMBEST": 4,
+"MELEE": 1,
+"PASIVE": 0,
+"RANGE": 2,
+"RANGE_PERSIT": 3
+}
 
-[node name="prepcion" type="CollisionShape2D" parent="prepcion"]
-shape = SubResource("CircleShape2D_tjlny")
-
-[connection signal="sprite_frames_changed" from="sprite" to="." method="_on_sprite_frames_changed"]
+[node name="Camera2D" type="Camera2D" parent="."]
