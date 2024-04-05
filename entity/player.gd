@@ -6,14 +6,12 @@ var alive:bool=true
 func _ready():
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
-	dead("test")
-	print(life)
-func _process(delta):
-	time+=delta
+#	dead("test")
+#	print(life)
 func _input(event):
 	if event.is_action_pressed("screenshot"):
 		var path="user://HazartD/DR/screenshot/ss%i.png"
-		var imagen=get_viewport().get_texture().get_image().save_png(path)
+		var _imagen=get_viewport().get_texture().get_image().save_png(path)
 		
 func dead(cause):
 	var save_data={
@@ -40,3 +38,7 @@ func hit(damage:float,dir:Vector2,a:DigimonCORE):
 
 func _on_tree_exiting():
 	if alive:dead("quit game")
+	
+func _process(delta):
+	time+=delta
+

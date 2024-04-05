@@ -12,5 +12,3 @@ func shoot():
 
 [node name="Attack_range" type="Sprite2D"]
 script = SubResource("GDScript_op2v3")
-Type = null
-power = null

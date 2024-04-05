@@ -1,5 +1,4 @@
-extends CharacterBody2D
-var input_vector:Vector2=Vector2.ZERO
+extends DigimonBody
 const SPEEDMOVE=9000
 func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")

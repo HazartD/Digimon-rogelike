@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://1k1urruj411u"]
+[gd_scene load_steps=4 format=3 uid="uid://1k1urruj411u"]
+
+[ext_resource type="SpriteFrames" uid="uid://cdtheh3c21gw2" path="res://img/animation_resouse/agumon.tres" id="1_tk2n8"]
 
 [sub_resource type="GDScript" id="GDScript_gkjo1"]
 script/source = "extends CharacterBody2D
@@ -14,6 +16,8 @@ func _on_sprite_frames_changed():
 script = SubResource("GDScript_gkjo1")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_tk2n8")
+animation = &"down"
 
 [node name="coli" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mrbvc")

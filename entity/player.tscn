@@ -1,33 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cijy8axnp86ko"]
+[gd_scene load_steps=3 format=3 uid="uid://cijy8axnp86ko"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_5f2fg"]
+[ext_resource type="PackedScene" uid="uid://dkw7j82rs3vny" path="res://entity/digimon_base.tscn" id="2_7g5pq"]
 
 [node name="player" type="Node"]
 script = ExtResource("1_5f2fg")
-air_move = null
-groud_move = null
-water_move = null
-IA_type = null
-attribute = null
-Evo_level = null
-Digimon_Id = null
-digimon_name = null
-_life = null
-_energy = null
-_attack = null
-_defend = null
-_speed = null
-_inteligent = null
-_will = null
-life = null
-energy = null
-attack = null
-defend = null
-speed = null
-inteligent = null
-will = null
-fighter = null
+Evo_level = 2
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="body" parent="." instance=ExtResource("2_7g5pq")]
 
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

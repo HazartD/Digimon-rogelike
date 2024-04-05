@@ -1,12 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4tuihkfryehf"]
+[gd_scene load_steps=11 format=3 uid="uid://c4tuihkfryehf"]
 
-[ext_resource type="PackedScene" uid="uid://op7mnjxhk1cx" path="res://classes/scenes/Attack_pasive.tscn" id="3_6a0gs"]
+[ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="2_pp3fa"]
 [ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="3_hvayo"]
-[ext_resource type="SpriteFrames" uid="uid://da8dhkppqrc73" path="res://img/animation_resouse/digimon_base.tres" id="4_rc5f5"]
-
-[sub_resource type="GDScript" id="GDScript_rclbr"]
-script/source = "extends DigimonBody
-"
+[ext_resource type="PackedScene" uid="uid://op7mnjxhk1cx" path="res://classes/scenes/Attack_pasive.tscn" id="3_jk5kd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1iya"]
 
@@ -40,24 +36,34 @@ shader_parameter/noise_tex = SubResource("NoiseTexture2D_iale8")
 [sub_resource type="CircleShape2D" id="CircleShape2D_5iick"]
 
 [node name="body" type="CharacterBody2D"]
-script = SubResource("GDScript_rclbr")
 
-[node name="Name" type="Label" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="patas" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l1iya")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_8c1e2")
+sprite_frames = ExtResource("2_pp3fa")
+animation = &"A1_down"
+
+[node name="Name" type="Label" parent="sprite"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -23.5
-offset_top = -26.0
-offset_right = 23.5
+offset_left = -137.5
+offset_top = -250.0
+offset_right = -90.5
+offset_bottom = -224.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Name"
 
-[node name="AtackBar" type="HBoxContainer" parent="Name"]
+[node name="AtackBar" type="HBoxContainer" parent="sprite/Name"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -70,16 +76,9 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Attack_pasive" parent="Name/AtackBar" instance=ExtResource("3_6a0gs")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="patas" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_l1iya")
-
-[node name="sprite" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_8c1e2")
-sprite_frames = ExtResource("4_rc5f5")
+[node name="Attack_pasive" parent="sprite/Name/AtackBar" instance=ExtResource("3_jk5kd")]
+has_limit_level = true
+limit_level = 2
 
 [node name="prepcion" type="Area2D" parent="."]
 

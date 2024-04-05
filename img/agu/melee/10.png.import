@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhp1xbrosiyr8"
-path="res://.godot/imported/don.jpg-e92d1c4b5357d1376fd70eee501b60d9.ctex"
+uid="uid://dpigardbidm8k"
+path="res://.godot/imported/10.png-ef50092fb72c085714eb5384a118d53f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/don.jpg"
-dest_files=["res://.godot/imported/don.jpg-e92d1c4b5357d1376fd70eee501b60d9.ctex"]
+source_file="res://img/agu/melee/10.png"
+dest_files=["res://.godot/imported/10.png-ef50092fb72c085714eb5384a118d53f.ctex"]
 
 [params]
 
