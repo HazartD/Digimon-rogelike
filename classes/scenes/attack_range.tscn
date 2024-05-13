@@ -2,12 +2,12 @@
 
 [sub_resource type="GDScript" id="GDScript_op2v3"]
 script/source = "extends AttackAction
-
 func _init():
 	accionado.connect(shoot)
 
 func shoot():
-	digimon_owner
+	var dir=digimon_owner.dir
+	
 "
 
 [node name="Attack_range" type="Sprite2D"]

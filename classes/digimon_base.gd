@@ -33,6 +33,7 @@ func hit(damage:float,dir:Vector2,a:DigimonCORE):
 		enemies.append(a)
 	else:enemies.append(a)
 
+@warning_ignore("unused_parameter")
 func _hit(damage:float,atta_dir:Vector2):
 	var knockback=damage#-(life/5)#if menor a 0 no hay
 	current_life-=damage
@@ -41,7 +42,7 @@ func _hit(damage:float,atta_dir:Vector2):
 		pass
 	else: 
 		if knockback>0:
-			body.velocity+=atta_dir*(knockback*100)
+			pass#body.velocity+=atta_dir*(knockback*100)
 		#$sprite.modulate=Color(0,0,0)
 		#$sprite.pause()
 		#await get_tree().create_timer(0.2).timeout

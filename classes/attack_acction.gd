@@ -3,7 +3,7 @@ class_name AttackAction extends Attack
 @export_enum("rapid:1","low:3","medium:5","high:7") var kooldown=3
 var physic:bool#si es fisico true y si intelig false
 var reposo:float
-var accion:String="A1"
+var accion:String="A01"
 var costo:int
 signal accionado
 var missile:PackedScene

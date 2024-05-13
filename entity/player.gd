@@ -2,10 +2,14 @@ class_name Player extends DigimonCORE
 var data:Array[float]=[]
 var player_name:String
 var alive:bool=true
+#const BODY=preload("res://entity/digimon_base.tscn")
 
 func _ready():
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
+	#var chil=BODY.instantiate()
+	#add_child(chil)
+	#body=chil
 #	dead("test")
 #	print(life)
 func _input(event):

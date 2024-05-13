@@ -1,7 +1,6 @@
-[gd_scene load_steps=79 format=3 uid="uid://dkw7j82rs3vny"]
+[gd_scene load_steps=78 format=3 uid="uid://dkw7j82rs3vny"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_88qll"]
-[ext_resource type="Script" path="res://classes/attack.gd" id="2_ons6w"]
 [ext_resource type="Texture2D" uid="uid://brg12h7t3mamt" path="res://img/agu/idel/0.png" id="3_1x3ox"]
 [ext_resource type="Texture2D" uid="uid://bck0qr6dq6igl" path="res://img/agu/run/0.png" id="3_3t8h2"]
 [ext_resource type="Texture2D" uid="uid://bkumub3f6mbek" path="res://img/agu/melee/0.png" id="3_scqx2"]
@@ -90,7 +89,7 @@ animations = [{
 "texture": ExtResource("4_fxwsp")
 }],
 "loop": true,
-"name": &"A1_down",
+"name": &"A01_down",
 "speed": 4.0
 }, {
 "frames": [{
@@ -101,7 +100,7 @@ animations = [{
 "texture": ExtResource("6_dqku5")
 }],
 "loop": true,
-"name": &"A1_left",
+"name": &"A01_left",
 "speed": 4.0
 }, {
 "frames": [{
@@ -112,7 +111,7 @@ animations = [{
 "texture": ExtResource("8_64flc")
 }],
 "loop": true,
-"name": &"A1_leftdown",
+"name": &"A01_leftdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -123,7 +122,7 @@ animations = [{
 "texture": ExtResource("10_t1ky1")
 }],
 "loop": true,
-"name": &"A1_leftup",
+"name": &"A01_leftup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -134,7 +133,7 @@ animations = [{
 "texture": ExtResource("12_ijcjg")
 }],
 "loop": true,
-"name": &"A1_right",
+"name": &"A01_right",
 "speed": 4.0
 }, {
 "frames": [{
@@ -145,7 +144,7 @@ animations = [{
 "texture": ExtResource("14_qj7bg")
 }],
 "loop": true,
-"name": &"A1_rightdown",
+"name": &"A01_rightdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -156,7 +155,7 @@ animations = [{
 "texture": ExtResource("16_fspad")
 }],
 "loop": true,
-"name": &"A1_rightup",
+"name": &"A01_rightup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -167,7 +166,7 @@ animations = [{
 "texture": ExtResource("18_cdokn")
 }],
 "loop": true,
-"name": &"A1_up",
+"name": &"A01_up",
 "speed": 4.0
 }, {
 "frames": [{
@@ -178,7 +177,7 @@ animations = [{
 "texture": ExtResource("19_8uyvo")
 }],
 "loop": true,
-"name": &"A2_down",
+"name": &"A02_down",
 "speed": 4.0
 }, {
 "frames": [{
@@ -189,7 +188,7 @@ animations = [{
 "texture": ExtResource("21_xpik5")
 }],
 "loop": true,
-"name": &"A2_left",
+"name": &"A02_left",
 "speed": 4.0
 }, {
 "frames": [{
@@ -200,7 +199,7 @@ animations = [{
 "texture": ExtResource("23_hpbjc")
 }],
 "loop": true,
-"name": &"A2_leftdown",
+"name": &"A02_leftdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -211,7 +210,7 @@ animations = [{
 "texture": ExtResource("23_ybc5n")
 }],
 "loop": true,
-"name": &"A2_leftup",
+"name": &"A02_leftup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -222,7 +221,7 @@ animations = [{
 "texture": ExtResource("27_msb7m")
 }],
 "loop": true,
-"name": &"A2_right",
+"name": &"A02_right",
 "speed": 4.0
 }, {
 "frames": [{
@@ -233,7 +232,7 @@ animations = [{
 "texture": ExtResource("29_k88g4")
 }],
 "loop": true,
-"name": &"A2_rightdown",
+"name": &"A02_rightdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -244,7 +243,7 @@ animations = [{
 "texture": ExtResource("31_emsju")
 }],
 "loop": true,
-"name": &"A2_rightup",
+"name": &"A02_rightup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -255,8 +254,96 @@ animations = [{
 "texture": ExtResource("33_c260w")
 }],
 "loop": true,
-"name": &"A2_up",
+"name": &"A02_up",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1x3ox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3qtmy")
+}],
+"loop": true,
+"name": &"del_down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_gnif0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tc068")
+}],
+"loop": true,
+"name": &"del_left",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_5h1ko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vv2wc")
+}],
+"loop": true,
+"name": &"del_leftdown",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_obj8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0l8ut")
+}],
+"loop": true,
+"name": &"del_leftup",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_jfi5i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vt5es")
+}],
+"loop": true,
+"name": &"del_right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_mebk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_j3wtd")
+}],
+"loop": true,
+"name": &"del_rightdown",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_cf4do")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vn42r")
+}],
+"loop": true,
+"name": &"del_rightup",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_tr3uc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_0frv4")
+}],
+"loop": true,
+"name": &"del_up",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -321,94 +408,6 @@ animations = [{
 "loop": true,
 "name": &"hit_up",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_1x3ox")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_3qtmy")
-}],
-"loop": true,
-"name": &"idel_down",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_gnif0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_tc068")
-}],
-"loop": true,
-"name": &"idel_left",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_5h1ko")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_vv2wc")
-}],
-"loop": true,
-"name": &"idel_leftdown",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_obj8e")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_0l8ut")
-}],
-"loop": true,
-"name": &"idel_leftup",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_jfi5i")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_vt5es")
-}],
-"loop": true,
-"name": &"idel_right",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_mebk0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_j3wtd")
-}],
-"loop": true,
-"name": &"idel_rightdown",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_cf4do")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_vn42r")
-}],
-"loop": true,
-"name": &"idel_rightup",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("17_tr3uc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_0frv4")
-}],
-"loop": true,
-"name": &"idel_up",
-"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -506,17 +505,24 @@ script = ExtResource("1_88qll")
 Digimon_Id = 1
 groud_move = true
 Evo_level = 2
+metadata/_edit_group_ = true
 
 [node name="patas" type="CollisionShape2D" parent="."]
 position = Vector2(12.25, 42.75)
 shape = SubResource("RectangleShape2D_hvuf0")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-editor_description = "el color del golpe depende del atrbuto, el libre es blanco"
+editor_description = "el color del golpe depende del atrbuto.
+
+libre=blanco
+Va=azul
+Vi=rojo
+Da=amarillo"
 material = SubResource("ShaderMaterial_sto4q")
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_4jwe3")
-animation = &"hit_rightup"
+animation = &"del_up"
+frame_progress = 0.381365
 
 [node name="Name" type="Label" parent="sprite"]
 anchors_preset = 12
@@ -547,11 +553,16 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Attack" type="Sprite2D" parent="sprite/Name/AtackBar"]
-position = Vector2(20, 0)
-script = ExtResource("2_ons6w")
-
 [node name="prepcion" type="Area2D" parent="."]
 
 [node name="prepcion" type="CollisionShape2D" parent="prepcion"]
 shape = SubResource("CircleShape2D_tjlny")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 3.49999)
+scale = Vector2(11.8, 11.05)
+
+[connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="animation_looped" from="sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

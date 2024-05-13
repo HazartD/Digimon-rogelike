@@ -10,10 +10,10 @@ func _ready():
 		var new_digimon_data:Array=[]
 		for a in new_digimon_data_unconver:
 			if a== new_digimon_data_unconver[1]:new_digimon_data+=[a]
-			elif a== "true":new_digimon_data+=[true]
-			elif a== "false":new_digimon_data+=[false]
+			#elif a== "true":new_digimon_data+=[true]
+			#elif a== "false":new_digimon_data+=[false]
 			else:new_digimon_data+=[int(a)]
 #			print(a)
 		base[new_digimon_data[0] as int]=new_digimon_data
-		print(new_digimon_data)
-	print(base)
+		#print(new_digimon_data)
+	#print(base)
