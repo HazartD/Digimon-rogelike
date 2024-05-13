@@ -64,7 +64,6 @@ func _physics_process(delta):
 	if player:_get_inputs()
 	velocity=dir*10000*delta
 	move_and_slide()
-	
 func _get_inputs():
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -78,30 +77,14 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 
 
 func _on_sprite_animation_finished():
-	var new_anim:String
+	var new_anim:String=$sprite.animation
+	new_anim=new_anim.erase(0,4)
 	if dir==Vector2.ZERO:
 		if !$sprite.animation.begins_with("d"):
-			new_anim=$sprite.animation
-			new_anim.erase(0,4)
-			new_anim.insert(0,"del_")
-			print(new_anim)
-			#$sprite.play(new_anim)
-		#if $sprite.animation.has(animationdir[0]) and !$sprite.animation.has(animationdir[2]) and !$sprite.animation.has(animationdir[5]):new_anim="idel_"+animationdir[0]
-		#elif $sprite.animation.has(animationdir[1])and !$sprite.animation.has(animationdir[2]) and !$sprite.animation.has(animationdir[3]):new_anim="idel_"+animationdir[1]
-		#elif $sprite.animation.has(animationdir[2]):new_anim="idel_"+animationdir[2]
-		#elif $sprite.animation.has(animationdir[3]):new_anim="idel_"+animationdir[3]
-		#elif $sprite.animation.has(animationdir[4])and !$sprite.animation.has(animationdir[5]) and !$sprite.animation.has(animationdir[6]):new_anim="idel_"+animationdir[4]
-		#elif $sprite.animation.has(animationdir[5]):new_anim="idel_"+animationdir[5]
-		#elif $sprite.animation.has(animationdir[6]):new_anim="idel_"+animationdir[6]
-		#elif $sprite.animation.has(animationdir[7])and !$sprite.animation.has(animationdir[3]) and !$sprite.animation.has(animationdir[6]):new_anim="idel_"+animationdir[7]
+			new_anim=new_anim.insert(0,"del_")
+			if $sprite.animation!=new_anim:$sprite.play(new_anim)
 	else:
-		if dir==dir_vector[0]:new_anim="run_"+animationdir[0]
-		elif dir==dir_vector[1]:new_anim="run_"+animationdir[1]
-		elif dir==dir_vector[2]:new_anim="run_"+animationdir[2]
-		elif dir==dir_vector[3]:new_anim="run_"+animationdir[3]
-		elif dir==dir_vector[4]:new_anim="run_"+animationdir[4]
-		elif dir==dir_vector[5]:new_anim="run_"+animationdir[5]
-		elif dir==dir_vector[6]:new_anim="run_"+animationdir[6]
-		elif dir==dir_vector[7]:new_anim="run_"+animationdir[7]
+		new_anim="run_"+animationdir[dir_vector.find(dir)]
+		if $sprite.animation!=new_anim:$sprite.play(new_anim)
 #	if $sprite.animation!=new_anim:$sprite.play(new_anim)
 
