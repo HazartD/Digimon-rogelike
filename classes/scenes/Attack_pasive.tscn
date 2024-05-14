@@ -2,39 +2,47 @@
 
 [sub_resource type="GDScript" id="GDScript_wb3vl"]
 script/source = "extends Attack
-var time:float=0.0
 @export var radius:float
-@export var kooldown:int=1
 @export var has_limit_level:bool=false
 @export var limit_level:DigimonCORE.level_evo
 @export var plus_power_multipicator:int=2
+
 func _ready():
-	positioning()
+#1	positioning()
+	timer()
 func positioning():
 	$area/area.shape.radius=radius
 	$area/area.position=digimon_owner.position
-func _process(delta):
-	time+=delta
-	if time/1==0:
-		var digimons=search_digimon_in_range()
-		for digi in digimons:
-			if has_limit_level: if digi.Evo_level<=limit_level: digi.hit(power*plus_power_multipicator,Vector2.ZERO,digimon_owner)
-			else:digi.hit(power,Vector2.ZERO,digimon_owner)
-		time=0.0
 
-func search_digimon_in_range():
-	var digimons:Array[DigimonCORE]=[]
-	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digimons.append(digi.get_parent())
-	return digimons
+func search_digimon_in_range_and_hit_they():
+	@warning_ignore(\"unassigned_variable\")
+	var digimons:Array[DigimonCORE]
+	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digimons.append(digi.core)
+	for digi in digimons:
+		if has_limit_level: if digi.Evo_level<=limit_level: digi.hit(power*plus_power_multipicator,Vector2.ZERO,digimon_owner)
+		else:digi.hit(power,Vector2.ZERO,digimon_owner)
+
+func timer():
+	if kooldown==0:
+		search_digimon_in_range_and_hit_they()
+		var _time=get_tree().create_timer(0.01).timeout.connect(timer)
+	else:
+		search_digimon_in_range_and_hit_they()
+		@warning_ignore(\"unused_variable\")
+		var _time=get_tree().create_timer(kooldown).timeout.connect(timer)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4pyk"]
+radius = 737.013
 
 [node name="Attack_pasive" type="Sprite2D"]
 script = SubResource("GDScript_wb3vl")
+kooldown = 1
+power_atack = 0.2
 
 [node name="area" type="Area2D" parent="."]
 collision_layer = 124
+collision_mask = 56
 
 [node name="area" type="CollisionShape2D" parent="area"]
 shape = SubResource("CircleShape2D_o4pyk")

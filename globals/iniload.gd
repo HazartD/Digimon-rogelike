@@ -3,6 +3,7 @@ extends Node
 var statsplus:Dictionary={"life":0.000,"energy":0.000,"attack":0.000,"defend":0.000,"speed":0.000,"inteligent":0.000,"will":0.000}
 var unlock_evo:Dictionary={}#son los id del digimon desbloqueado y su true false
 var run_number:int=1
+var screenshoot_number:int=0
 const USERDATA="user://HazartD/DR/Userdata.ini"
 const CONFIG="user://HazartD/DR/Config.ini"
 enum Locations{NATURE_SPIRIT}
@@ -37,15 +38,19 @@ func load_userdata():
 		unlock_evo=con.get_value("meta_progesion","unlock_evo")
 		statsplus=con.get_value("meta_progesion","statsplus")
 		run_number=con.get_value("meta_progesion","run_number")
+		screenshoot_number=con.get_value("meta_progesion","screenshoot_number")
+		
+		
 
 func savedead(data:Dictionary):
 	var section="("+str(run_number)+")"+data["player_name"]
 	run_number+=1
 	var con=ConfigFile.new()
-	var _err=con.load(USERDATA)
+	con.load(USERDATA)
 	con.set_value("meta_progesion","unlock_evo",unlock_evo)
 	con.set_value("meta_progesion","run_number",run_number)
 	con.set_value("meta_progesion","location",location)
+	con.set_value("meta_progesion","screenshoot_number",screenshoot_number)
 	
 	for key in data.keys():
 		if key !="player_name":
@@ -56,3 +61,15 @@ func savedead(data:Dictionary):
 	
 	con.set_value("meta_progesion","statsplus",statsplus)
 	con.save(USERDATA)
+
+
+func _input(event):
+	if event.is_action_pressed("screenshot"):
+		var path="user://HazartD/DR/screenshot/ss%s.png" % screenshoot_number
+		screenshoot_number+=1
+		var _imagen=get_viewport().get_texture().get_image().save_png(path)
+		var con=ConfigFile.new()
+		con.load(USERDATA)
+		con.set_value("meta_progesion","screenshoot_number",screenshoot_number)
+		con.save(USERDATA)
+		

@@ -26,28 +26,39 @@ var enemies:Array[DigimonCORE]=[]#if ese, y prosige, else: pop
 
 	#set_sprite("res://img/animation_resouse/digimon_base.tres")
 
-func hit(damage:float,dir:Vector2,a:DigimonCORE):
-	_hit(damage,dir)
-	if enemies.has(a):
-		enemies.pop_at(enemies.bsearch(a))
-		enemies.append(a)
-	else:enemies.append(a)
-
 @warning_ignore("unused_parameter")
-func _hit(damage:float,atta_dir:Vector2):
-	var knockback=damage#-(life/5)#if menor a 0 no hay
-	current_life-=damage
-	damage_recive+=damage
-	if current_life<=0:
-		pass
-	else: 
-		if knockback>0:
-			pass#body.velocity+=atta_dir*(knockback*100)
-		#$sprite.modulate=Color(0,0,0)
-		#$sprite.pause()
-		#await get_tree().create_timer(0.2).timeout
-		#$sprite.modulate=Color(1,1,1,1)
-		#$sprite.play()
+func hit(damage:float,dir:Vector2,a:DigimonBody):
+	_hit(damage,dir,a.attribute)
+	#if enemies.has(a):
+		#enemies.pop_at(enemies.bsearch(a))
+		#enemies.append(a)
+	#else:enemies.append(a)
+
+func minus_life(damage:float,divisor:float=1):
+	current_life-=damage*divisor
+	damage_recive+=damage*divisor
+	
+@warning_ignore("unused_parameter")
+func _hit(damage:float,atta_dir:Vector2,attri:attribut):
+#	var knockback=damage#-(life/5)#if menor a 0 no hay
+	if attribute==attribut.FR or attribute==attribut.UNK:minus_life(damage)
+	elif attribute==attribut.VA:
+		match attri:
+			attribut.VI:minus_life(damage,0.7)
+			attribut.DA:minus_life(damage,1.3)
+			_:minus_life(damage)
+	elif attribute==attribut.VI:
+		match attri:
+			attribut.VA:minus_life(damage,1.3)
+			attribut.DA:minus_life(damage,0.7)
+			_:minus_life(damage)
+	elif attribute==attribut.DA:
+		match attri:
+			attribut.VA:minus_life(damage,0.7)
+			attribut.VI:minus_life(damage,1.3)
+			_:minus_life(damage)
+	body.hited()
+
 
 func evo():
 	pass

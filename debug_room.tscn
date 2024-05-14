@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1mhb1kt2cuxd"]
+
+[ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_lcl16"]
+[ext_resource type="PackedScene" uid="uid://dkw7j82rs3vny" path="res://entity/agu.tscn" id="2_y6abx"]
+[ext_resource type="PackedScene" uid="uid://c4tuihkfryehf" path="res://entity/rare.tscn" id="3_6t5du"]
+
+[node name="room" type="Node2D"]
+
+[node name="DigimonCORE4" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+
+[node name="digimon_body" parent="DigimonCORE4" node_paths=PackedStringArray("core") instance=ExtResource("2_y6abx")]
+position = Vector2(142, 133)
+core = NodePath("..")
+
+[node name="DigimonCORE3" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+
+[node name="digimon_body" parent="DigimonCORE3" node_paths=PackedStringArray("core") instance=ExtResource("2_y6abx")]
+position = Vector2(180, 508)
+core = NodePath("..")
+
+[node name="DigimonCORE2" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+
+[node name="digimon_body" parent="DigimonCORE2" node_paths=PackedStringArray("core") instance=ExtResource("2_y6abx")]
+position = Vector2(984, 503)
+core = NodePath("..")
+
+[node name="DigimonCORE" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+
+[node name="body" parent="DigimonCORE" node_paths=PackedStringArray("core") instance=ExtResource("3_6t5du")]
+position = Vector2(694, 487)
+core = NodePath("..")

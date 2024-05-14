@@ -83,7 +83,7 @@ animations = [{
 "texture": ExtResource("2_iyht5")
 }],
 "loop": true,
-"name": &"A1_down",
+"name": &"A01_down",
 "speed": 4.0
 }, {
 "frames": [{
@@ -94,7 +94,7 @@ animations = [{
 "texture": ExtResource("4_gwod4")
 }],
 "loop": true,
-"name": &"A1_left",
+"name": &"A01_left",
 "speed": 4.0
 }, {
 "frames": [{
@@ -105,7 +105,7 @@ animations = [{
 "texture": ExtResource("6_evl67")
 }],
 "loop": true,
-"name": &"A1_leftdown",
+"name": &"A01_leftdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -116,7 +116,7 @@ animations = [{
 "texture": ExtResource("8_g8dwh")
 }],
 "loop": true,
-"name": &"A1_leftup",
+"name": &"A01_leftup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -127,7 +127,7 @@ animations = [{
 "texture": ExtResource("10_umg5j")
 }],
 "loop": true,
-"name": &"A1_right",
+"name": &"A01_right",
 "speed": 4.0
 }, {
 "frames": [{
@@ -138,7 +138,7 @@ animations = [{
 "texture": ExtResource("12_6rq8l")
 }],
 "loop": true,
-"name": &"A1_rightdown",
+"name": &"A01_rightdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -149,7 +149,7 @@ animations = [{
 "texture": ExtResource("14_sm0oi")
 }],
 "loop": true,
-"name": &"A1_rightup",
+"name": &"A01_rightup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -160,7 +160,7 @@ animations = [{
 "texture": ExtResource("16_ihi62")
 }],
 "loop": true,
-"name": &"A1_up",
+"name": &"A01_up",
 "speed": 4.0
 }, {
 "frames": [{
@@ -171,7 +171,7 @@ animations = [{
 "texture": ExtResource("18_4w6ul")
 }],
 "loop": true,
-"name": &"A2_down",
+"name": &"A02_down",
 "speed": 4.0
 }, {
 "frames": [{
@@ -182,7 +182,7 @@ animations = [{
 "texture": ExtResource("20_617n4")
 }],
 "loop": true,
-"name": &"A2_left",
+"name": &"A02_left",
 "speed": 4.0
 }, {
 "frames": [{
@@ -193,7 +193,7 @@ animations = [{
 "texture": ExtResource("22_i2pq4")
 }],
 "loop": true,
-"name": &"A2_leftdown",
+"name": &"A02_leftdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -204,7 +204,7 @@ animations = [{
 "texture": ExtResource("24_e4cpb")
 }],
 "loop": true,
-"name": &"A2_leftup",
+"name": &"A02_leftup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -215,7 +215,7 @@ animations = [{
 "texture": ExtResource("26_g3byy")
 }],
 "loop": true,
-"name": &"A2_right",
+"name": &"A02_right",
 "speed": 4.0
 }, {
 "frames": [{
@@ -226,7 +226,7 @@ animations = [{
 "texture": ExtResource("28_xjbvm")
 }],
 "loop": true,
-"name": &"A2_rightdown",
+"name": &"A02_rightdown",
 "speed": 4.0
 }, {
 "frames": [{
@@ -237,7 +237,7 @@ animations = [{
 "texture": ExtResource("30_y1wse")
 }],
 "loop": true,
-"name": &"A2_rightup",
+"name": &"A02_rightup",
 "speed": 4.0
 }, {
 "frames": [{
@@ -248,8 +248,96 @@ animations = [{
 "texture": ExtResource("32_7y2yr")
 }],
 "loop": true,
-"name": &"A2_up",
+"name": &"A02_up",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("41_a0enl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_7l7ok")
+}],
+"loop": true,
+"name": &"del_down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("43_elvot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_jxmhk")
+}],
+"loop": true,
+"name": &"del_left",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("45_60xyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_sqeh2")
+}],
+"loop": true,
+"name": &"del_leftdown",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("47_r10aw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_fuxyj")
+}],
+"loop": true,
+"name": &"del_leftup",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("49_b245p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_cwyms")
+}],
+"loop": true,
+"name": &"del_right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("51_iixyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_a7p8h")
+}],
+"loop": true,
+"name": &"del_rightdown",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("53_h4y7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_m0c2x")
+}],
+"loop": true,
+"name": &"del_rightup",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_dp8b7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_kw0pw")
+}],
+"loop": true,
+"name": &"del_up",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -314,94 +402,6 @@ animations = [{
 "loop": true,
 "name": &"hit_up",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("41_a0enl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("42_7l7ok")
-}],
-"loop": true,
-"name": &"idel_down",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("43_elvot")
-}, {
-"duration": 1.0,
-"texture": ExtResource("44_jxmhk")
-}],
-"loop": true,
-"name": &"idel_left",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("45_60xyg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("46_sqeh2")
-}],
-"loop": true,
-"name": &"idel_leftdown",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("47_r10aw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("48_fuxyj")
-}],
-"loop": true,
-"name": &"idel_leftup",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("49_b245p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_cwyms")
-}],
-"loop": true,
-"name": &"idel_right",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("51_iixyp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("52_a7p8h")
-}],
-"loop": true,
-"name": &"idel_rightdown",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("53_h4y7j")
-}, {
-"duration": 1.0,
-"texture": ExtResource("54_m0c2x")
-}],
-"loop": true,
-"name": &"idel_rightup",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("55_dp8b7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("56_kw0pw")
-}],
-"loop": true,
-"name": &"idel_up",
-"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
