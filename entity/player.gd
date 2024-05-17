@@ -13,7 +13,7 @@ func dead(cause):
 	var save_data={
 	"time":time,
 	"player_name":player_name,
-	"digimon_id":body.digimon_id,
+	"digimon_id":digimon_id,
 	"life":life,
 	"energy":energy,
 	"attack":attack,
@@ -27,7 +27,7 @@ func dead(cause):
 	alive=false
 
 func hit(damage:float,dir:Vector2,a:DigimonBody):
-	_hit(damage,dir)
+	_hit(damage,dir,a.attribute)
 	if current_life<=0: dead(a.Digimon_Id)
 
 
@@ -38,3 +38,7 @@ func _on_tree_exiting():
 func _process(delta):
 	time+=delta
 
+
+
+func _on_child_entered_tree(node):
+	if node is DigimonBody:node.player=true

@@ -8,6 +8,9 @@ script = ExtResource("1_5f2fg")
 Evo_level = 2
 
 [node name="digimon_body" parent="." instance=ExtResource("2_denxd")]
-position = Vector2(237.23, 356.646)
 
+[node name="Camera2D" type="Camera2D" parent="digimon_body"]
+zoom = Vector2(0.5, 0.5)
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

@@ -35,8 +35,9 @@ func hit(damage:float,dir:Vector2,a:DigimonBody):
 	#else:enemies.append(a)
 
 func minus_life(damage:float,divisor:float=1):
-	current_life-=damage*divisor
-	damage_recive+=damage*divisor
+	damage=(damage*divisor)-(body.get_defend()*0.25)
+	current_life-=damage
+	damage_recive+=damage
 	
 @warning_ignore("unused_parameter")
 func _hit(damage:float,atta_dir:Vector2,attri:attribut):
@@ -65,5 +66,3 @@ func evo():
 	#crea clase evolution
 	#set_stats(seasch_evo(mete como parametro la id, los stas y si es el player))
 	#machtea la id, mete las funciones en un array, por cada una la ejecuta y si da false la saca y de lo contrario regresa la id, cada funcion tiene el nombre del digi, comprueba cada stat importante, mete 
-
-

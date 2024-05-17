@@ -1,16 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://druvk3tfimras"]
+[gd_scene load_steps=3 format=3 uid="uid://druvk3tfimras"]
+
+[ext_resource type="AudioStream" uid="uid://b88ir2jdus00g" path="res://audio/attack/ta.ogg" id="1_oglge"]
 
 [sub_resource type="GDScript" id="GDScript_r17vf"]
 script/source = "extends AttackAction
-
-func _on_accionado():
-	pass # Replace with function body.
+func effect():
+	search_digimon_in_range_and_hit_they()
+func search_digimon_in_range_and_hit_they():
+	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(power,digimon_owner.dir,digimon_owner)
 "
 
 [node name="Attack_melee" type="Sprite2D"]
 script = SubResource("GDScript_r17vf")
+sound = ExtResource("1_oglge")
 Type = 1
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -50.0
+bus = &"SFX"

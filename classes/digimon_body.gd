@@ -1,11 +1,11 @@
 class_name DigimonBody extends CharacterBody2D
 var dir:Vector2=Vector2.ZERO:
 	set(value):
-		_on_sprite_animation_finished()
-		dir=value
+		if !$sprite.animation.begins_with("h") and !$sprite.animation.begins_with("A"):
+			_on_sprite_animation_finished()
 var digimon_name:String
-var player:bool=true
-@export var core:DigimonCORE=get_parent()
+var player:bool=false
+var core:DigimonCORE=get_parent()
 @export_group("freatures")
 @export var Digimon_Id:int
 @export var air_move:bool
@@ -15,7 +15,7 @@ var player:bool=true
 @export var Evo_level:DigimonCORE.level_evo
 const animationdir:Array=["down","left","leftdown","leftup","right","rightdown","rightup","up"]
 const dir_vector:Array[Vector2]=[Vector2.DOWN,Vector2.LEFT,Vector2.LEFT+Vector2.DOWN,Vector2.LEFT+Vector2.UP,Vector2.RIGHT,Vector2.RIGHT+Vector2.DOWN,Vector2.RIGHT+Vector2.UP,Vector2.UP]
-
+@onready var interaction_area:Area2D=$interaction_area
 var _life:float
 var _energy:float
 var _attack:float
@@ -48,8 +48,9 @@ func set_stats():
 	while data_index<10:
 		set(keys[data_index],new_stats[data_index])
 		data_index+=1
-	#if player==true and core is Player:$sprite/Name.text=core.player_name
-	#else:$sprite/Name.text=digimon_name+"mon"
+	if player==true and core is Player:$sprite/Name.text=core.player_name+"
+	("+digimon_name+"mon)"
+	else:$sprite/Name.text=digimon_name+"mon"
 	core.attribute=attribute
 	core.Evo_level=Evo_level
 	core.max_energy=get_energy()
@@ -62,17 +63,17 @@ func _ready():
 	core=get_parent()
 	$sprite.play("del_down")
 	set_stats()
-	
 
 func _physics_process(delta):
 	if player:_get_inputs()
 	velocity=dir*10000*delta
 	move_and_slide()
-	$sprite/Name.text=str(core.current_life)
 func _get_inputs():
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
+func _process(_delta):
+	$sprite/Name.text="life:"+str(core.current_life)+"  energy:"+str(core.current_energy)
+	
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	visible=false
@@ -81,22 +82,24 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 	visible=true
 
 func hited():
-	if core.current_life<=0:pass
+	if core.current_life<=0:
+		visible=false
 	else:
 		var new_anim:String=$sprite.animation
 		new_anim=new_anim.erase(0,4)
 		new_anim=new_anim.insert(0,"hit_")
 		$sprite.play(new_anim)
+	$sound.play()
+
 func attack(acc:String):
 	var new_anim:String=$sprite.animation
 	new_anim=new_anim.erase(0,4)
-	new_anim=new_anim.insert(0,"_")
-	new_anim=new_anim.insert(0,acc)
+	new_anim=new_anim.insert(0,acc+"_")
 	$sprite.play(new_anim)
-
 
 func _on_sprite_animation_finished():
 	var new_anim:String=$sprite.animation
+	interaction_area.rotar(dir)
 	if dir==Vector2.ZERO:
 		if !$sprite.animation.begins_with("d"):
 			new_anim=new_anim.erase(0,4)
@@ -105,5 +108,4 @@ func _on_sprite_animation_finished():
 	else:
 		new_anim="run_"+animationdir[dir_vector.find(dir)]
 		if $sprite.animation!=new_anim:$sprite.play(new_anim)
-#	if $sprite.animation!=new_anim:$sprite.play(new_anim)
 

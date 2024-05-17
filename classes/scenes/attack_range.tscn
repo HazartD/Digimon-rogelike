@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bairja1m5stjv"]
+[gd_scene load_steps=3 format=3 uid="uid://bairja1m5stjv"]
+
+[ext_resource type="AudioStream" uid="uid://j8gsmfmiyi00" path="res://audio/attack/tu.ogg" id="1_w7i1j"]
 
 [sub_resource type="GDScript" id="GDScript_op2v3"]
 script/source = "extends AttackAction
@@ -6,3 +8,8 @@ script/source = "extends AttackAction
 
 [node name="Attack_range" type="Sprite2D"]
 script = SubResource("GDScript_op2v3")
+sound = ExtResource("1_w7i1j")
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+volume_db = -50.0
+bus = &"SFX"

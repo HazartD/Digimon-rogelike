@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4tuihkfryehf"]
+[gd_scene load_steps=9 format=3 uid="uid://c4tuihkfryehf"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_h21te"]
 [ext_resource type="Shader" path="res://img/shader/digimon_hit.gdshader" id="2_2pdkg"]
@@ -13,6 +13,8 @@ shader_parameter/active = true
 shader_parameter/tint = Color(0.298039, 0, 0.305882, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5iick"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cejp"]
 
 [node name="body" type="CharacterBody2D"]
 script = ExtResource("1_h21te")
@@ -56,11 +58,17 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Attack_pasive" parent="sprite/Name/AtackBar" instance=ExtResource("3_jk5kd")]
+radius = 737.01
 has_limit_level = true
 limit_level = 2
-power_atack = 2.0
+power_atack = 1.0
 
 [node name="prepcion" type="Area2D" parent="."]
 
 [node name="prepcion" type="CollisionShape2D" parent="prepcion"]
 shape = SubResource("CircleShape2D_5iick")
+
+[node name="interaction_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
+shape = SubResource("RectangleShape2D_2cejp")

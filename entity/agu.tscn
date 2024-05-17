@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://dkw7j82rs3vny"]
+[gd_scene load_steps=83 format=3 uid="uid://dkw7j82rs3vny"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
 [ext_resource type="Texture2D" uid="uid://bkumub3f6mbek" path="res://img/agu/melee/0.png" id="2_nskhm"]
@@ -75,6 +75,8 @@
 [ext_resource type="Texture2D" uid="uid://dt6hvjbmkxbop" path="res://img/agu/run/15.png" id="73_l4cv8"]
 [ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://classes/scenes/attack_melee.tscn" id="74_5us2e"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://classes/scenes/attack_range.tscn" id="75_eht16"]
+[ext_resource type="Script" path="res://entity/interaction_area.gd" id="76_wuekr"]
+[ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="77_05iou"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvuf0"]
 size = Vector2(212.5, 109.5)
@@ -350,90 +352,66 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("50_hrhsg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_hrhsg")
 }],
 "loop": true,
 "name": &"hit_down",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("51_aaui5")
-}, {
 "duration": 1.0,
 "texture": ExtResource("51_aaui5")
 }],
 "loop": true,
 "name": &"hit_left",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("52_xfod2")
-}, {
 "duration": 1.0,
 "texture": ExtResource("52_xfod2")
 }],
 "loop": true,
 "name": &"hit_leftdown",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("53_7v1mt")
-}, {
 "duration": 1.0,
 "texture": ExtResource("53_7v1mt")
 }],
 "loop": true,
 "name": &"hit_leftup",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("54_oy8ko")
-}, {
 "duration": 1.0,
 "texture": ExtResource("54_oy8ko")
 }],
 "loop": true,
 "name": &"hit_right",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("55_bkoh1")
-}, {
 "duration": 1.0,
 "texture": ExtResource("55_bkoh1")
 }],
 "loop": true,
 "name": &"hit_rightdown",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("56_fpx8u")
-}, {
 "duration": 1.0,
 "texture": ExtResource("56_fpx8u")
 }],
 "loop": true,
 "name": &"hit_rightup",
-"speed": 1.0
+"speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("57_7k57m")
-}, {
 "duration": 1.0,
 "texture": ExtResource("57_7k57m")
 }],
 "loop": true,
 "name": &"hit_up",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -526,13 +504,16 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20vgc"]
+size = Vector2(235, 197)
+
 [node name="agu" type="CharacterBody2D"]
+position = Vector2(0, 37)
 collision_layer = 61
 collision_mask = 56
 script = ExtResource("1_yf17y")
 groud_move = true
 Evo_level = 2
-metadata/_edit_group_ = true
 
 [node name="patas" type="CollisionShape2D" parent="."]
 position = Vector2(12.25, 42.75)
@@ -548,7 +529,7 @@ Da=amarillo"
 material = SubResource("ShaderMaterial_sto4q")
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_4jwe3")
-animation = &"hit_down"
+animation = &"del_down"
 
 [node name="Name" type="Label" parent="sprite"]
 anchors_preset = 12
@@ -565,6 +546,7 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Name"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="AtackBar" type="HBoxContainer" parent="sprite/Name"]
 layout_mode = 1
@@ -578,11 +560,16 @@ offset_right = 20.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Attack_melee" parent="sprite/Name/AtackBar" instance=ExtResource("74_5us2e")]
+max_sound_distanse = 500
+kooldown = 0
 power_atack = 0.265
 
 [node name="Attack_range" parent="sprite/Name/AtackBar" instance=ExtResource("75_eht16")]
+accion = "A02"
+max_sound_distanse = 500
 power_atack = 0.337
 
 [node name="prepcion" type="Area2D" parent="."]
@@ -593,6 +580,19 @@ shape = SubResource("CircleShape2D_tjlny")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, 3.49999)
 scale = Vector2(11.8, 11.05)
+
+[node name="interaction_area" type="Area2D" parent="."]
+script = ExtResource("76_wuekr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
+position = Vector2(-0.5, -98.5)
+shape = SubResource("RectangleShape2D_20vgc")
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("77_05iou")
+volume_db = 10.0
+max_distance = 1000.0
+bus = &"SFX"
 
 [connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="animation_looped" from="sprite" to="." method="_on_sprite_animation_finished"]

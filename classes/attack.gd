@@ -5,5 +5,5 @@ class_name Attack extends Sprite2D
 @export_enum("PASIVE","MELEE","RANGE","RANGE_PERSIT","EMBEST")var Type=0
 @export_range(0,2) var power_atack:float
 @onready var atribut:DigimonCORE.attribut=digimon_owner.attribute
-@onready var power:float=20#power_atack*digimon_owner.get_attack()
+@onready var power:float=105#power_atack*digimon_owner.get_attack()
 

@@ -8,19 +8,16 @@ script/source = "extends Attack
 @export var plus_power_multipicator:int=2
 
 func _ready():
-#1	positioning()
+	positioning()
 	timer()
 func positioning():
 	$area/area.shape.radius=radius
-	$area/area.position=digimon_owner.position
+	$area/area.global_position=digimon_owner.global_position
 
 func search_digimon_in_range_and_hit_they():
-	@warning_ignore(\"unassigned_variable\")
-	var digimons:Array[DigimonCORE]
-	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digimons.append(digi.core)
-	for digi in digimons:
-		if has_limit_level: if digi.Evo_level<=limit_level: digi.hit(power*plus_power_multipicator,Vector2.ZERO,digimon_owner)
-		else:digi.hit(power,Vector2.ZERO,digimon_owner)
+	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:
+		if has_limit_level: if digi.Evo_level<=limit_level: digi.core.hit(power*plus_power_multipicator,Vector2.ZERO,digimon_owner)
+	else:digi.core.hit(power,Vector2.ZERO,digimon_owner)
 
 func timer():
 	if kooldown==0:
@@ -28,7 +25,6 @@ func timer():
 		var _time=get_tree().create_timer(0.01).timeout.connect(timer)
 	else:
 		search_digimon_in_range_and_hit_they()
-		@warning_ignore(\"unused_variable\")
 		var _time=get_tree().create_timer(kooldown).timeout.connect(timer)
 "
 
