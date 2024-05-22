@@ -4,4 +4,4 @@ var previus_dir:Vector2
 func rotar(dir):
 	if dir!=previus_dir and dir !=Vector2.ZERO:
 		rotation_degrees=rotation_direction[dir]
-	previus_dir=dir
+		previus_dir=dir

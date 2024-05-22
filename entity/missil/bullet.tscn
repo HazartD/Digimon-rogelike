@@ -1,25 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://1k1urruj411u"]
+[gd_scene load_steps=5 format=3 uid="uid://1k1urruj411u"]
 
-[ext_resource type="SpriteFrames" uid="uid://cdtheh3c21gw2" path="res://img/animation_resouse/agumon.tres" id="1_tk2n8"]
+[ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="1_4i4d5"]
 
-[sub_resource type="GDScript" id="GDScript_gkjo1"]
+[sub_resource type="GDScript" id="GDScript_voyh2"]
 script/source = "extends CharacterBody2D
+var power:float=100
+var digimon_owner:DigimonBody
+var dir:Vector2=Vector2.DOWN
+var speed:float=10000
+func set_data(powe,dig,spe,spr):
+	power=powe
+	digimon_owner=dig
+	if dig.interaction_area.previus_dir!=Vector2.ZERO:dir=dig.interaction_area.previus_dir
+	speed=spe
+	$sprite.sprite_frames=spr
+
+func _on_area_2d_body_entered(body):
+	if body !=digimon_owner and body != self:
+		print(\"range attack of \",digimon_owner.name,digimon_owner.digimon_name,\" impact in \",body.name,body.digimon_name)
+		if body is DigimonBody:
+			body.core.hit(power,dir,digimon_owner)
+			queue_free()
+		else:queue_free()
+
+func _physics_process(delta):
+	velocity=(dir*speed)*delta
+	move_and_slide()
 
 
-func _on_sprite_frames_changed():
+func _on_sprite_sprite_frames_changed():
 	$coli.shape.size=$sprite.sprite_frames.get_frame_texture($sprite.animation,0).get_size()
+	$Area2D/coli.shape.size=$sprite.sprite_frames.get_frame_texture($sprite.animation,0).get_size()
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrbvc"]
 
-[node name="bullet" type="CharacterBody2D"]
-script = SubResource("GDScript_gkjo1")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxetq"]
+size = Vector2(285, 210)
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("1_tk2n8")
-animation = &"down"
+[node name="bullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = SubResource("GDScript_voyh2")
+metadata/_edit_group_ = true
 
 [node name="coli" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mrbvc")
 
-[connection signal="sprite_frames_changed" from="sprite" to="." method="_on_sprite_frames_changed"]
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_4i4d5")
+animation = &"A01_down"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="coli" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -4)
+shape = SubResource("RectangleShape2D_xxetq")
+
+[connection signal="sprite_frames_changed" from="sprite" to="." method="_on_sprite_sprite_frames_changed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

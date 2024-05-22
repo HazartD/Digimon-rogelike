@@ -11,13 +11,13 @@ var location:Locations=Locations.NATURE_SPIRIT
 func _init():
 	DirAccess.make_dir_absolute("user://HazartD/DR/screenshot")
 	DirAccess.open("user://HazartD/DR")
-	if FileAccess.file_exists(USERDATA):load_userdata()
-	else:
-		var con=ConfigFile.new()
-		con.set_value("first_run","why exist this section?","creo que necesita tener algo para crear el archivo y puse esto")
-		con.set_value("first_run","date",str(Time.get_datetime_dict_from_system()))
-		con.set_value("first_run","system",OS.get_name())
-		con.save(USERDATA)
+	#if FileAccess.file_exists(USERDATA):load_userdata()
+	#else:
+		#var con=ConfigFile.new()
+		#con.set_value("first_run","why exist this section?","creo que necesita tener algo para crear el archivo y puse esto")
+		#con.set_value("first_run","date",str(Time.get_datetime_dict_from_system()))
+		#con.set_value("first_run","system",OS.get_name())
+		#con.save(USERDATA)
 func save_config():
 	var con=ConfigFile.new()
 	con.set_value("general","languaje",TranslationServer.get_locale())
@@ -55,9 +55,8 @@ func savedead(data:Dictionary):
 	for key in data.keys():
 		if key !="player_name":
 			con.set_value(section,key,data[key])
-			if  key =="digimon_id" or key =="time" or key =="player_name" or key =="fighter" or key =="dead cause":continue
-			else:
-				statsplus[key]+=(data[key]/10000)
+			if  key =="digimon_id" or key =="time" or key =="player_name" or key =="fighter" or key =="dead cause"or key =="line_id":continue
+			elif statsplus[key] != data[key]: statsplus[key]+=(data[key]/10000)
 	
 	con.set_value("meta_progesion","statsplus",statsplus)
 	con.save(USERDATA)

@@ -8,14 +8,14 @@ var body:DigimonBody
 @export var attribute:attribut
 @export var Evo_level:level_evo
 @export_group("stats")
-@export var life:float=0.0
-@export var energy:float=0.0
-@export var attack:float=0.0
-@export var defend:float=0.0
-@export var speed:float=0.0#la speed tambien afecta al movimiento
-@export var inteligent:float=0.0
-@export var will:float=0.0
-@export var fighter:float
+@export var life:float=0.1
+@export var energy:float=0.1
+@export var attack:float=0.1
+@export var defend:float=0.1
+@export var speed:float=0.1#la speed tambien afecta al movimiento
+@export var inteligent:float=0.1
+@export var will:float=0.1
+@export var fighter:float=0.1
 @export var damage_recive:float=0.0
 
 var max_life:float=10

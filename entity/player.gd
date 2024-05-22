@@ -3,7 +3,7 @@ var data:Array[float]=[]
 var player_name:String="aaa"
 var alive:bool=true
 #const BODY=preload("res://entity/digimon_base.tscn")
-
+var line_id:Array[int]=[]
 func _ready():
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
@@ -14,6 +14,7 @@ func dead(cause):
 	"time":time,
 	"player_name":player_name,
 	"digimon_id":digimon_id,
+	"line_id":line_id,
 	"life":life,
 	"energy":energy,
 	"attack":attack,
@@ -33,7 +34,8 @@ func hit(damage:float,dir:Vector2,a:DigimonBody):
 
 
 func _on_tree_exiting():
-	if alive:dead("quit game")
+	pass
+#	if alive:dead("exit game")
 	
 func _process(delta):
 	time+=delta
@@ -41,4 +43,6 @@ func _process(delta):
 
 
 func _on_child_entered_tree(node):
-	if node is DigimonBody:node.player=true
+	if node is DigimonBody:
+		line_id.append(node.Digimon_Id)
+		node.player=true

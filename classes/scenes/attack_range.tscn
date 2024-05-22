@@ -4,6 +4,17 @@
 
 [sub_resource type="GDScript" id="GDScript_op2v3"]
 script/source = "extends AttackAction
+@export var speed:int=100
+@export var spri:SpriteFrames
+const BULLET:PackedScene=preload(\"res://entity/missil/bullet.tscn\")
+func effect():
+	var bu=BULLET.instantiate()
+#	bu.set_process(false)
+	digimon_owner.core.add_child(bu)
+	bu.global_position=digimon_owner.global_position
+	bu.set_data(powered(),digimon_owner,speed*digimon_owner.get_speed(),spri)
+#	bu.set_data(power,digimon_owner,speed,spri)
+#	bu.set_process(true)
 "
 
 [node name="Attack_range" type="Sprite2D"]

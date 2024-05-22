@@ -20,13 +20,13 @@ radius = 184.597
 
 [node name="room" type="Node2D"]
 
-[node name="DigimonCORE" type="Node" parent="."]
+[node name="rare" type="Node" parent="."]
 script = ExtResource("1_lcl16")
 
-[node name="body" parent="DigimonCORE" instance=ExtResource("3_6t5du")]
+[node name="body" parent="rare" instance=ExtResource("3_6t5du")]
 position = Vector2(1231, 349)
 
-[node name="Raremon" type="Sprite2D" parent="DigimonCORE/body"]
+[node name="Raremon" type="Sprite2D" parent="rare/body"]
 position = Vector2(23, -1.99999)
 scale = Vector2(0.514286, 0.547778)
 texture = ExtResource("3_urk74")
@@ -37,25 +37,25 @@ script = ExtResource("1_lcl16")
 [node name="digimon_body" parent="DigimonCORE4" instance=ExtResource("2_y6abx")]
 position = Vector2(675, 408)
 
+[node name="grey" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+
+[node name="agu" parent="grey" instance=ExtResource("2_y6abx")]
+position = Vector2(978, 116)
+Evo_level = 4
+
+[node name="150Px-greymonNewCentury" type="Sprite2D" parent="grey/agu"]
+position = Vector2(3.00003, -35)
+scale = Vector2(2.01667, 1.55402)
+texture = ExtResource("6_7e2gc")
+
+[node name="player" parent="." instance=ExtResource("4_d0nwv")]
+
 [node name="DigimonCORE3" type="Node" parent="."]
 script = ExtResource("1_lcl16")
 
 [node name="digimon_body" parent="DigimonCORE3" instance=ExtResource("2_y6abx")]
 position = Vector2(-6975, -7959)
-
-[node name="player" parent="." instance=ExtResource("4_d0nwv")]
-
-[node name="DigimonCORE2" type="Node" parent="."]
-script = ExtResource("1_lcl16")
-
-[node name="agu" parent="DigimonCORE2" instance=ExtResource("2_y6abx")]
-position = Vector2(978, 116)
-Evo_level = 4
-
-[node name="150Px-greymonNewCentury" type="Sprite2D" parent="DigimonCORE2/agu"]
-position = Vector2(3.00003, -35)
-scale = Vector2(2.01667, 1.55402)
-texture = ExtResource("6_7e2gc")
 
 [node name="Area2D" type="Area2D" parent="."]
 script = SubResource("GDScript_vl5ka")

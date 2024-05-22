@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4tuihkfryehf"]
+[gd_scene load_steps=10 format=3 uid="uid://c4tuihkfryehf"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_h21te"]
 [ext_resource type="Shader" path="res://img/shader/digimon_hit.gdshader" id="2_2pdkg"]
 [ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="2_pp3fa"]
 [ext_resource type="PackedScene" uid="uid://op7mnjxhk1cx" path="res://classes/scenes/Attack_pasive.tscn" id="3_jk5kd"]
+[ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="5_8g70x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1iya"]
 
@@ -18,6 +19,7 @@ shader_parameter/tint = Color(0.298039, 0, 0.305882, 1)
 
 [node name="body" type="CharacterBody2D"]
 script = ExtResource("1_h21te")
+Digimon_Id = 16
 attribute = 2
 
 [node name="patas" type="CollisionShape2D" parent="."]
@@ -61,6 +63,7 @@ grow_vertical = 0
 radius = 737.01
 has_limit_level = true
 limit_level = 2
+physic = true
 power_atack = 1.0
 
 [node name="prepcion" type="Area2D" parent="."]
@@ -72,3 +75,9 @@ shape = SubResource("CircleShape2D_5iick")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
 shape = SubResource("RectangleShape2D_2cejp")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_8g70x")
+max_distance = 3000.0

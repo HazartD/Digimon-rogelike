@@ -48,9 +48,6 @@ func set_stats():
 	while data_index<10:
 		set(keys[data_index],new_stats[data_index])
 		data_index+=1
-	if player==true and core is Player:$sprite/Name.text=core.player_name+"
-	("+digimon_name+"mon)"
-	else:$sprite/Name.text=digimon_name+"mon"
 	core.attribute=attribute
 	core.Evo_level=Evo_level
 	core.max_energy=get_energy()
@@ -58,11 +55,18 @@ func set_stats():
 	core.current_energy=get_energy()
 	core.max_life=get_life()
 	core.body=self
+	if player==true and core is Player:$sprite/Name.text=core.player_name+"
+	("+digimon_name+"mon)"
+	else:$sprite/Name.text=digimon_name+"mon"
 
 func _ready():
+	if $AudioListener2D:
+		if player:$AudioListener2D.make_current()
+		else:$AudioListener2D.queue_free()
 	core=get_parent()
 	$sprite.play("del_down")
 	set_stats()
+
 
 func _physics_process(delta):
 	if player:_get_inputs()
@@ -89,7 +93,7 @@ func hited():
 		new_anim=new_anim.erase(0,4)
 		new_anim=new_anim.insert(0,"hit_")
 		$sprite.play(new_anim)
-	$sound.play()
+	$hurt.play()
 
 func attack(acc:String):
 	var new_anim:String=$sprite.animation
