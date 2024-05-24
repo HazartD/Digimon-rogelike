@@ -42,6 +42,7 @@ script = ExtResource("1_lcl16")
 
 [node name="agu" parent="grey" instance=ExtResource("2_y6abx")]
 position = Vector2(978, 116)
+Digimon_Id = 3
 Evo_level = 4
 
 [node name="150Px-greymonNewCentury" type="Sprite2D" parent="grey/agu"]

@@ -1,4 +1,5 @@
-class_name Attack extends Sprite2D
+class_name Attack extends TextureRect
+var reposo:float
 @export var physic:bool#si es fisico true y si intelig false
 @export var energy_use:bool=false
 @onready var digimon_owner:DigimonBody=get_parent().get_parent().get_parent().get_parent()
@@ -9,5 +10,12 @@ class_name Attack extends Sprite2D
 func powered():
 	if physic:return power_atack*digimon_owner.get_attack()
 	else:return power_atack*digimon_owner.get_inteligent()
+
+
+func _process(_delta):
+	if reposo<=0:
+		if modulate!=Color(1,1,1,1):modulate=Color(1,1,1,1)
+	else: if modulate!=Color(0.3,0.3,0.3,0.3):modulate=Color(0.3,0.3,0.3,0.3)
+	$Label.text=str(reposo)
 	
 

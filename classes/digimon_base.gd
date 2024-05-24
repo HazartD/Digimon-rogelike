@@ -17,47 +17,55 @@ var body:DigimonBody
 @export var will:float=0.1
 @export var fighter:float=0.1
 @export var damage_recive:float=0.0
-
+signal body_dead(murder)
 var max_life:float=10
 var max_energy:float
 var current_life:float=10
 var current_energy:float
 var enemies:Array[DigimonCORE]=[]#if ese, y prosige, else: pop
-
 	#set_sprite("res://img/animation_resouse/digimon_base.tres")
 
 @warning_ignore("unused_parameter")
-func hit(damage:float,dir:Vector2,a:DigimonBody):
-	_hit(damage,dir,a.attribute)
+func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,pasive:bool=false):
+	body.dir=dir
+	if pasive:_hit(damage,dir,a.attribute,physic)
+	else:
+		var limit=(body.get_speed()-a.get_speed())/2
+		print(limit)
+		if randi_range(0,limit)==0:_hit(damage,dir,a.attribute,physic)
+		else:print(self.name," evadio")
+			
+			
 	#if enemies.has(a):
-		#enemies.pop_at(enemies.bsearch(a))
 		#enemies.append(a)
 	#else:enemies.append(a)
 
-func minus_life(damage:float,divisor:float=1):
-	damage=(damage*divisor)-(body.get_defend()*0.25)
+func minus_life(damage:float,physic:bool,divisor:float=1):
+	damage=(damage*divisor)
+	if physic:damage-=(body.get_defend()*0.25)
+	else :damage-=(body.get_inteligent()*0.25)
 	current_life-=damage
 	damage_recive+=damage
 	
 @warning_ignore("unused_parameter")
-func _hit(damage:float,atta_dir:Vector2,attri:attribut):
+func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool):
 #	var knockback=damage#-(life/5)#if menor a 0 no hay
-	if attribute==attribut.FR or attribute==attribut.UNK:minus_life(damage)
+	if attribute==attribut.FR or attribute==attribut.UNK:minus_life(damage,physic)
 	elif attribute==attribut.VA:
 		match attri:
-			attribut.VI:minus_life(damage,0.7)
-			attribut.DA:minus_life(damage,1.3)
-			_:minus_life(damage)
+			attribut.VI:minus_life(damage,physic,0.7)
+			attribut.DA:minus_life(damage,physic,1.3)
+			_:minus_life(damage,physic)
 	elif attribute==attribut.VI:
 		match attri:
-			attribut.VA:minus_life(damage,1.3)
-			attribut.DA:minus_life(damage,0.7)
-			_:minus_life(damage)
+			attribut.VA:minus_life(damage,physic,1.3)
+			attribut.DA:minus_life(damage,physic,0.7)
+			_:minus_life(damage,physic)
 	elif attribute==attribut.DA:
 		match attri:
-			attribut.VA:minus_life(damage,0.7)
-			attribut.VI:minus_life(damage,1.3)
-			_:minus_life(damage)
+			attribut.VA:minus_life(damage,physic,0.7)
+			attribut.VI:minus_life(damage,physic,1.3)
+			_:minus_life(damage,physic)
 	body.hited()
 
 

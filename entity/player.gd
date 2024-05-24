@@ -1,18 +1,15 @@
 class_name Player extends DigimonCORE
 var data:Array[float]=[]
-var player_name:String="aaa"
 var alive:bool=true
-#const BODY=preload("res://entity/digimon_base.tscn")
-var line_id:Array[int]=[]
+var line_id:Array[int]=[0,16,3]
 func _ready():
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
 
-		
 func dead(cause):
 	var save_data={
 	"time":time,
-	"player_name":player_name,
+	"player_name":Iniload.player_name,
 	"digimon_id":digimon_id,
 	"line_id":line_id,
 	"life":life,
@@ -25,11 +22,17 @@ func dead(cause):
 	"fighter":fighter,
 	"dead cause":cause}
 	Iniload.savedead(save_data)
-	alive=false
+	#alive=false
 
-func hit(damage:float,dir:Vector2,a:DigimonBody):
-	_hit(damage,dir,a.attribute)
-	if current_life<=0: dead(a.Digimon_Id)
+func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,pasive:bool=false):
+	body.dir=dir
+	if pasive:_hit(damage,dir,a.attribute,physic)
+	else:
+		var limit=(body.get_speed()-a.get_speed())/2
+		print(limit)
+		if randi_range(0,limit)==0:_hit(damage,dir,a.attribute,physic)
+		else:print(self.name," evadio")
+#	if current_life<=0: dead(a.Digimon_Id)
 
 
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bairja1m5stjv"]
+[gd_scene load_steps=4 format=3 uid="uid://bairja1m5stjv"]
 
+[ext_resource type="Texture2D" uid="uid://mdpgknjg2ub2" path="res://icon.svg" id="1_h1d76"]
 [ext_resource type="AudioStream" uid="uid://j8gsmfmiyi00" path="res://audio/attack/tu.ogg" id="1_w7i1j"]
 
 [sub_resource type="GDScript" id="GDScript_op2v3"]
 script/source = "extends AttackAction
-@export var speed:int=100
+@export var speed:int=10
 @export var spri:SpriteFrames
 const BULLET:PackedScene=preload(\"res://entity/missil/bullet.tscn\")
 func effect():
@@ -12,15 +13,23 @@ func effect():
 #	bu.set_process(false)
 	digimon_owner.core.add_child(bu)
 	bu.global_position=digimon_owner.global_position
-	bu.set_data(powered(),digimon_owner,speed*digimon_owner.get_speed(),spri)
+	
+	bu.set_data(powered(),digimon_owner,speed+digimon_owner.get_speed()*0.5,spri,physic)
 #	bu.set_data(power,digimon_owner,speed,spri)
 #	bu.set_process(true)
 "
 
-[node name="Attack_range" type="Sprite2D"]
+[node name="Attack_range" type="TextureRect"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_h1d76")
 script = SubResource("GDScript_op2v3")
 sound = ExtResource("1_w7i1j")
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 volume_db = -50.0
 bus = &"SFX"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

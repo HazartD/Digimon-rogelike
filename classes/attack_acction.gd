@@ -1,9 +1,8 @@
 class_name AttackAction extends Attack
-var reposo:float
 @export var accion:String="A01"
 var costo:int=10
 @export var sound:Resource
-@export var max_sound_distanse:int
+@export var max_sound_distanse:int=500
 func action():
 	digimon_owner.attack(accion)
 	reposo=kooldown

@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://op7mnjxhk1cx"]
+[gd_scene load_steps=4 format=3 uid="uid://op7mnjxhk1cx"]
+
+[ext_resource type="Texture2D" uid="uid://mdpgknjg2ub2" path="res://icon.svg" id="1_gebl1"]
 
 [sub_resource type="GDScript" id="GDScript_wb3vl"]
 script/source = "extends Attack
@@ -16,8 +18,8 @@ func positioning():
 
 func search_digimon_in_range_and_hit_they():
 	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:
-		if has_limit_level: if digi.Evo_level<=limit_level: digi.core.hit(powered()*plus_power_multipicator,Vector2.ZERO,digimon_owner)
-	else:digi.core.hit(powered(),Vector2.ZERO,digimon_owner)
+		if has_limit_level: if digi.Evo_level<=limit_level: digi.core.hit(powered()*plus_power_multipicator,Vector2.ZERO,digimon_owner,physic,true)
+	else:digi.core.hit(powered(),Vector2.ZERO,digimon_owner,physic)
 
 func timer():
 	if kooldown==0:
@@ -31,7 +33,9 @@ func timer():
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4pyk"]
 radius = 737.013
 
-[node name="Attack_pasive" type="Sprite2D"]
+[node name="Attack_pasive" type="TextureRect"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_gebl1")
 script = SubResource("GDScript_wb3vl")
 kooldown = 1
 power_atack = 0.2
@@ -42,3 +46,8 @@ collision_mask = 56
 
 [node name="area" type="CollisionShape2D" parent="area"]
 shape = SubResource("CircleShape2D_o4pyk")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

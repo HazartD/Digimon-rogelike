@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://druvk3tfimras"]
+[gd_scene load_steps=4 format=3 uid="uid://druvk3tfimras"]
 
+[ext_resource type="Texture2D" uid="uid://mdpgknjg2ub2" path="res://icon.svg" id="1_gm4nq"]
 [ext_resource type="AudioStream" uid="uid://b88ir2jdus00g" path="res://audio/attack/ta.ogg" id="1_oglge"]
 
 [sub_resource type="GDScript" id="GDScript_r17vf"]
@@ -7,15 +8,18 @@ script/source = "extends AttackAction
 func effect():
 	search_digimon_in_range_and_hit_they()
 func search_digimon_in_range_and_hit_they():
-	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),digimon_owner.dir,digimon_owner)
+	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),digimon_owner.dir,digimon_owner,physic)
 "
 
-[node name="Attack_melee" type="Sprite2D"]
+[node name="Attack_melee" type="TextureRect"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_gm4nq")
 script = SubResource("GDScript_r17vf")
 sound = ExtResource("1_oglge")
 Type = 1
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
