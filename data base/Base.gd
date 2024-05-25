@@ -1,11 +1,10 @@
 extends Node
-
 var base:Dictionary={}
 func _ready():
 	var data_base=FileAccess.open("res://data base/Base.csv",FileAccess.READ)
-	var _keys= data_base.get_csv_line(";")
+	var _keys= data_base.get_csv_line()
 	while data_base.get_position() < data_base.get_length():
-		var new_digimon_data_unconver=data_base.get_csv_line()
+		var new_digimon_data_unconver=data_base.get_csv_line(";")
 #		print(new_digimon_data_unconver)
 		var new_digimon_data:Array=[]
 		for a in new_digimon_data_unconver:

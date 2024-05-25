@@ -8,7 +8,6 @@ func _ready():
 	elif DisplayServer.window_get_mode()==3:$MC/HB/accion/full.button_pressed=true
 func _input(event):
 	if event.is_action("ui_cancel"):
-		
 		queue_free()
 
 func _on_bgm_value_changed(value):

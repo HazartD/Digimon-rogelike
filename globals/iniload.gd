@@ -12,19 +12,20 @@ const SEED_FILE_PATH="user://HazartD/DR/seed_register/%s.ini"
 		#var sprite=Sprite2D.new()
 		#sprite.texture=ImageTexture.create_from_image(Image.load_from_file(con.get_value("screenshoot",img)))
 		#add_child(sprite)
-
+var world_seed:Dictionary={}
 var statsplus:Dictionary={"life":0.000,"energy":0.000,"attack":0.000,"defend":0.000,"speed":0.000,"inteligent":0.000,"will":0.000}
-var unlock_evo:Dictionary={}#son los id del digimon desbloqueado y su true false
+var unlock_evo:Dictionary={"meca_data":false,6:false,7:false,8:false,9:false}#son los id del digimon desbloqueado y su true false
 var run_number:int=1
-enum Locations{NATURE_SPIRIT,DRAGON_ROAR,DEEP_SAVERS}
-var location:Locations=Locations.NATURE_SPIRIT
-var actual_seed:int=345678
-var seed_string:String
+enum LOCATIONS{DS,NSP,DR,ME,JT,NSO,VB,WG,DA,UK,CRACK_TEAM_BASE,FILE_CITY,SHORE}
+var location:LOCATIONS=LOCATIONS.NSP
+var actual_seed:int=1923659980
+var seed_string:String="Digimon"
 var player_name:String
+
 func _init():
-	DirAccess.make_dir_absolute("user://HazartD/DR/screenshot")
-	DirAccess.make_dir_absolute("user://HazartD/DR/seed_register")
-	DirAccess.open("user://HazartD/DR")
+	DirAccess.make_dir_recursive_absolute("user://HazartD/DR/screenshot")
+	DirAccess.make_dir_recursive_absolute("user://HazartD/DR/seed_register")
+	#DirAccess.open("user://HazartD/DR")
 	#if FileAccess.file_exists(USERDATA):load_userdata()
 	#else:
 		#var con=ConfigFile.new()
@@ -93,18 +94,17 @@ func create_seed_regiser_file():
 	var con=ConfigFile.new()
 	con.set_value("seed data","seed",actual_seed)
 	con.set_value("seed data","text_1",seed_string)
+	#for seed in world_seed: con.set_value("world seeds",str(seed),world_seed[seed])
+	con.set_value("world seeds","world_seed",world_seed)
 	con.save(SEED_FILE_PATH % actual_seed)
 
-func add_seed_string_to_seed_file(_seed:int,stri:String):
-	#cuando creas un mundo debe comprobar si la string da una seed ya registrada y negarte crear otro
+func add_seed_string_to_seed_file(_seed:int,stri:String):#cuando creas un mundo debe comprobar si la string da una seed ya registrada y negarte crear otro
 	var con=ConfigFile.new()
 	con.load(SEED_FILE_PATH % _seed)
 	var number:int=2
 	while con.has_section_key("seed data","text_%s"%number):
 		number+=1
 	con.set_value("seed data","text_%s"%number,stri)
-	pass
-
 
 func _input(event):
 	if event.is_action_pressed("screenshot"):
@@ -119,4 +119,3 @@ func _input(event):
 			con.load(SEED_FILE_PATH % actual_seed)
 			con.set_value("screenshoot",str(screenshoot_number),path)
 			con.save(SEED_FILE_PATH % actual_seed)
-

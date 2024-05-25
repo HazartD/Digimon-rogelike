@@ -34,16 +34,12 @@ func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,pasive:bool=false):
 		else:print(self.name," evadio")
 #	if current_life<=0: dead(a.Digimon_Id)
 
-
-
 func _on_tree_exiting():
 	pass
 #	if alive:dead("exit game")
 	
 func _process(delta):
 	time+=delta
-
-
 
 func _on_child_entered_tree(node):
 	if node is DigimonBody:

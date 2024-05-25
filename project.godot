@@ -97,6 +97,10 @@ A04={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://translation/UI.en.translation", "res://translation/UI.es.translation")
+
 [layer_names]
 
 2d_physics/layer_1="air3"

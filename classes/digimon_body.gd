@@ -55,7 +55,7 @@ func set_stats():
 	core.current_energy=get_energy()
 	core.max_life=get_life()
 	core.body=self
-	if player==true and core is Player:$sprite/Name.text=core.player_name+"
+	if player==true and core is Player:$sprite/Name.text=Iniload.player_name+"
 	("+digimon_name+"mon)"
 	else:$sprite/Name.text=digimon_name+"mon"
 
