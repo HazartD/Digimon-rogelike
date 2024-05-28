@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://x2xjmh3pner5"]
+
+[sub_resource type="GDScript" id="GDScript_efnpo"]
+script/source = "extends Label
+func _ready():
+	position.y=-20
+	await get_tree().create_timer(0.15).timeout
+	var tween=get_tree().create_tween()
+	tween.tween_property(self,\"position:y\",20,0.5)
+	await tween.finished
+	queue_free()
+"
+
+[node name="digimon_estate" type="Label"]
+offset_left = 177.0
+offset_top = 185.0
+offset_right = 207.0
+offset_bottom = 208.0
+text = "EVA"
+script = SubResource("GDScript_efnpo")

@@ -26,9 +26,9 @@ var enemies:Array[DigimonCORE]=[]#if ese, y prosige, else: pop
 	#set_sprite("res://img/animation_resouse/digimon_base.tres")
 
 @warning_ignore("unused_parameter")
-func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,pasive:bool=false):
+func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false):
 	body.dir=dir
-	if pasive:_hit(damage,dir,a.attribute,physic)
+	if area:_hit(damage,dir,a.attribute,physic)
 	else:
 		var limit=(body.get_speed()-a.get_speed())/2
 		print(limit)
@@ -40,16 +40,11 @@ func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,pasive:bool=false):
 		#enemies.append(a)
 	#else:enemies.append(a)
 
-func minus_life(damage:float,physic:bool,divisor:float=1):
-	damage=(damage*divisor)
-	if physic:damage-=(body.get_defend()*0.25)
-	else :damage-=(body.get_inteligent()*0.25)
-	current_life-=damage
-	damage_recive+=damage
-	
 @warning_ignore("unused_parameter")
 func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool):
-#	var knockback=damage#-(life/5)#if menor a 0 no hay
+	var knockback=damage-(life/8)
+	if knockback>0:body.position+=atta_dir*(knockback/2)
+	else:print("impacto, pero no hay retroseso en ",self.name)
 	if attribute==attribut.FR or attribute==attribut.UNK:minus_life(damage,physic)
 	elif attribute==attribut.VA:
 		match attri:
@@ -68,6 +63,12 @@ func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool):
 			_:minus_life(damage,physic)
 	body.hited()
 
+func minus_life(damage:float,physic:bool,divisor:float=1):
+	damage=(damage*divisor)
+	if physic:damage-=(body.get_defend()*0.25)
+	else :damage-=(body.get_inteligent()*0.25)
+	current_life-=damage
+	damage_recive+=damage
 
 func evo():
 	pass

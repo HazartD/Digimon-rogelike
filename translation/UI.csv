@@ -1,4 +1,7 @@
-;es;en
-NS;"No se ha ingresado texto, se usará semilla aleatoria";"No text has been entered, random seed will be used"
-IS;"Se ingresó un número válido, se usará como semilla";"A valid number was entered, it will be used as a seed"
-SS;"Se ingresó texto, se convertirá en número entero";"Text was entered, it will be converted to an integer"
+,es,en
+NS,"No se ha ingresado texto, se usará semilla aleatoria","No text has been entered, random seed will be used"
+IS,"Se ingresó un número válido, se usará como semilla","A valid number was entered, it will be used as a seed"
+SS,"Se ingresó texto, se convertirá en número entero","Text was entered, it will be converted to an integer"
+ACTUAL_MAP,Mapa actual,Actual map
+FINAL_MAP,Mapa final,Final map
+EVA,Evadir,Flee

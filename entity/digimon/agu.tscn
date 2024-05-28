@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://dkw7j82rs3vny"]
+
+[ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
+[ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://classes/scenes/attack_melee.tscn" id="5_v31tj"]
+[ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://classes/scenes/attack_range.tscn" id="75_eht16"]
+[ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="76_nxe34"]
+[ext_resource type="Script" path="res://entity/interaction_area.gd" id="76_wuekr"]
+[ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="77_05iou"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_20vgc"]
+size = Vector2(180, 129)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvuf0"]
+size = Vector2(180, 143)
+
+[node name="agu" type="CharacterBody2D"]
+position = Vector2(0, 37)
+collision_layer = 61
+collision_mask = 56
+motion_mode = 1
+script = ExtResource("1_yf17y")
+groud_move = true
+Evo_level = 2
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+editor_description = "el color del golpe depende del atrbuto.
+
+libre=blanco
+Va=azul
+Vi=rojo
+Da=amarillo"
+material = SubResource("ShaderMaterial_sto4q")
+position = Vector2(0, 2)
+sprite_frames = ExtResource("76_nxe34")
+animation = &"run_right"
+
+[node name="Name" type="Label" parent="sprite"]
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.10268
+offset_left = -132.0
+offset_top = -131.0
+offset_right = -132.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Name"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AtackBar" type="HBoxContainer" parent="sprite/Name"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0599004
+anchor_top = 3.52322
+anchor_right = 1.02343
+anchor_bottom = 3.52322
+offset_top = -128.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="Attack_range" parent="sprite/Name/AtackBar" instance=ExtResource("75_eht16")]
+layout_mode = 2
+speed = 500
+spri = ExtResource("76_nxe34")
+max_sound_distanse = 1500
+power_atack = 0.337
+
+[node name="Attack_melee" parent="sprite/Name/AtackBar" instance=ExtResource("5_v31tj")]
+layout_mode = 2
+
+[node name="prepcion" type="Area2D" parent="."]
+
+[node name="prepcion" type="CollisionShape2D" parent="prepcion"]
+shape = SubResource("CircleShape2D_tjlny")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(3, 3)
+scale = Vector2(11.8, 11.05)
+
+[node name="interaction_area" type="Area2D" parent="."]
+script = ExtResource("76_wuekr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
+position = Vector2(-2, -64.5)
+shape = SubResource("RectangleShape2D_20vgc")
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("77_05iou")
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
+[node name="patas" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -7.5)
+shape = SubResource("RectangleShape2D_hvuf0")
+
+[connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="animation_looped" from="sprite" to="." method="_on_sprite_animation_finished"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

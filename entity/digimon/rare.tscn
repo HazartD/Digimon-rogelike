@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_h21te"]
 [ext_resource type="Shader" path="res://img/shader/digimon_hit.gdshader" id="2_2pdkg"]
 [ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="2_pp3fa"]
-[ext_resource type="PackedScene" uid="uid://op7mnjxhk1cx" path="res://classes/scenes/Attack_pasive.tscn" id="3_jk5kd"]
+[ext_resource type="PackedScene" uid="uid://op7mnjxhk1cx" path="res://classes/scenes/attack_pasive.tscn" id="3_jk5kd"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://classes/scenes/attack_range.tscn" id="5_2uvug"]
 [ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="5_8g70x"]
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="6_jbdks"]
@@ -20,6 +20,7 @@ shader_parameter/tint = Color(0.298039, 0, 0.305882, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cejp"]
 
 [node name="body" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_h21te")
 Digimon_Id = 16
 attribute = 2

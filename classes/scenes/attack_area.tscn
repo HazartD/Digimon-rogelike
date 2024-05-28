@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cq378x4rl48os"]
+
+[ext_resource type="Texture2D" uid="uid://mdpgknjg2ub2" path="res://icon.svg" id="1_pn8wl"]
+[ext_resource type="AudioStream" uid="uid://b88ir2jdus00g" path="res://audio/attack/ta.ogg" id="1_v2m00"]
+
+[sub_resource type="GDScript" id="GDScript_xdh7a"]
+script/source = "extends AttackAction
+@export var radius:float=1000
+func effect():
+	search_digimon_in_range_and_hit_they()
+func _ready():
+	positioning()
+func positioning():
+	$area/area.shape.radius=radius
+	$area/area.global_position=digimon_owner.global_position
+func search_digimon_in_range_and_hit_they():
+	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),digimon_owner.dir,digimon_owner,physic,true)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_apqww"]
+radius = 737.013
+
+[node name="attack_area" type="TextureRect"]
+texture = ExtResource("1_pn8wl")
+script = SubResource("GDScript_xdh7a")
+accion = "A03"
+sound = ExtResource("1_v2m00")
+Type = 5
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 124
+collision_mask = 56
+
+[node name="area" type="CollisionShape2D" parent="area"]
+shape = SubResource("CircleShape2D_apqww")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 65
+text = "99.9"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]

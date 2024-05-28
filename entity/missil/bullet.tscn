@@ -19,13 +19,9 @@ func set_data(powe,dig,spe,spr,phy:bool):
 
 func _physics_process(delta):
 	position+=(dir*speed)*delta
-
-
 func _on_sprite_sprite_frames_changed():
 	$coli.shape.size=$sprite.sprite_frames.get_frame_texture($sprite.animation,0).get_size()
 	$Area2D/coli.shape.size=$sprite.sprite_frames.get_frame_texture($sprite.animation,0).get_size()
-
-
 func _on_body_entered(body):
 	if body !=digimon_owner:
 		if body is DigimonBody:

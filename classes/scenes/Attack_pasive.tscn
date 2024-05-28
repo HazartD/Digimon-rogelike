@@ -8,7 +8,6 @@ script/source = "extends Attack
 @export var has_limit_level:bool=false
 @export var limit_level:DigimonCORE.level_evo
 @export var plus_power_multipicator:int=2
-
 func _ready():
 	positioning()
 	timer()
@@ -16,17 +15,17 @@ func positioning():
 	$area/area.shape.radius=radius
 	$area/area.global_position=digimon_owner.global_position
 
-func search_digimon_in_range_and_hit_they():
+func pulse():
 	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:
 		if has_limit_level: if digi.Evo_level<=limit_level: digi.core.hit(powered()*plus_power_multipicator,Vector2.ZERO,digimon_owner,physic,true)
 	else:digi.core.hit(powered(),Vector2.ZERO,digimon_owner,physic)
 
 func timer():
 	if kooldown==0:
-		search_digimon_in_range_and_hit_they()
+		pulse()
 		var _time=get_tree().create_timer(0.01).timeout.connect(timer)
 	else:
-		search_digimon_in_range_and_hit_they()
+		pulse()
 		var _time=get_tree().create_timer(kooldown).timeout.connect(timer)
 "
 
@@ -37,7 +36,6 @@ radius = 737.013
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_gebl1")
 script = SubResource("GDScript_wb3vl")
-kooldown = 1
 power_atack = 0.2
 
 [node name="area" type="Area2D" parent="."]
@@ -49,5 +47,9 @@ shape = SubResource("CircleShape2D_o4pyk")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 125.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 65
+text = "99.9"
+horizontal_alignment = 1
+vertical_alignment = 1

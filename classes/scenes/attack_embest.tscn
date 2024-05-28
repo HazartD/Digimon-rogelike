@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvnkk5pbk51hq"]
+
+[ext_resource type="Texture2D" uid="uid://mdpgknjg2ub2" path="res://icon.svg" id="1_mpj4h"]
+
+[sub_resource type="GDScript" id="GDScript_h8suv"]
+script/source = "extends AttackAction
+@export_enum(\"a:2\",\"COLIDE:10\",\"IMPACT:50\",\"ARRASTRE:100\") var impulse=2
+@export var duration:float=2
+var attacked:Array[DigimonBody]=[]
+var active:bool=false
+func effect():
+	active=true 
+	digimon_owner.sprite.play(\"run_\"+digimon_owner.animationdir[digimon_owner.dir_vector.find(digimon_owner.interaction_area.previus_dir)])
+	digimon_owner.impulse=impulse*digimon_owner.interaction_area.previus_dir
+	await get_tree().create_timer(duration).timeout
+	digimon_owner.impulse=Vector2.ZERO
+	active=false
+	attacked.clear()
+
+func _physics_process(_delta):
+	if active:search_digimon_in_range_and_hit_they()
+func search_digimon_in_range_and_hit_they():
+	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner and !attacked.has(digi):
+		digi.core.hit(powered(),digimon_owner.interaction_area.previus_dir,digimon_owner,physic)
+		attacked.append(digi)
+"
+
+[node name="attack_embest" type="TextureRect"]
+texture = ExtResource("1_mpj4h")
+script = SubResource("GDScript_h8suv")
+Type = 4
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 125.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 65
+text = "99.9"
+horizontal_alignment = 1
+vertical_alignment = 1

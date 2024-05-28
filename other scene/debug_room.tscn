@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1mhb1kt2cuxd"]
+[gd_scene load_steps=10 format=3 uid="uid://c1hhpun2njuva"]
 
 [ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_lcl16"]
-[ext_resource type="PackedScene" uid="uid://dkw7j82rs3vny" path="res://entity/agu.tscn" id="2_y6abx"]
-[ext_resource type="PackedScene" uid="uid://c4tuihkfryehf" path="res://entity/rare.tscn" id="3_6t5du"]
+[ext_resource type="PackedScene" uid="uid://dkw7j82rs3vny" path="res://entity/digimon/agu.tscn" id="2_y6abx"]
+[ext_resource type="PackedScene" uid="uid://c4tuihkfryehf" path="res://entity/digimon/rare.tscn" id="3_6t5du"]
 [ext_resource type="Texture2D" uid="uid://d0di0atpgu4kx" path="res://img/Raremon.webp" id="3_urk74"]
 [ext_resource type="PackedScene" uid="uid://cijy8axnp86ko" path="res://entity/player.tscn" id="4_d0nwv"]
-[ext_resource type="Texture2D" uid="uid://cwl3m7lsws8w1" path="res://img/150px-Greymon_New_Century.png" id="6_7e2gc"]
 
 [sub_resource type="GDScript" id="GDScript_vl5ka"]
 script/source = "extends Area2D
@@ -17,6 +16,17 @@ func _on_body_entered(body):
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uo1su"]
 radius = 184.597
+
+[sub_resource type="GDScript" id="GDScript_hkyxe"]
+script/source = "extends Area2D
+
+
+func _on_body_entered(body):
+	body.position=Vector2(0,0)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r6mpt"]
+radius = 198.671
 
 [node name="room" type="Node2D"]
 
@@ -40,16 +50,6 @@ position = Vector2(675, 408)
 [node name="grey" type="Node" parent="."]
 script = ExtResource("1_lcl16")
 
-[node name="agu" parent="grey" instance=ExtResource("2_y6abx")]
-position = Vector2(978, 116)
-Digimon_Id = 3
-Evo_level = 4
-
-[node name="150Px-greymonNewCentury" type="Sprite2D" parent="grey/agu"]
-position = Vector2(3.00003, -35)
-scale = Vector2(2.01667, 1.55402)
-texture = ExtResource("6_7e2gc")
-
 [node name="player" parent="." instance=ExtResource("4_d0nwv")]
 
 [node name="DigimonCORE3" type="Node" parent="."]
@@ -65,4 +65,12 @@ script = SubResource("GDScript_vl5ka")
 position = Vector2(-162.892, -558.252)
 shape = SubResource("CircleShape2D_uo1su")
 
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(-7144.55, -7514.85)
+script = SubResource("GDScript_hkyxe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("CircleShape2D_r6mpt")
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]

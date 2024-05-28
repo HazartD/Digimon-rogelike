@@ -6,6 +6,7 @@ var dir:Vector2=Vector2.ZERO:
 var digimon_name:String
 var player:bool=false
 var core:DigimonCORE=get_parent()
+var impulse:Vector2=Vector2.ZERO
 @export_group("freatures")
 @export var Digimon_Id:int
 @export var air_move:bool
@@ -13,9 +14,10 @@ var core:DigimonCORE=get_parent()
 @export var water_move:bool
 @export var attribute:DigimonCORE.attribut
 @export var Evo_level:DigimonCORE.level_evo
-const animationdir:Array=["down","left","leftdown","leftup","right","rightdown","rightup","up"]
-const dir_vector:Array[Vector2]=[Vector2.DOWN,Vector2.LEFT,Vector2.LEFT+Vector2.DOWN,Vector2.LEFT+Vector2.UP,Vector2.RIGHT,Vector2.RIGHT+Vector2.DOWN,Vector2.RIGHT+Vector2.UP,Vector2.UP]
+const animationdir:PackedStringArray=["down","left","leftdown","leftup","right","rightdown","rightup","up"]
+const dir_vector:PackedVector2Array=[Vector2.DOWN,Vector2.LEFT,Vector2.LEFT+Vector2.DOWN,Vector2.LEFT+Vector2.UP,Vector2.RIGHT,Vector2.RIGHT+Vector2.DOWN,Vector2.RIGHT+Vector2.UP,Vector2.UP]
 @onready var interaction_area:Area2D=$interaction_area
+@onready var sprite=$sprite
 var _life:float
 var _energy:float
 var _attack:float
@@ -24,21 +26,21 @@ var _speed:float
 var _inteligent:float
 var _will:float
 var _fighter:float
-func get_life():
+func get_life()->float:
 	return _life+(_life*core.life)
-func get_fighter():
+func get_fighter()->float:
 	return _fighter+(_fighter*core.fighter)
-func get_will():
+func get_will()->float:
 	return _will+(_will*core.will)
-func get_inteligent():
+func get_inteligent()->float:
 	return _inteligent+(_inteligent*core.inteligent)
-func get_speed():
+func get_speed()->float:
 	return _speed+(_speed*core.speed)
-func get_defend():
+func get_defend()->float:
 	return _defend+(_defend*core.defend)
-func get_attack():
+func get_attack()->float:
 	return _attack+(_attack*core.attack)
-func get_energy():
+func get_energy()->float:
 	return _energy+(_energy*core.energy)
 
 func set_stats():
@@ -64,52 +66,52 @@ func _ready():
 		if player:$AudioListener2D.make_current()
 		else:$AudioListener2D.queue_free()
 	core=get_parent()
-	$sprite.play("del_down")
+	sprite.play("del_down")
 	set_stats()
-
 
 func _physics_process(delta):
 	if player:_get_inputs()
-	velocity=dir*10000*delta
+	velocity=(((dir+impulse)*(10000+get_speed())))*delta
 	move_and_slide()
+
 func _get_inputs():
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-func _process(_delta):
-	$sprite/Name.text="life:"+str(core.current_life)+"  energy:"+str(core.current_energy)
-	
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	visible=false
-
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	visible=true
-
+func hurt():
+	$hurt.play()
 func hited():
 	if core.current_life<=0:
 		visible=false
 	else:
-		var new_anim:String=$sprite.animation
+		var new_anim:String=sprite.animation
 		new_anim=new_anim.erase(0,4)
 		new_anim=new_anim.insert(0,"hit_")
-		$sprite.play(new_anim)
-	$hurt.play()
-
+		sprite.play(new_anim)
+	hurt()
+func flee():
+	var _name=$sprite/Name.text
+	$sprite/Name.text="EVA"
+	await get_tree().create_timer(0.1).timeout
+	$sprite/Name.text=_name
 func attack(acc:String):
-	var new_anim:String=$sprite.animation
+	var new_anim:String=sprite.animation
 	new_anim=new_anim.erase(0,4)
 	new_anim=new_anim.insert(0,acc+"_")
-	$sprite.play(new_anim)
+	if sprite.sprite_frames.has_animation(new_anim) and sprite.animation!=new_anim:sprite.play(new_anim)
 
 func _on_sprite_animation_finished():
-	var new_anim:String=$sprite.animation
+	var new_anim:String=sprite.animation
 	interaction_area.rotar(dir)
-	if dir==Vector2.ZERO:
-		if !$sprite.animation.begins_with("d"):
+	if dir==Vector2.ZERO and impulse==Vector2.ZERO:
+		if !sprite.animation.begins_with("d"):
 			new_anim=new_anim.erase(0,4)
 			new_anim=new_anim.insert(0,"del_")
-			if $sprite.animation!=new_anim:$sprite.play(new_anim)
-	else:
-		new_anim="run_"+animationdir[dir_vector.find(dir)]
-		if $sprite.animation!=new_anim:$sprite.play(new_anim)
+			#if sprite.animation!=new_anim:sprite.play(new_anim)
+	else:new_anim="run_"+animationdir[dir_vector.find(interaction_area.previus_dir)]
+	if sprite.animation!=new_anim:sprite.play(new_anim)
 
