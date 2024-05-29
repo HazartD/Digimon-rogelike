@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="6_jbdks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1iya"]
+size = Vector2(309, 272)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tp03o"]
 shader = ExtResource("2_2pdkg")
@@ -18,8 +19,9 @@ shader_parameter/tint = Color(0.298039, 0, 0.305882, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5iick"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cejp"]
+size = Vector2(369, 62)
 
-[node name="body" type="CharacterBody2D"]
+[node name="rare" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_h21te")
 Digimon_Id = 16
@@ -27,6 +29,7 @@ attribute = 2
 Evo_level = 3
 
 [node name="patas" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, -9)
 shape = SubResource("RectangleShape2D_l1iya")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
@@ -83,6 +86,7 @@ shape = SubResource("CircleShape2D_5iick")
 script = ExtResource("6_jbdks")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
+position = Vector2(1, 154)
 shape = SubResource("RectangleShape2D_2cejp")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]

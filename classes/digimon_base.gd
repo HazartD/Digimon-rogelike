@@ -25,22 +25,15 @@ var current_energy:float
 var enemies:Array[DigimonCORE]=[]#if ese, y prosige, else: pop
 	#set_sprite("res://img/animation_resouse/digimon_base.tres")
 
-@warning_ignore("unused_parameter")
 func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false):
-	body.dir=dir
-	if area:_hit(damage,dir,a.attribute,physic)
+	var limit=(body.get_speed()-a.get_speed())
+	if area or limit<=0:_hit(damage,dir,a.attribute,physic)
 	else:
-		var limit=(body.get_speed()-a.get_speed())/2
-		print(limit)
-		if randi_range(0,limit)==0:_hit(damage,dir,a.attribute,physic)
-		else:print(self.name," evadio")
-			
-			
+		if randi_range(0,limit/2)==0:_hit(damage,dir,a.attribute,physic)
+		else:body.flee()
 	#if enemies.has(a):
 		#enemies.append(a)
 	#else:enemies.append(a)
-
-@warning_ignore("unused_parameter")
 func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool):
 	var knockback=damage-(life/8)
 	if knockback>0:body.position+=atta_dir*(knockback/2)
@@ -62,13 +55,16 @@ func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool):
 			attribut.VI:minus_life(damage,physic,1.3)
 			_:minus_life(damage,physic)
 	body.hited()
-
 func minus_life(damage:float,physic:bool,divisor:float=1):
 	damage=(damage*divisor)
 	if physic:damage-=(body.get_defend()*0.25)
 	else :damage-=(body.get_inteligent()*0.25)
 	current_life-=damage
 	damage_recive+=damage
+
+func regen():
+	if current_energy<=max_energy:current_energy+=2
+	if current_life<=max_life:current_life+=2
 
 func evo():
 	pass

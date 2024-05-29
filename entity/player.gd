@@ -22,7 +22,7 @@ func dead(cause):
 	"fighter":fighter,
 	"dead cause":cause}
 	Iniload.savedead(save_data)
-	#alive=false
+	alive=false
 
 func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,pasive:bool=false):
 	body.dir=dir
@@ -39,9 +39,13 @@ func _on_tree_exiting():
 #	if alive:dead("exit game")
 	
 func _process(delta):
+	regen()
 	time+=delta
 
 func _on_child_entered_tree(node):
 	if node is DigimonBody:
 		line_id.append(node.Digimon_Id)
 		node.player=true
+		var cam=Camera2D.new()
+		cam.zoom=Vector2(0.5,0.5)
+		node.add_child(cam)

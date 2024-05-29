@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://1k1urruj411u"]
 
-[ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="1_4i4d5"]
+[ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="1_1b37p"]
 
 [sub_resource type="GDScript" id="GDScript_voyh2"]
 script/source = "extends Area2D
 var power:float=100
 var digimon_owner:DigimonBody
 var dir:Vector2=Vector2.DOWN
-var speed:float=1000
+var speed:float=1
 var physic:bool
 func set_data(powe,dig,spe,spr,phy:bool):
 	power=powe
@@ -41,7 +41,7 @@ script = SubResource("GDScript_voyh2")
 metadata/_edit_group_ = true
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("1_4i4d5")
+sprite_frames = ExtResource("1_1b37p")
 animation = &"A01_down"
 
 [node name="coli" type="CollisionShape2D" parent="."]

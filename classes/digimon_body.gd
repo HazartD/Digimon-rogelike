@@ -1,4 +1,5 @@
 class_name DigimonBody extends CharacterBody2D
+const STATE:PackedScene=preload("res://other scene/digimon_estate.tscn")
 var dir:Vector2=Vector2.ZERO:
 	set(value):
 		if !$sprite.animation.begins_with("h") and !$sprite.animation.begins_with("A"):
@@ -53,11 +54,11 @@ func set_stats():
 	core.attribute=attribute
 	core.Evo_level=Evo_level
 	core.max_energy=get_energy()
-	core.current_life=get_life()
 	core.current_energy=get_energy()
+	core.current_life=get_life()
 	core.max_life=get_life()
 	core.body=self
-	if player==true and core is Player:$sprite/Name.text=Iniload.player_name+"
+	if player==true:$sprite/Name.text=Iniload.player_name+"
 	("+digimon_name+"mon)"
 	else:$sprite/Name.text=digimon_name+"mon"
 
@@ -78,10 +79,10 @@ func _get_inputs():
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	visible=false
-func _on_visible_on_screen_notifier_2d_screen_entered():
-	visible=true
+#func _on_visible_on_screen_notifier_2d_screen_exited():
+	#visible=false
+#func _on_visible_on_screen_notifier_2d_screen_entered():
+	#visible=true
 func hurt():
 	$hurt.play()
 func hited():
@@ -94,14 +95,13 @@ func hited():
 		sprite.play(new_anim)
 	hurt()
 func flee():
-	var _name=$sprite/Name.text
-	$sprite/Name.text="EVA"
-	await get_tree().create_timer(0.1).timeout
-	$sprite/Name.text=_name
+	var e=STATE.instantiate()
+	add_child(e)
+
 func attack(acc:String):
-	var new_anim:String=sprite.animation
-	new_anim=new_anim.erase(0,4)
-	new_anim=new_anim.insert(0,acc+"_")
+	var new_anim:String=acc+"_"+animationdir[dir_vector.find(interaction_area.previus_dir)]
+	#new_anim=new_anim.erase(0,4)
+	#new_anim=new_anim.insert(0,acc+"_")
 	if sprite.sprite_frames.has_animation(new_anim) and sprite.animation!=new_anim:sprite.play(new_anim)
 
 func _on_sprite_animation_finished():

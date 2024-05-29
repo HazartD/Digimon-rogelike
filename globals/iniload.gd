@@ -13,7 +13,7 @@ const SEED_FILE_PATH="user://HazartD/DR/seed_register/%s.ini"
 		#sprite.texture=ImageTexture.create_from_image(Image.load_from_file(con.get_value("screenshoot",img)))
 		#add_child(sprite)
 var world_seeds:Dictionary={}
-var statsplus:Dictionary={"life":0.000,"energy":0.000,"attack":0.000,"defend":0.000,"speed":0.000,"inteligent":0.000,"will":0.000}
+var statsplus:Dictionary={"life":2.000,"energy":500.000,"attack":0.000,"defend":0.000,"speed":400.000,"inteligent":0.000,"will":0.000}
 var unlock_evo:Dictionary={"meca_data":false,6:false,7:false,8:false,9:false}#son los id del digimon desbloqueado y su true false
 var run_number:int=1
 enum LOCATIONS{DS,NSP,DR,ME,JT,NSO,VB,WG,DA,UK,CRACK_TEAM_BASE,FILE_CITY,SHORE}
@@ -101,8 +101,9 @@ func create_seed_regiser_file():
 func add_seed_string_to_seed_file(_seed:int,stri:String):#cuando creas un mundo debe comprobar si la string da una seed ya registrada y negarte crear otro
 	var con=ConfigFile.new()
 	con.load(SEED_FILE_PATH % _seed)
-	var number:int=2
+	var number:int=1
 	while con.has_section_key("seed data","text_%s"%number):
+		if stri==con.get_value("seed data","text_%s"%number):break
 		number+=1
 	con.set_value("seed data","text_%s"%number,stri)
 

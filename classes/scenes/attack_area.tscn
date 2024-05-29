@@ -14,7 +14,7 @@ func positioning():
 	$area/area.shape.radius=radius
 	$area/area.global_position=digimon_owner.global_position
 func search_digimon_in_range_and_hit_they():
-	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),digimon_owner.dir,digimon_owner,physic,true)
+	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),get_dir(),digimon_owner,physic,true)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_apqww"]

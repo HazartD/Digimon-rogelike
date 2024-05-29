@@ -12,9 +12,8 @@ func _ready():
 "
 
 [node name="digimon_estate" type="Label"]
-offset_left = 177.0
-offset_top = 185.0
-offset_right = 207.0
-offset_bottom = 208.0
+offset_right = 30.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 100
 text = "EVA"
 script = SubResource("GDScript_efnpo")

@@ -10,7 +10,8 @@ var reposo:float=0
 func powered()->float:
 	if physic:return power_atack*digimon_owner.get_attack()
 	else:return power_atack*digimon_owner.get_inteligent()
-
+func get_dir()->Vector2:
+	return digimon_owner.interaction_area.previus_dir
 func _process(delta):
 	if reposo<=0.0:
 		if modulate!=Color(1,1,1,1):modulate=Color(1,1,1,1)

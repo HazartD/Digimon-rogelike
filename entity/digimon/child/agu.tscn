@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3hwgblcofgf2"]
+[gd_scene load_steps=11 format=3 uid="uid://dkw7j82rs3vny"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
 [ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://classes/scenes/attack_melee.tscn" id="5_v31tj"]
@@ -20,7 +20,7 @@ size = Vector2(180, 143)
 [node name="agu" type="CharacterBody2D"]
 position = Vector2(0, 37)
 collision_layer = 61
-collision_mask = 57
+collision_mask = 56
 motion_mode = 1
 script = ExtResource("1_yf17y")
 groud_move = true

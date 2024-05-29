@@ -13,7 +13,7 @@ func _ready():
 	timer()
 func positioning():
 	$area/area.shape.radius=radius
-	$area/area.global_position=digimon_owner.global_position
+	#$area/area.global_position=digimon_owner.global_position
 
 func pulse():
 	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:

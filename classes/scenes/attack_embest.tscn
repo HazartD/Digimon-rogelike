@@ -9,9 +9,10 @@ script/source = "extends AttackAction
 var attacked:Array[DigimonBody]=[]
 var active:bool=false
 func effect():
-	active=true 
-	digimon_owner.sprite.play(\"run_\"+digimon_owner.animationdir[digimon_owner.dir_vector.find(digimon_owner.interaction_area.previus_dir)])
-	digimon_owner.impulse=impulse*digimon_owner.interaction_area.previus_dir
+	digimon_owner.core.speed+=INTRAINING
+	active=true
+	digimon_owner.sprite.play(\"run_\"+digimon_owner.animationdir[digimon_owner.dir_vector.find(get_dir())])
+	digimon_owner.impulse=impulse*get_dir()
 	await get_tree().create_timer(duration).timeout
 	digimon_owner.impulse=Vector2.ZERO
 	active=false
@@ -21,7 +22,7 @@ func _physics_process(_delta):
 	if active:search_digimon_in_range_and_hit_they()
 func search_digimon_in_range_and_hit_they():
 	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner and !attacked.has(digi):
-		digi.core.hit(powered(),digimon_owner.interaction_area.previus_dir,digimon_owner,physic)
+		digi.core.hit(powered(),get_dir(),digimon_owner,physic)
 		attacked.append(digi)
 "
 
