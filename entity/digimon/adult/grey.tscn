@@ -39,7 +39,7 @@ Da=amarillo"
 material = SubResource("ShaderMaterial_sto4q")
 position = Vector2(0, 2)
 sprite_frames = ExtResource("2_etrb6")
-animation = &"run_right"
+animation = &"del_down"
 
 [node name="Name" type="Label" parent="sprite"]
 anchors_preset = -1
@@ -90,8 +90,8 @@ layout_mode = 2
 shape = SubResource("CircleShape2D_tjlny")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(3, 3)
-scale = Vector2(11.8, 11.05)
+position = Vector2(-44.5, 10.5)
+scale = Vector2(16.75, 18.45)
 
 [node name="interaction_area" type="Area2D" parent="."]
 script = ExtResource("6_xpetf")
@@ -117,5 +117,3 @@ texture = ExtResource("8_lt01e")
 
 [connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
 [connection signal="animation_looped" from="sprite" to="." method="_on_sprite_animation_finished"]
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

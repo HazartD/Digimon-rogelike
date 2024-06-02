@@ -3,14 +3,11 @@ class_name AttackAction extends Attack
 @export var costo:int=10
 @export var sound:Resource
 @export var max_sound_distanse:int=500
-const INTRAINING:float=0.01
 func action():
 	digimon_owner.attack(accion)
 	reposo=kooldown
 	digimon_owner.core.current_energy-=costo
 	$sound.play()
-	if physic:digimon_owner.core.attack+=INTRAINING
-	else:digimon_owner.core.inteligent+=INTRAINING
 	await digimon_owner.sprite.frame_changed
 	effect()
 func _ready():

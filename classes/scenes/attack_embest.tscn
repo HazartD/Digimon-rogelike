@@ -9,12 +9,12 @@ script/source = "extends AttackAction
 var attacked:Array[DigimonBody]=[]
 var active:bool=false
 func effect():
-	digimon_owner.core.speed+=INTRAINING
+	digimon_owner.core.speed+=0.01
 	active=true
 	digimon_owner.sprite.play(\"run_\"+digimon_owner.animationdir[digimon_owner.dir_vector.find(get_dir())])
-	digimon_owner.impulse=impulse*get_dir()
+	digimon_owner.impulse=impulse#*get_dir()
 	await get_tree().create_timer(duration).timeout
-	digimon_owner.impulse=Vector2.ZERO
+	digimon_owner.impulse=1#Vector2.ZERO
 	active=false
 	attacked.clear()
 
@@ -41,3 +41,4 @@ theme_override_font_sizes/font_size = 65
 text = "99.9"
 horizontal_alignment = 1
 vertical_alignment = 1
+visible_characters = 4

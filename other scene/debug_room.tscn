@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://c1hhpun2njuva"]
 
 [ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_lcl16"]
-[ext_resource type="PackedScene" uid="uid://dkw7j82rs3vny" path="res://entity/digimon/child/agu.tscn" id="2_y6abx"]
+[ext_resource type="PackedScene" uid="uid://b3hwgblcofgf2" path="res://entity/digimon/child/agu.tscn" id="2_y6abx"]
 [ext_resource type="PackedScene" uid="uid://c4tuihkfryehf" path="res://entity/digimon/adult/rare.tscn" id="3_6t5du"]
 [ext_resource type="Texture2D" uid="uid://d0di0atpgu4kx" path="res://img/Raremon.webp" id="3_urk74"]
 [ext_resource type="PackedScene" uid="uid://cijy8axnp86ko" path="res://entity/player.tscn" id="4_d0nwv"]
@@ -55,20 +55,6 @@ script = ExtResource("1_lcl16")
 position = Vector2(652.28, -252.69)
 
 [node name="player" parent="." instance=ExtResource("4_d0nwv")]
-attribute = 0
-life = 0.1
-energy = 0.1
-attack = 0.1
-defend = 0.1
-speed = 0.1
-inteligent = 0.1
-will = 0.1
-fighter = 0.1
-damage_recive = 0.0
-
-[node name="digimon_body" parent="player" instance=ExtResource("2_y6abx")]
-position = Vector2(-198.766, 194.365)
-Evo_level = 5
 
 [node name="agu" type="Node" parent="."]
 script = ExtResource("1_lcl16")

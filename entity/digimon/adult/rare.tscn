@@ -89,8 +89,10 @@ script = ExtResource("6_jbdks")
 position = Vector2(1, 154)
 shape = SubResource("RectangleShape2D_2cejp")
 
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8g70x")
 max_distance = 3000.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(10, 9.00002)
+scale = Vector2(19.6, 18.1)

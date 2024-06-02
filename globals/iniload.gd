@@ -107,16 +107,16 @@ func add_seed_string_to_seed_file(_seed:int,stri:String):#cuando creas un mundo 
 		number+=1
 	con.set_value("seed data","text_%s"%number,stri)
 
-func _input(event):
-	if event.is_action_pressed("screenshot"):
-		var screenshoot_number:int=1
-		var path=SCREENSHOT_PATH % screenshoot_number
-		while FileAccess.file_exists(path):
-			screenshoot_number+=1
-			path=SCREENSHOT_PATH % screenshoot_number
-		var _imagen=get_viewport().get_texture().get_image().save_png(path)
-		if actual_seed:
-			var con=ConfigFile.new()
-			con.load(SEED_FILE_PATH % actual_seed)
-			con.set_value("screenshoot",str(screenshoot_number),path)
-			con.save(SEED_FILE_PATH % actual_seed)
+#func _input(event):
+	#if event.is_action_pressed("screenshot"):
+		#var screenshoot_number:int=1
+		#var path=SCREENSHOT_PATH % screenshoot_number
+		#while FileAccess.file_exists(path):
+			#screenshoot_number+=1
+			#path=SCREENSHOT_PATH % screenshoot_number
+		#var _imagen=get_viewport().get_texture().get_image().save_png(path)
+		#if actual_seed:
+			#var con=ConfigFile.new()
+			#con.load(SEED_FILE_PATH % actual_seed)
+			#con.set_value("screenshoot",str(screenshoot_number),path)
+			#con.save(SEED_FILE_PATH % actual_seed)

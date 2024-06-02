@@ -1,26 +1,50 @@
-[gd_scene load_steps=11 format=3 uid="uid://dkw7j82rs3vny"]
+[gd_scene load_steps=17 format=3 uid="uid://b3hwgblcofgf2"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
+[ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_dmyfc"]
 [ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://classes/scenes/attack_melee.tscn" id="5_v31tj"]
+[ext_resource type="Script" path="res://entity/visible.gd" id="8_vy12a"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://classes/scenes/attack_range.tscn" id="75_eht16"]
 [ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="76_nxe34"]
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="76_wuekr"]
 [ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="77_05iou"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gxywu"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n8aqi"]
+noise = SubResource("FastNoiseLite_gxywu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o3ou0"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m744f"]
+noise = SubResource("FastNoiseLite_o3ou0")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
+resource_local_to_scene = true
+shader = ExtResource("2_dmyfc")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 1.0
+shader_parameter/type_color = Vector4(0, 0.25, 0.25, 1)
+shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_m744f")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_n8aqi")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
+radius = 309.79
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20vgc"]
-size = Vector2(180, 129)
+size = Vector2(214, 168)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvuf0"]
-size = Vector2(180, 143)
+size = Vector2(215, 214)
 
 [node name="agu" type="CharacterBody2D"]
 position = Vector2(0, 37)
 collision_layer = 61
-collision_mask = 56
+collision_mask = 57
 motion_mode = 1
 script = ExtResource("1_yf17y")
 groud_move = true
@@ -36,7 +60,7 @@ Da=amarillo"
 material = SubResource("ShaderMaterial_sto4q")
 position = Vector2(0, 2)
 sprite_frames = ExtResource("76_nxe34")
-animation = &"run_right"
+animation = &"del_down"
 
 [node name="Name" type="Label" parent="sprite"]
 anchors_preset = -1
@@ -82,17 +106,15 @@ physic = true
 [node name="prepcion" type="Area2D" parent="."]
 
 [node name="prepcion" type="CollisionShape2D" parent="prepcion"]
+visible = false
 shape = SubResource("CircleShape2D_tjlny")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(3, 3)
-scale = Vector2(11.8, 11.05)
-
 [node name="interaction_area" type="Area2D" parent="."]
+rotation = 3.14159
 script = ExtResource("76_wuekr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
-position = Vector2(-2, -64.5)
+position = Vector2(-4, -84)
 shape = SubResource("RectangleShape2D_20vgc")
 
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
@@ -100,13 +122,13 @@ stream = ExtResource("77_05iou")
 volume_db = 10.0
 bus = &"SFX"
 
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-
 [node name="patas" type="CollisionShape2D" parent="."]
-position = Vector2(-4, -7.5)
+position = Vector2(3.5, 6)
 shape = SubResource("RectangleShape2D_hvuf0")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-13.5, 14)
+scale = Vector2(13.35, -18)
+script = ExtResource("8_vy12a")
+
 [connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]
-[connection signal="animation_looped" from="sprite" to="." method="_on_sprite_animation_finished"]
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

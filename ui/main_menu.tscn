@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ptlqojmt1nts"]
+[gd_scene load_steps=9 format=3 uid="uid://ptlqojmt1nts"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_6kcfx"]
+[ext_resource type="Script" path="res://classes/evolutions/evolution_child.gd" id="2_nxoc8"]
+[ext_resource type="Script" path="res://classes/evolutions/evolution_adult.gd" id="3_avduy"]
+[ext_resource type="Script" path="res://classes/evolutions/evolution_perfect.gd" id="4_5lqhd"]
+[ext_resource type="Script" path="res://classes/evolutions/evolution_ultimate.gd" id="5_rmfw8"]
+[ext_resource type="Script" path="res://classes/evolutions/evolution_crack_team.gd" id="6_fa8o0"]
+[ext_resource type="Script" path="res://classes/evolutions/evolution_hybrid.gd" id="7_0cq6j"]
+[ext_resource type="Script" path="res://classes/evolutions/evolution_armor.gd" id="8_okw2s"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -54,6 +61,27 @@ offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "NS"
+
+[node name="child" type="Node" parent="Button/Label"]
+script = ExtResource("2_nxoc8")
+
+[node name="adult" type="Node" parent="Button/Label"]
+script = ExtResource("3_avduy")
+
+[node name="perfect" type="Node" parent="Button/Label"]
+script = ExtResource("4_5lqhd")
+
+[node name="ultimate" type="Node" parent="Button/Label"]
+script = ExtResource("5_rmfw8")
+
+[node name="crack_team" type="Node" parent="Button/Label"]
+script = ExtResource("6_fa8o0")
+
+[node name="hybrid" type="Node" parent="Button/Label"]
+script = ExtResource("7_0cq6j")
+
+[node name="armor" type="Node" parent="Button/Label"]
+script = ExtResource("8_okw2s")
 
 [connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

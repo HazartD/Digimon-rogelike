@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://chmyf7ph6qv3q"]
+
+[sub_resource type="GDScript" id="GDScript_7yhkc"]
+script/source = "extends Node
+const PATH:String=\"res://classes/evolutions/evolution_%s.gd\"
+const EVOS_SCRIPT:Array[Script]=[preload(PATH%\"child\"),preload(PATH%\"adult\"),preload(PATH%\"perfect\"),preload(PATH%\"ultimate\"),preload(PATH%\"hybrid\"),preload(PATH%\"armor\"),preload(PATH%\"crack_team\")]
+
+"
+
+[node name="Evos" type="Node"]
+script = SubResource("GDScript_7yhkc")
