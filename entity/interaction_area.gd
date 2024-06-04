@@ -3,5 +3,5 @@ const ROTATION:Dictionary={Vector2.UP:0,Vector2.DOWN:180,Vector2.LEFT:270,Vector
 var previus_dir:Vector2=Vector2.DOWN
 func rotar(dir):
 	if dir!=previus_dir and dir !=Vector2.ZERO:
-		rotation_degrees=rotation_direction[dir]
+		rotation_degrees=ROTATION[dir]
 		previus_dir=dir

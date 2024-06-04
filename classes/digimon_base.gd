@@ -17,17 +17,30 @@ var body:DigimonBody
 @export var will:float=0.1
 @export var fighter:float=0.1
 @export var damage_recive:float=0.0
-signal body_dead(murder)
-var max_life:float=10
-var max_energy:float
+var max_life:float=10:
+	set(v):
+		max_life=v
+		current_life=v
+var max_energy:float:
+	set(v):
+		max_energy=v
+		current_energy=v
+var max_hunger:int:
+	set(v):
+		max_hunger=v
+		current_hunger=v
 var current_life:float=10:
-	set(value):
-		current_life=value
+	set(v):
+		current_life=v
 		if current_life>max_life:current_life=max_life
 var current_energy:float:
-	set(value):
-		current_energy=value
+	set(v):
+		current_energy=v
 		if current_energy>max_energy:current_energy=max_energy
+var current_hunger:float:
+	set(v):
+		current_hunger=v
+		if current_hunger>max_hunger:current_hunger=max_hunger
 var enemies:Array[DigimonCORE]=[]#if ese, y prosige, else: pop
 	#set_sprite("res://img/animation_resouse/digimon_base.tres")
 
@@ -70,9 +83,10 @@ func minus_life(damage:float,physic:bool,divisor:float=1):
 	damage_recive+=damage
 	defend+=damage/10000
 
-func regen():
-	if current_energy<=max_energy:current_energy+=2
-	if current_life<=max_life:current_life+=2
+func regen(delta:float):
+	if current_energy<max_energy:current_energy+=delta/4
+	if current_life<max_life:current_life+=delta/4
+	current_hunger-=delta/4
 
 func evo():pass
 	#crea clase evolution
@@ -80,5 +94,6 @@ func evo():pass
 	#machtea la id, mete las funciones en un array, por cada una la ejecuta y si da false la saca y de lo contrario regresa la id, cada funcion tiene el nombre del digi, comprueba cada stat importante, mete 
 
 func _process(delta):
-	regen()
+	regen(delta)
+	current_hunger-=delta/4
 	time+=delta

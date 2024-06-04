@@ -14,15 +14,13 @@ var impulse:int=1#Vector2=Vector2.ZERO
 @export var water_move:bool
 @export var attribute:DigimonCORE.attribut
 @export var Evo_level:DigimonCORE.level_evo
-@export var max_hungry:int=100
-@export var current_hungry:float=100:
-	set(value):
-		current_hungry=value
-		if current_hungry>max_hungry:current_hungry=max_hungry
 const animationdir:PackedStringArray=["down","left","leftdown","leftup","right","rightdown","rightup","up"]
 const dir_vector:PackedVector2Array=[Vector2.DOWN,Vector2.LEFT,Vector2.LEFT+Vector2.DOWN,Vector2.LEFT+Vector2.UP,Vector2.RIGHT,Vector2.RIGHT+Vector2.DOWN,Vector2.RIGHT+Vector2.UP,Vector2.UP]
 @onready var interaction_area:Area2D=$interaction_area
 @onready var sprite=$sprite
+@onready var bar_l:TextureProgressBar=$sprite/Name/VBoxContainer/l
+@onready var bar_e:TextureProgressBar=$sprite/Name/VBoxContainer/e
+@onready var bar_h:TextureProgressBar=$sprite/Name/VBoxContainer/h
 var _life:float
 var _energy:float
 var _attack:float
@@ -47,6 +45,7 @@ func set_stats()->void:
 	while data_index<10:
 		set(keys[data_index],new_stats[data_index])
 		data_index+=1
+	core.max_hunger=new_stats[10]
 	core.attribute=attribute
 	core.Evo_level=Evo_level
 	core.max_energy=get_energy()
@@ -60,6 +59,7 @@ func set_stats()->void:
 
 func _ready():
 	hide()
+	
 	core=get_parent()
 	sprite.play("del_down")
 	set_stats()
@@ -77,22 +77,21 @@ func _physics_process(delta):
 	if player:_get_inputs()
 	velocity=(((dir*impulse)*(10000+get_speed())))*delta
 #	velocity=(((dir+impulse)*(10000+get_speed())))*delta
-	current_hungry-=delta/2
 	move_and_slide()
 
 func _get_inputs()->void:#dir = Vector2(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"), Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"))
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-
 func hurt():$hurt.play()
 func hited():
+	hurt()
 	if core.current_life<=0:
 		var tween=get_tree().create_tween()
 		tween.tween_property(sprite.material,"shader_parameter/progress",1,0.3)
-		#await tween.finished
-		#queue_free()
+		await tween.finished
+		queue_free()
 	else:sprite.play("hit_"+sprite.animation.erase(0,4))
-	hurt()
+
 func flee():
 	var e=STATE.instantiate()
 	add_child(e)

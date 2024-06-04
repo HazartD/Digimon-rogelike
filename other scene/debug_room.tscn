@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_lcl16"]
 [ext_resource type="PackedScene" uid="uid://b3hwgblcofgf2" path="res://entity/digimon/child/agu.tscn" id="2_y6abx"]
-[ext_resource type="PackedScene" uid="uid://c4tuihkfryehf" path="res://entity/digimon/adult/rare.tscn" id="3_6t5du"]
+[ext_resource type="PackedScene" uid="uid://qawg8f1t8rq5" path="res://entity/digimon/adult/rare.tscn" id="3_6t5du"]
 [ext_resource type="Texture2D" uid="uid://d0di0atpgu4kx" path="res://img/Raremon.webp" id="3_urk74"]
 [ext_resource type="PackedScene" uid="uid://cijy8axnp86ko" path="res://entity/player.tscn" id="4_d0nwv"]
-[ext_resource type="PackedScene" uid="uid://dqwdsfk5nb3hr" path="res://entity/digimon/adult/grey.tscn" id="5_cmemj"]
+[ext_resource type="PackedScene" uid="uid://c2b4yayqxx6qq" path="res://entity/digimon/adult/grey.tscn" id="5_cmemj"]
 
 [sub_resource type="GDScript" id="GDScript_vl5ka"]
 script/source = "extends Area2D

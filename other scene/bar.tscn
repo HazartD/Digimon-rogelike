@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7o6wrw0713c5"]
+
+[ext_resource type="Texture2D" uid="uid://cwl3m7lsws8w1" path="res://img/150px-Greymon_New_Century.png" id="1_qp643"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbfqx"]
+
+[sub_resource type="Gradient" id="Gradient_afb8w"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_667bq"]
+gradient = SubResource("Gradient_afb8w")
+width = 1000
+height = 50
+fill_from = Vector2(0, 1)
+fill_to = Vector2(1, 0.487179)
+
+[sub_resource type="GDScript" id="GDScript_tn57c"]
+script/source = "extends TextureProgressBar
+#si al final configuro mas cosas lo dejare como escena, de lo contrario sacare el script y se los pondre
+const TYPE:PackedStringArray=[\"life\",\"energy\",\"hunger\"]
+const C:String=\"current_\"
+@export_enum(\"l\",\"e\",\"h\") var type:int=0
+@onready var core:DigimonCORE=get_parent().get_parent().get_parent().get_parent().get_parent()
+func _ready():
+	max_value=core.get(\"max_\"+TYPE[type])
+	value=core.get(C+TYPE[type])
+	match type:
+		0:modulate=Color(1,0,0)
+		2:modulate=Color(0,1,0)
+		_:modulate=Color(0,0,1)
+func update():value=core.get(C+TYPE[type])
+func _process(_delta):update()
+"
+
+[node name="Bar" type="TextureProgressBar"]
+material = SubResource("ShaderMaterial_sbfqx")
+offset_right = 492.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 50.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_667bq")
+texture_progress = ExtResource("1_qp643")
+script = SubResource("GDScript_tn57c")

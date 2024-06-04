@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3hwgblcofgf2"]
+[gd_scene load_steps=18 format=3 uid="uid://b3hwgblcofgf2"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
 [ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_dmyfc"]
-[ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://classes/scenes/attack_melee.tscn" id="5_v31tj"]
+[ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://other scene/attack/attack_range.tscn" id="4_1gvd5"]
+[ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://other scene/attack/attack_melee.tscn" id="5_nn6d5"]
+[ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://other scene/bar.tscn" id="6_77ohc"]
 [ext_resource type="Script" path="res://entity/visible.gd" id="8_vy12a"]
-[ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://classes/scenes/attack_range.tscn" id="75_eht16"]
 [ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="76_nxe34"]
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="76_wuekr"]
 [ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="77_05iou"]
@@ -79,29 +80,41 @@ text = "Name"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="AtackBar" type="HBoxContainer" parent="sprite/Name"]
+[node name="VBoxContainer" type="VBoxContainer" parent="sprite/Name"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.0599004
-anchor_top = 3.52322
-anchor_right = 1.02343
-anchor_bottom = 3.52322
-offset_top = -128.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 313.0
+offset_bottom = 190.0
 grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+grow_vertical = 2
+
+[node name="AtackBar" type="HBoxContainer" parent="sprite/Name/VBoxContainer"]
+layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Attack_range" parent="sprite/Name/AtackBar" instance=ExtResource("75_eht16")]
+[node name="Attack_range" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("4_1gvd5")]
 layout_mode = 2
 speed = 500
 spri = ExtResource("76_nxe34")
 max_sound_distanse = 1500
 power_atack = 0.337
 
-[node name="Attack_melee" parent="sprite/Name/AtackBar" instance=ExtResource("5_v31tj")]
+[node name="Attack_melee" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("5_nn6d5")]
 layout_mode = 2
 physic = true
+
+[node name="l" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
+layout_mode = 2
+
+[node name="e" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
+layout_mode = 2
+type = 1
+
+[node name="h" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
+layout_mode = 2
+type = 2
 
 [node name="prepcion" type="Area2D" parent="."]
 
