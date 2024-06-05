@@ -4,10 +4,7 @@
 
 [sub_resource type="GDScript" id="GDScript_xkwii"]
 script/source = "extends AttackAction
-func effect():
-	search_digimon_in_range_and_hit_they()
-func search_digimon_in_range_and_hit_they():
-	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),digimon_owner.dir,digimon_owner,physic)
+func effect():for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),digimon_owner.previus_dir,digimon_owner,physic)
 "
 
 [node name="Attack_melee" type="TextureRect"]

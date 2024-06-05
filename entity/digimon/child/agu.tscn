@@ -85,7 +85,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 313.0
+offset_right = 27.0
 offset_bottom = 190.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -99,7 +99,7 @@ layout_mode = 2
 speed = 500
 spri = ExtResource("76_nxe34")
 max_sound_distanse = 1500
-power_atack = 0.337
+power_atack = 0.5
 
 [node name="Attack_melee" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("5_nn6d5")]
 layout_mode = 2
@@ -107,13 +107,16 @@ physic = true
 
 [node name="l" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2
+value = 51.0
 
 [node name="e" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2
+value = 51.0
 type = 1
 
 [node name="h" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2
+value = 51.0
 type = 2
 
 [node name="prepcion" type="Area2D" parent="."]
@@ -140,8 +143,8 @@ position = Vector2(3.5, 6)
 shape = SubResource("RectangleShape2D_hvuf0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-13.5, 14)
-scale = Vector2(13.35, -18)
+position = Vector2(-1.90735e-06, 103.25)
+scale = Vector2(14.7, -23.725)
 script = ExtResource("8_vy12a")
 
 [connection signal="animation_finished" from="sprite" to="." method="_on_sprite_animation_finished"]

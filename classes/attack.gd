@@ -10,14 +10,13 @@ var reposo:float=0
 func powered()->float:
 	if physic:return power_atack*digimon_owner.get_attack()
 	else:return power_atack*digimon_owner.get_inteligent()
-func get_dir()->Vector2:
-	return digimon_owner.interaction_area.previus_dir
+func get_dir()->Vector2:return digimon_owner.previus_dir
 func _process(delta):
 	if reposo<=0.0:
-		if modulate!=Color(1,1,1,1):modulate=Color(1,1,1,1)
+		if self_modulate!=Color(1,1,1,1):self_modulate=Color(1,1,1,1)
 	else: 
 		reposo-=delta
-		if modulate!=Color(0.3,0.3,0.3,0.3):modulate=Color(0.3,0.3,0.3,0.3)
+		if self_modulate!=Color(0.3,0.3,0.3,0.3):self_modulate=Color(0.3,0.3,0.3,0.3)
 	$Label.text=str(reposo)
 	
 

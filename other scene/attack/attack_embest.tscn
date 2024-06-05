@@ -7,19 +7,18 @@ script/source = "extends AttackAction
 @export_enum(\"a:2\",\"COLIDE:10\",\"IMPACT:50\",\"ARRASTRE:100\") var impulse=2
 @export var duration:float=2
 var attacked:Array[DigimonBody]=[]
-var active:bool=false
+func _ready():set_physics_process(false)
 func effect():
 	digimon_owner.core.speed+=0.01
-	active=true
-	digimon_owner.sprite.play(\"run_\"+digimon_owner.animationdir[digimon_owner.dir_vector.find(get_dir())])
+	set_physics_process(true)
+	digimon_owner.sprite.play(\"run_\"+digimon_owner.ANIMATIONDIR[digimon_owner.DIR_VECTOR.find(get_dir())])
 	digimon_owner.impulse=impulse#*get_dir()
 	await get_tree().create_timer(duration).timeout
 	digimon_owner.impulse=1#Vector2.ZERO
-	active=false
+	set_physics_process(false)
 	attacked.clear()
 
-func _physics_process(_delta):
-	if active:search_digimon_in_range_and_hit_they()
+func _physics_process(_delta):search_digimon_in_range_and_hit_they()
 func search_digimon_in_range_and_hit_they():
 	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner and !attacked.has(digi):
 		digi.core.hit(powered(),get_dir(),digimon_owner,physic)

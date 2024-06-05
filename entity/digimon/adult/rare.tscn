@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://qawg8f1t8rq5"]
+[gd_scene load_steps=13 format=3 uid="uid://qawg8f1t8rq5"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_h21te"]
 [ext_resource type="Shader" path="res://img/shader/digimon_hit.gdshader" id="2_2pdkg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://op7mnjxhk1cx" path="res://other scene/attack/attack_pasive.tscn" id="3_jk5kd"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://other scene/attack/attack_range.tscn" id="5_2uvug"]
 [ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="5_8g70x"]
+[ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://other scene/bar.tscn" id="6_4aatu"]
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="6_jbdks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1iya"]
@@ -53,20 +54,15 @@ size_flags_vertical = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Name"
 
-[node name="AtackBar" type="HBoxContainer" parent="sprite/Name"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="sprite/Name"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Attack_pasive" parent="sprite/Name/AtackBar" instance=ExtResource("3_jk5kd")]
+[node name="AtackBar" type="HBoxContainer" parent="sprite/Name/VBoxContainer"]
+layout_mode = 2
+
+[node name="Attack_pasive" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("3_jk5kd")]
 layout_mode = 2
 radius = 737.01
 has_limit_level = true
@@ -74,8 +70,19 @@ limit_level = 2
 physic = true
 power_atack = 1.0
 
-[node name="Attack_range" parent="sprite/Name/AtackBar" instance=ExtResource("5_2uvug")]
+[node name="Attack_range" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("5_2uvug")]
 layout_mode = 2
+
+[node name="l" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_4aatu")]
+layout_mode = 2
+
+[node name="e" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_4aatu")]
+layout_mode = 2
+type = 1
+
+[node name="h" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_4aatu")]
+layout_mode = 2
+type = 2
 
 [node name="prepcion" type="Area2D" parent="."]
 
@@ -94,5 +101,5 @@ stream = ExtResource("5_8g70x")
 max_distance = 3000.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(10, 9.00002)
-scale = Vector2(19.6, 18.1)
+position = Vector2(-0.499955, -30.5)
+scale = Vector2(76.25, 73.35)

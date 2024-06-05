@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7o6wrw0713c5"]
+[gd_scene load_steps=7 format=3 uid="uid://c7o6wrw0713c5"]
 
 [ext_resource type="Texture2D" uid="uid://cwl3m7lsws8w1" path="res://img/150px-Greymon_New_Century.png" id="1_qp643"]
 
@@ -20,17 +20,26 @@ script/source = "extends TextureProgressBar
 const TYPE:PackedStringArray=[\"life\",\"energy\",\"hunger\"]
 const C:String=\"current_\"
 @export_enum(\"l\",\"e\",\"h\") var type:int=0
+@onready var label=$Label
 @onready var core:DigimonCORE=get_parent().get_parent().get_parent().get_parent().get_parent()
 func _ready():
 	max_value=core.get(\"max_\"+TYPE[type])
 	value=core.get(C+TYPE[type])
+	label.text=str(value)+\" / \"+str(max_value)
 	match type:
-		0:modulate=Color(1,0,0)
-		2:modulate=Color(0,1,0)
-		_:modulate=Color(0,0,1)
-func update():value=core.get(C+TYPE[type])
+		0:self_modulate=Color(1,0,0)
+		2:self_modulate=Color(0,1,0)
+		_:self_modulate=Color(0,0,1)
+func update():
+	value=core.get(C+TYPE[type])
+	label.text=str(value)+\"/\"+str(max_value)
 func _process(_delta):update()
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_3h285"]
+font_size = 33
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Bar" type="TextureProgressBar"]
 material = SubResource("ShaderMaterial_sbfqx")
@@ -38,8 +47,21 @@ offset_right = 492.0
 offset_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+step = 3.0
 value = 50.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_667bq")
 texture_progress = ExtResource("1_qp643")
 script = SubResource("GDScript_tn57c")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 34
+label_settings = SubResource("LabelSettings_3h285")
+horizontal_alignment = 1
+vertical_alignment = 1

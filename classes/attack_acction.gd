@@ -5,10 +5,11 @@ class_name AttackAction extends Attack
 @export var max_sound_distanse:int=500
 func action():
 	digimon_owner.attack(accion)
+	await digimon_owner.sprite.frame_changed
+	print("ataco")
 	reposo=kooldown
 	digimon_owner.core.current_energy-=costo
 	$sound.play()
-	await digimon_owner.sprite.frame_changed
 	effect()
 func _ready():
 	$sound.stream=sound

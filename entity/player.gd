@@ -1,8 +1,8 @@
 class_name Player extends DigimonCORE
-var data:Array[float]=[]
+#var data:Array[float]=[]
 var alive:bool=true
 var line_id:Array[int]=[0,16,3]
-func _ready():
+func _init():
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
 
@@ -24,21 +24,23 @@ func dead(cause):
 	Iniload.savedead(save_data)
 	line_id.clear()
 	alive=false
-
-func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,pasive:bool=false):
-	body.dir=dir
-	if pasive:_hit(damage,dir,a.attribute,physic)
+func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false):
+	if area:_hit(damage,dir,a.attribute,physic)
 	else:
-		var limit=(body.get_speed()-a.get_speed())/2
-		print(limit)
-		if randi_range(0,limit)==0:_hit(damage,dir,a.attribute,physic)
-		else:print(self.name," evadio")
+		if physic:a.core.attack+=0.01
+		else:a.core.inteligent+=0.01
+		var limit=(body.get_speed()-a.get_speed())
+		if limit<=0:_hit(damage,dir,a.attribute,physic)
+		elif randi_range(0,limit/2)==0:_hit(damage,dir,a.attribute,physic)
+		else:
+			speed+=0.1/limit
+			body.flee()
+	enemies.push_back(a.core)
 #	if current_life<=0: dead(a.Digimon_Id)
 
 func _on_tree_exiting():
 #	if alive:dead("exit game")
 	pass
-
 
 func _on_child_entered_tree(node):
 	if node is DigimonBody:
@@ -46,7 +48,7 @@ func _on_child_entered_tree(node):
 		node.player=true
 		var cam=Camera2D.new()
 		var l=AudioListener2D.new()
-		cam.zoom=Vector2(0.5,0.5)
-		l.make_current()
 		node.add_child(cam)
 		node.add_child(l)
+		cam.zoom=Vector2(0.5,0.5)
+		l.make_current()

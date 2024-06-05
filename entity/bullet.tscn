@@ -12,7 +12,7 @@ var physic:bool
 func set_data(powe,dig,spe,spr,phy:bool):
 	power=powe
 	digimon_owner=dig
-	if dig.interaction_area.previus_dir!=Vector2.ZERO:dir=dig.interaction_area.previus_dir
+	dir=dig.previus_dir
 	speed=spe
 	physic=phy
 	$sprite.sprite_frames=spr
@@ -25,7 +25,7 @@ func _on_sprite_sprite_frames_changed():
 func _on_body_entered(body):
 	if body !=digimon_owner:
 		if body is DigimonBody:
-			print(\"range attack of \",digimon_owner.name,digimon_owner.digimon_name,\" impact in \",body.name,body.digimon_name)
+			#print(\"range attack of \",digimon_owner.name,digimon_owner.digimon_name,\" impact in \",body.name,body.digimon_name)
 			body.core.hit(power,dir,digimon_owner,physic)
 			queue_free()
 		else:queue_free()
