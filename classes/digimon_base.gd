@@ -33,6 +33,11 @@ var current_life:float=0:
 	set(v):
 		current_life=v
 		if current_life>max_life:current_life=max_life
+		if current_life<=0:
+			if body.get_will()/body.get_will()*10<=randf():
+				current_life+=1
+				will+=0.1
+				body.no_dead()
 var current_energy:float=0:
 	set(v):
 		current_energy=v
@@ -48,19 +53,28 @@ var data:int=0:
 	set(v):
 		data=v
 		current_hunger+=float(v)/2
-
+#func ded(a:DigimonBody)->void:pass
 func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false)->void:
+	body.enemies.push_back(a)
 	if area:_hit(damage,dir,a.attribute,physic)
 	else:
+		var self_speed=body.get_speed()
+		var ataker_speed=a.get_speed()
 		if physic:a.core.attack+=0.01
 		else:a.core.inteligent+=0.01
-		var limit=(body.get_speed()-a.get_speed())
-		if limit<=0:_hit(damage,dir,a.attribute,physic)
-		elif randi_range(0,limit/2)==0:_hit(damage,dir,a.attribute,physic)
+		var limit=(ataker_speed/(self_speed+ataker_speed))/3
+		var rng=randf()
+		if limit<=rng:
+			#_hit(damage,dir,a.attribute,physic)
+			if limit*1.5<=rng:_hit(damage,dir,a.attribute,physic)
+			else:
+				_hit(damage-body.get_defend()*0.5,dir,a.attribute,physic)
+				defend+=0.01
+				body.block()
 		else:
 			speed+=0.1/limit
 			body.flee()
-	body.enemies.push_back(a)
+	#ded(a)
 func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool)->void:
 	var knockback=damage-(life/8)
 	if knockback>0:body.position+=atta_dir*(knockback/2)
@@ -82,12 +96,12 @@ func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool)->void:
 			_:minus_life(damage,physic)
 	body.hited()
 func minus_life(damage:float,physic:bool,divisor:float=1)->void:
-	damage=(damage*divisor)
+	damage*=divisor
 	if physic:damage-=(body.get_defend()*0.25)
 	else :damage-=(body.get_inteligent()*0.25)
 	current_life-=damage
 	damage_recive+=damage
-	defend+=damage/10000
+	defend+=damage/100000
 
 func regen(delta:float)->void:
 	current_hunger-=delta/5

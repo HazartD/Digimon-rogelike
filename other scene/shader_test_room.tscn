@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpawhw0b1b8wb"]
+
+[ext_resource type="Script" path="res://other scene/shader_test_room.gd" id="1_0iet4"]
+
+[node name="Node2D" type="Node2D"]
+visible = false
+script = ExtResource("1_0iet4")

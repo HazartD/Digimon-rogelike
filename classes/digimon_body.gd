@@ -84,13 +84,14 @@ func _ready()->void:
 		visual.connect("screen_entered",show)
 		visual.connect("screen_exited",hide)
 
+
 #aqui no se si meter que el impulse sea un dir que fuerce una direccion o que solo afecte la velocidad
 func _physics_process(delta)->void:
 	if player:_get_inputs()
 	velocity=(((dir*impulse)*(10000+get_speed())))*delta
 	set_previus_dir_and_run_record(delta)
-#	velocity=(((dir+impulse)*(10000+get_speed())))*delta
 	move_and_slide()
+#	velocity=(((dir+impulse)*(10000+get_speed())))*delta
 
 func _get_inputs()->void:
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -101,7 +102,7 @@ func hited()->void:
 	$hurt.play()
 	if core.current_life<=0:
 		if visual:visual.queue_free()
-		var tween=get_tree().create_tween()
+		var tween=get_tree().create_tween()#cambiar color con el self_modulate
 		tween.tween_property(sprite.material,"shader_parameter/progress",1,0.3)
 		await tween.finished
 		for body in enemies:if body:body.core.data+=int(get_life()/enemies.size()*2)
@@ -109,6 +110,14 @@ func hited()->void:
 	else:sprite.play("hit_"+sprite.animation.erase(0,4))
 func flee()->void:
 	var e=STATE.instantiate()
+	add_child(e)
+func block()->void:
+	var e=STATE.instantiate()
+	e.text="BLK"
+	add_child(e)
+func no_dead():
+	var e=STATE.instantiate()
+	e.text="NOD"
 	add_child(e)
 func attack(acc:String):#cuando haga las animaciones de embest quitare el if y lo dejare en una sola linea
 	var new_anim:String=acc+"_"+sprite.animation.erase(0,4)

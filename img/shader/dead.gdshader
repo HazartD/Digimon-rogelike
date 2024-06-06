@@ -4,13 +4,11 @@ uniform sampler2D noise_tex_normal;
 uniform sampler2D noise_tex;
 uniform float progress : hint_range(0.0, 1.0);
 uniform float strength = 1.0;
-uniform vec4 type_color =vec4(0.5,0.5,0.0,1.0);
  //If your sprite doesn't have enough space and the explosion gets clipped, 
  //you can uncomment this and adjust the scale
 //void vertex() {
 	//float scale = 3.0;
 	//VERTEX *= scale;
-//
 	//UV *= scale;
 	//UV -= (scale - 1.0) / 2.0;
 //}
@@ -23,7 +21,7 @@ void fragment() {
 		direction = direction * strength * progress;
 		
 		// UV for exploded texture
-		vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE; // Real texture size in pixels
+		vec2 tex_size =1.0 / TEXTURE_PIXEL_SIZE; // Real texture size in pixels
 		vec2 uv = floor(UV * tex_size) / (tex_size - 1.0); // Pixelate UV to snap pixels
 		uv = uv - direction; // Distort UV
 		
@@ -42,6 +40,6 @@ void fragment() {
 		border = ceil(1.0 - border);
 		tex.a *= border;
 		
-		COLOR = tex*type_color;
+		COLOR = tex;
 	}
 }

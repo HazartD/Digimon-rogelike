@@ -1,8 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3hwgblcofgf2"]
+[gd_scene load_steps=16 format=3 uid="uid://b3hwgblcofgf2"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
 [ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_dmyfc"]
+[ext_resource type="Texture2D" uid="uid://b1xfe4ha18ft" path="res://img/shader/dead_noise_2.tres" id="3_m7v4o"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://other scene/attack/attack_range.tscn" id="4_1gvd5"]
+[ext_resource type="Texture2D" uid="uid://dq3tjt388culg" path="res://img/shader/dead_noise_1.tres" id="4_w7rln"]
 [ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://other scene/attack/attack_melee.tscn" id="5_nn6d5"]
 [ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://other scene/bar.tscn" id="6_77ohc"]
 [ext_resource type="Script" path="res://entity/visible.gd" id="8_vy12a"]
@@ -10,28 +12,13 @@
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="76_wuekr"]
 [ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="77_05iou"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gxywu"]
-noise_type = 2
-frequency = 0.05
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n8aqi"]
-noise = SubResource("FastNoiseLite_gxywu")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_o3ou0"]
-noise_type = 2
-frequency = 0.05
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m744f"]
-noise = SubResource("FastNoiseLite_o3ou0")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
 resource_local_to_scene = true
 shader = ExtResource("2_dmyfc")
-shader_parameter/progress = 0.0
+shader_parameter/progress = 0.391
 shader_parameter/strength = 1.0
-shader_parameter/type_color = Vector4(0, 0.25, 0.25, 1)
-shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_m744f")
-shader_parameter/noise_tex = SubResource("NoiseTexture2D_n8aqi")
+shader_parameter/noise_tex_normal = ExtResource("4_w7rln")
+shader_parameter/noise_tex = ExtResource("3_m7v4o")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
 radius = 309.79
@@ -104,6 +91,7 @@ power_atack = 0.5
 [node name="Attack_melee" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("5_nn6d5")]
 layout_mode = 2
 physic = true
+kooldown = 0
 
 [node name="l" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2

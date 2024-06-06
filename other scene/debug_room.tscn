@@ -58,6 +58,8 @@ position = Vector2(652.28, -252.69)
 
 [node name="agu" type="Node" parent="."]
 script = ExtResource("1_lcl16")
+life = 100.5
+speed = 0.11
 
 [node name="digimon_body" parent="agu" instance=ExtResource("2_y6abx")]
 position = Vector2(-6975, -7959)
