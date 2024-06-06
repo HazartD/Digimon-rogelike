@@ -22,7 +22,7 @@ const C:String=\"current_\"
 @export_enum(\"l\",\"e\",\"h\") var type:int=0
 @onready var label=$Label
 @onready var core:DigimonCORE=get_parent().get_parent().get_parent().get_parent().get_parent()
-func _ready():
+func _ready()->void:
 	max_value=core.get(\"max_\"+TYPE[type])
 	value=core.get(C+TYPE[type])
 	label.text=str(value)+\" / \"+str(max_value)
@@ -30,10 +30,10 @@ func _ready():
 		0:self_modulate=Color(1,0,0)
 		2:self_modulate=Color(0,1,0)
 		_:self_modulate=Color(0,0,1)
-func update():
+func update()->void:
 	value=core.get(C+TYPE[type])
 	label.text=str(value)+\"/\"+str(max_value)
-func _process(_delta):update()
+func _process(_delta)->void:update()
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_3h285"]
@@ -48,7 +48,7 @@ offset_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 step = 3.0
-value = 50.0
+value = 51.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_667bq")
 texture_progress = ExtResource("1_qp643")

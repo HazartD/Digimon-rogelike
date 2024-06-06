@@ -107,16 +107,13 @@ physic = true
 
 [node name="l" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2
-value = 51.0
 
 [node name="e" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2
-value = 51.0
 type = 1
 
 [node name="h" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2
-value = 51.0
 type = 2
 
 [node name="prepcion" type="Area2D" parent="."]

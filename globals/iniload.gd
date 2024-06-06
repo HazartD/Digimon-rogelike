@@ -13,7 +13,7 @@ const SEED_FILE_PATH="user://HazartD/DR/seed_register/%s.ini"
 		#sprite.texture=ImageTexture.create_from_image(Image.load_from_file(con.get_value("screenshoot",img)))
 		#add_child(sprite)
 var world_seeds:Dictionary={}
-var statsplus:Dictionary={"life":2.200,"energy":500.000,"attack":0.000,"defend":0.000,"speed":400.000,"inteligent":0.000,"will":0.000}
+var statsplus:Dictionary={"life":2.200,"energy":0.000,"attack":0.000,"defend":0.000,"speed":0.001,"inteligent":0.000,"will":0.000}
 var unlock_evo:Dictionary={"meca_data":false,6:false,7:false,8:false,9:false}#son los id del digimon desbloqueado y su true false
 var run_number:int=1
 enum LOCATIONS{DS,NSP,DR,ME,JT,NSO,VB,WG,DA,UK,CRACK_TEAM_BASE,FILE_CITY,SHORE}
@@ -22,7 +22,7 @@ var actual_seed:int=1923659980
 var seed_string:String="Digimon"
 var player_name:String
 
-func _init():
+func _init()->void:
 	DirAccess.make_dir_recursive_absolute("user://HazartD/DR/screenshot")
 	DirAccess.make_dir_recursive_absolute("user://HazartD/DR/seed_register")
 	#DirAccess.open("user://HazartD/DR")
@@ -44,7 +44,7 @@ func _init():
 		#con.save(USERDATA)
 	if FileAccess.file_exists(CONFIG):load_config()
 
-func save_config():
+func save_config()->void:
 	var con=ConfigFile.new()
 	con.set_value("general","languaje",TranslationServer.get_locale())
 	con.set_value("general","windowmode",DisplayServer.window_get_mode())
@@ -53,7 +53,7 @@ func save_config():
 	con.set_value("auidio","ui",AudioServer.get_bus_volume_db(3))
 	con.save(CONFIG)
 
-func load_userdata():
+func load_userdata()->void:
 	var con=ConfigFile.new()
 	var _err=con.load(USERDATA)
 	if con.has_section("meta_progesion"):
@@ -61,7 +61,7 @@ func load_userdata():
 		statsplus=con.get_value("meta_progesion","statsplus")
 		run_number=con.get_value("meta_progesion","run_number")
 
-func load_config():
+func load_config()->void:
 	var con=ConfigFile.new()
 	var err=con.load(CONFIG)
 	if err != OK: return
@@ -74,7 +74,7 @@ func load_config():
 func get_section_player() -> String:
 	return player_name+"("+str(run_number)+")"
 
-func savedead(data:Dictionary):
+func savedead(data:Dictionary)->void:
 	var section=get_section_player()
 	run_number+=1
 	var con=ConfigFile.new()
@@ -90,7 +90,7 @@ func savedead(data:Dictionary):
 	con.set_value("meta_progesion","statsplus",statsplus)
 	con.save(USERDATA)
 
-func create_seed_regiser_file():
+func create_seed_regiser_file()->void:
 	var con=ConfigFile.new()
 	con.set_value("seed data","seed",actual_seed)
 	con.set_value("seed data","text_1",seed_string)
@@ -98,7 +98,7 @@ func create_seed_regiser_file():
 	con.set_value("world_seeds","world_seeds",world_seeds)
 	con.save(SEED_FILE_PATH % actual_seed)
 
-func add_seed_string_to_seed_file(_seed:int,stri:String):#cuando creas un mundo debe comprobar si la string da una seed ya registrada y negarte crear otro
+func add_seed_string_to_seed_file(_seed:int,stri:String)->void:#cuando creas un mundo debe comprobar si la string da una seed ya registrada y negarte crear otro
 	var con=ConfigFile.new()
 	con.load(SEED_FILE_PATH % _seed)
 	var number:int=1
@@ -107,7 +107,7 @@ func add_seed_string_to_seed_file(_seed:int,stri:String):#cuando creas un mundo 
 		number+=1
 	con.set_value("seed data","text_%s"%number,stri)
 
-#func _input(event):
+#func _input(event)->void:
 	#if event.is_action_pressed("screenshot"):
 		#var screenshoot_number:int=1
 		#var path=SCREENSHOT_PATH % screenshoot_number

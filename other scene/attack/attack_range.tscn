@@ -8,7 +8,7 @@ script/source = "extends AttackAction
 @export var speed:int=10
 @export var spri:SpriteFrames
 const BULLET:PackedScene=preload(\"res://entity/bullet.tscn\")
-func effect():
+func effect()->void:
 	var bu=BULLET.instantiate()
 	digimon_owner.core.add_child(bu)
 	bu.global_position=digimon_owner.global_position

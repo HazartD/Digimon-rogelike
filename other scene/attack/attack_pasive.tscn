@@ -8,19 +8,19 @@ script/source = "extends Attack
 @export var has_limit_level:bool=false
 @export var limit_level:DigimonCORE.level_evo
 @export var plus_power_multipicator:int=2
-func _ready():
+func _ready()->void:
 	positioning()
 	timer()
-func positioning():
+func positioning()->void:
 	$area/area.shape.radius=radius
 	$area/area.global_position=digimon_owner.global_position
 
-func pulse():
+func pulse()->void:
 	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:
 		if has_limit_level: if digi.Evo_level<=limit_level: digi.core.hit(powered()*plus_power_multipicator,Vector2.ZERO,digimon_owner,physic,true)
-		else:digi.core.hit(powered(),Vector2.ZERO,digimon_owner,physic)
+		else:digi.core.hit(powered()/2,Vector2.ZERO,digimon_owner,physic)
 
-func timer():
+func timer()->void:
 	if kooldown==0:
 		pulse()
 		var _time=get_tree().create_timer(0.01).timeout.connect(timer)

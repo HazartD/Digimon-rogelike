@@ -37,17 +37,19 @@ var current_energy:float=0:
 	set(v):
 		current_energy=v
 		if current_energy>max_energy:current_energy=max_energy
+		if current_energy<=0:current_energy=0
 var current_hunger:float=0:
 	set(v):
 		current_hunger=v
 		if current_hunger>max_hunger:current_hunger=max_hunger
-var enemies:Array[DigimonCORE]=[]#if ese, y prosige, else: pop
+		if current_hunger<=0:current_hunger=0
 	#set_sprite("res://img/animation_resouse/digimon_base.tres")
 var data:int=0:
 	set(v):
 		data=v
 		current_hunger+=float(v)/2
-func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false):
+
+func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false)->void:
 	if area:_hit(damage,dir,a.attribute,physic)
 	else:
 		if physic:a.core.attack+=0.01
@@ -58,8 +60,8 @@ func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false):
 		else:
 			speed+=0.1/limit
 			body.flee()
-	enemies.push_back(a.core)
-func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool):
+	body.enemies.push_back(a)
+func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool)->void:
 	var knockback=damage-(life/8)
 	if knockback>0:body.position+=atta_dir*(knockback/2)
 	if attribute==attribut.FR or attribute==attribut.UNK:minus_life(damage,physic)
@@ -79,7 +81,7 @@ func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool):
 			attribut.VI:minus_life(damage,physic,1.3)
 			_:minus_life(damage,physic)
 	body.hited()
-func minus_life(damage:float,physic:bool,divisor:float=1):
+func minus_life(damage:float,physic:bool,divisor:float=1)->void:
 	damage=(damage*divisor)
 	if physic:damage-=(body.get_defend()*0.25)
 	else :damage-=(body.get_inteligent()*0.25)
@@ -87,18 +89,18 @@ func minus_life(damage:float,physic:bool,divisor:float=1):
 	damage_recive+=damage
 	defend+=damage/10000
 
-func regen(delta:float):
+func regen(delta:float)->void:
 	current_hunger-=delta/5
 	if current_hunger>=float(max_hunger)/2:
 		if current_energy<max_energy:current_energy+=delta/4
 		if current_life<max_life:current_life+=delta/4
 
-func evo():
+func evo()->void:
 	pass
 	#crea clase evolution
 	#set_stats(seasch_evo(mete como parametro la id, los stas y si es el player))
 	#machtea la id, mete las funciones en un array, por cada una la ejecuta y si da false la saca y de lo contrario regresa la id, cada funcion tiene el nombre del digi, comprueba cada stat importante, mete 
 
-func _process(delta):
+func _process(delta)->void:
 	regen(delta)
 	time+=delta

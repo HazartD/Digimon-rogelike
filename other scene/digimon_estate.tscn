@@ -2,7 +2,7 @@
 
 [sub_resource type="GDScript" id="GDScript_efnpo"]
 script/source = "extends Label
-func _ready():
+func _ready()->void:
 	position.y=-20
 	await get_tree().create_timer(0.15).timeout
 	var tween=get_tree().create_tween()

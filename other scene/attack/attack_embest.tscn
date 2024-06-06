@@ -7,8 +7,8 @@ script/source = "extends AttackAction
 @export_enum(\"a:2\",\"COLIDE:10\",\"IMPACT:50\",\"ARRASTRE:100\") var impulse=2
 @export var duration:float=2
 var attacked:Array[DigimonBody]=[]
-func _ready():set_physics_process(false)
-func effect():
+func _ready()->void:set_physics_process(false)
+func effect()->void:
 	digimon_owner.core.speed+=0.01
 	set_physics_process(true)
 	digimon_owner.sprite.play(\"run_\"+digimon_owner.ANIMATIONDIR[digimon_owner.DIR_VECTOR.find(get_dir())])
@@ -18,8 +18,8 @@ func effect():
 	set_physics_process(false)
 	attacked.clear()
 
-func _physics_process(_delta):search_digimon_in_range_and_hit_they()
-func search_digimon_in_range_and_hit_they():
+func _physics_process(_delta)->void:search_digimon_in_range_and_hit_they()
+func search_digimon_in_range_and_hit_they()->void:
 	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner and !attacked.has(digi):
 		digi.core.hit(powered(),get_dir(),digimon_owner,physic)
 		attacked.append(digi)
@@ -28,6 +28,7 @@ func search_digimon_in_range_and_hit_they():
 [node name="attack_embest" type="TextureRect"]
 texture = ExtResource("1_mpj4h")
 script = SubResource("GDScript_h8suv")
+physic = true
 Type = 4
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]

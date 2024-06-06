@@ -2,11 +2,11 @@ class_name Player extends DigimonCORE
 #var data:Array[float]=[]
 var alive:bool=true
 var line_id:Array[int]=[0,16,3]
-func _init():
+func _init()->void:
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
 
-func dead(cause):
+func dead(cause)->void:
 	var save_data={
 	"time":time,
 	"player_name":Iniload.player_name,
@@ -24,7 +24,7 @@ func dead(cause):
 	Iniload.savedead(save_data)
 	line_id.clear()
 	alive=false
-func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false):
+func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false)->void:
 	if area:_hit(damage,dir,a.attribute,physic)
 	else:
 		if physic:a.core.attack+=0.01
@@ -35,14 +35,14 @@ func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false):
 		else:
 			speed+=0.1/limit
 			body.flee()
-	enemies.push_back(a.core)
+	body.enemies.push_back(a)
 #	if current_life<=0: dead(a.Digimon_Id)
 
-func _on_tree_exiting():
+func _on_tree_exiting()->void:
 #	if alive:dead("exit game")
 	pass
 
-func _on_child_entered_tree(node):
+func _on_child_entered_tree(node)->void:
 	if node is DigimonBody:
 		line_id.append(node.Digimon_Id)
 		node.player=true

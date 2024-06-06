@@ -6,14 +6,14 @@
 [sub_resource type="GDScript" id="GDScript_xdh7a"]
 script/source = "extends AttackAction
 @export var radius:float=1000
-func effect():
+func effect()->void:
 	search_digimon_in_range_and_hit_they()
-func _ready():
+func _ready()->void:
 	positioning()
-func positioning():
+func positioning()->void:
 	$area/area.shape.radius=radius
 	$area/area.global_position=digimon_owner.global_position
-func search_digimon_in_range_and_hit_they():
+func search_digimon_in_range_and_hit_they()->void:
 	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:digi.core.hit(powered(),get_dir(),digimon_owner,physic,true)
 "
 
