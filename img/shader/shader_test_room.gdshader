@@ -1,18 +1,18 @@
 shader_type canvas_item;
-uniform vec2 fragments= vec2(5,5);
-uniform float progress : hint_range(0.0, 1.0)=0;
-void fragment() {
-	vec2 pixel_fract =fract(UV*fragments);
-	//COLOR.rgb = vec3(pixel_fract,0);
-	float pixel_distance = distance(pixel_fract,vec2(0.5,0.5));
-	//COLOR.rgb=vec3(pixel_distance,0,0);
-	COLOR=texture(TEXTURE,UV);
-	COLOR.a*=step(pixel_distance,progress);
-	
-	// Called for every pixel the material is visible on.
-}
+uniform float explosion_speed : hint_range(0.1, 10.0) = 1.0;
+uniform float explosion_radius : hint_range(0.1, 5.0) = 1.0;
 
-//void light() {
-	// Called for every pixel for every light affecting the CanvasItem.
-	// Uncomment to replace the default light processing function with this one.
-//}
+void fragment() {
+	vec2 center = vec2(0.5, 0.5);
+	vec2 distance = center - FRAGCOORD.xy / vec2(1.0 / TEXTURE_PIXEL_SIZE.x, 1.0 / TEXTURE_PIXEL_SIZE.y);
+	float distance_from_center = length(distance);
+	float scale = 1.0 + explosion_speed * distance_from_center;
+	float transparency = 1.0 - clamp(explosion_speed * distance_from_center, 0.0, 1.0);
+	COLOR.a *= transparency;
+	vec2 uv = FRAGCOORD.xy * TEXTURE_PIXEL_SIZE;
+	vec2 centeredUV = uv - center;
+	vec2 offset = centeredUV * scale - centeredUV;
+	vec2 newUV = uv + offset * explosion_radius;
+	vec4 textureColor = texture(TEXTURE, newUV);
+	COLOR *= textureColor;
+}

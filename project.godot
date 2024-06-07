@@ -24,6 +24,7 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 Iniload="*res://globals/iniload.gd"
 Base="*res://data base/Base.gd"
+Resouses="*res://globals/resouses.gd"
 
 [filesystem]
 

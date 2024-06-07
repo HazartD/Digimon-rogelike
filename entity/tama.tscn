@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cy0p0g0phfsjv"]
+
+[node name="tama" type="RigidBody2D"]

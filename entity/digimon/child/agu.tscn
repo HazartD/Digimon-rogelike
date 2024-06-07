@@ -15,7 +15,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
 resource_local_to_scene = true
 shader = ExtResource("2_dmyfc")
-shader_parameter/progress = 0.391
+shader_parameter/progress = 0.0
 shader_parameter/strength = 1.0
 shader_parameter/noise_tex_normal = ExtResource("4_w7rln")
 shader_parameter/noise_tex = ExtResource("3_m7v4o")
@@ -51,6 +51,7 @@ sprite_frames = ExtResource("76_nxe34")
 animation = &"del_down"
 
 [node name="Name" type="Label" parent="sprite"]
+visible = false
 anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
@@ -115,6 +116,7 @@ rotation = 3.14159
 script = ExtResource("76_wuekr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interaction_area"]
+visible = false
 position = Vector2(-4, -84)
 shape = SubResource("RectangleShape2D_20vgc")
 
@@ -124,10 +126,12 @@ volume_db = 10.0
 bus = &"SFX"
 
 [node name="patas" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(3.5, 6)
 shape = SubResource("RectangleShape2D_hvuf0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 position = Vector2(-1.90735e-06, 103.25)
 scale = Vector2(14.7, -23.725)
 script = ExtResource("8_vy12a")

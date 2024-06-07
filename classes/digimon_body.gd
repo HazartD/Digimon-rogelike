@@ -100,14 +100,26 @@ func _get_inputs()->void:
 #func hurt():$hurt.play()
 func hited()->void:
 	$hurt.play()
-	if core.current_life<=0:
-		if visual:visual.queue_free()
-		var tween=get_tree().create_tween()#cambiar color con el self_modulate
-		tween.tween_property(sprite.material,"shader_parameter/progress",1,0.3)
-		await tween.finished
-		for body in enemies:if body:body.core.data+=int(get_life()/enemies.size()*2)
-		queue_free()
+	if core.current_life<=0:dead_anim_and_queue_free()
 	else:sprite.play("hit_"+sprite.animation.erase(0,4))
+func dead_anim_and_queue_free():
+	if visual:visual.queue_free()
+	if attribute==DigimonCORE.attribut.FR:sprite.material.shader=Resouses.DEAD
+	else:
+		sprite.material.shader=Resouses.FREE_DEAD
+		match attribute:
+			DigimonCORE.attribut.VI: self_modulate=Color(1,0,0,1)
+			DigimonCORE.attribut.VA: self_modulate=Color(0,0,1,1)
+			DigimonCORE.attribut.DA: self_modulate=Color(0,1,1,1)
+			_: self_modulate=Color(0.14,0.14,0.14,1)
+
+	sprite.material.set("shader_parameter/noise_tex_normal",Resouses.NOISE_NORMAL)
+	sprite.material.set("shader_parameter/noise_tex",Resouses.NOISE)
+	var tween=get_tree().create_tween()
+	tween.tween_property(sprite.material,"shader_parameter/progress",1,0.3)
+	await tween.finished
+	for body in enemies:if body:body.core.data+=int(get_life()/enemies.size()*2)
+	queue_free()
 func flee()->void:
 	var e=STATE.instantiate()
 	add_child(e)

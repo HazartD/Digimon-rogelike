@@ -34,7 +34,7 @@ var current_life:float=0:
 		current_life=v
 		if current_life>max_life:current_life=max_life
 		if current_life<=0:
-			if body.get_will()/body.get_will()*10<=randf():
+			if 70/(70+body.get_will()*0.1)<=randf():
 				current_life+=1
 				will+=0.1
 				body.no_dead()
@@ -114,6 +114,9 @@ func evo()->void:
 	#crea clase evolution
 	#set_stats(seasch_evo(mete como parametro la id, los stas y si es el player))
 	#machtea la id, mete las funciones en un array, por cada una la ejecuta y si da false la saca y de lo contrario regresa la id, cada funcion tiene el nombre del digi, comprueba cada stat importante, mete 
+func to_tama():
+	body.get_defend()
+	body.get_life()
 
 func _process(delta)->void:
 	regen(delta)
