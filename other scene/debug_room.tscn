@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1hhpun2njuva"]
+[gd_scene load_steps=12 format=3 uid="uid://c1hhpun2njuva"]
 
 [ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_lcl16"]
 [ext_resource type="PackedScene" uid="uid://b3hwgblcofgf2" path="res://entity/digimon/child/agu.tscn" id="2_y6abx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d0di0atpgu4kx" path="res://img/Raremon.webp" id="3_urk74"]
 [ext_resource type="PackedScene" uid="uid://cijy8axnp86ko" path="res://entity/player.tscn" id="4_d0nwv"]
 [ext_resource type="PackedScene" uid="uid://c2b4yayqxx6qq" path="res://entity/digimon/adult/grey.tscn" id="5_cmemj"]
+[ext_resource type="PackedScene" uid="uid://cy0p0g0phfsjv" path="res://entity/tama.tscn" id="7_v02ov"]
 
 [sub_resource type="GDScript" id="GDScript_vl5ka"]
 script/source = "extends Area2D
@@ -33,11 +34,12 @@ radius = 198.671
 
 [node name="rare" type="Node" parent="."]
 script = ExtResource("1_lcl16")
+attack = 3.5
 
-[node name="body" parent="rare" instance=ExtResource("3_6t5du")]
+[node name="rare" parent="rare" instance=ExtResource("3_6t5du")]
 position = Vector2(1231, 349)
 
-[node name="Raremon" type="Sprite2D" parent="rare/body"]
+[node name="Raremon" type="Sprite2D" parent="rare/rare"]
 position = Vector2(23, -1.99999)
 scale = Vector2(0.514286, 0.547778)
 texture = ExtResource("3_urk74")
@@ -47,6 +49,7 @@ script = ExtResource("1_lcl16")
 
 [node name="digimon_body" parent="agu2" instance=ExtResource("2_y6abx")]
 position = Vector2(675, 408)
+attribute = 4
 
 [node name="grey" type="Node" parent="."]
 script = ExtResource("1_lcl16")
@@ -77,6 +80,18 @@ script = SubResource("GDScript_hkyxe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 shape = SubResource("CircleShape2D_r6mpt")
+
+[node name="DigimonCORE2" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+
+[node name="tama" parent="DigimonCORE2" instance=ExtResource("7_v02ov")]
+position = Vector2(-158, 801)
+
+[node name="DigimonCORE" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+
+[node name="tama" parent="DigimonCORE" instance=ExtResource("7_v02ov")]
+position = Vector2(-871, 343)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]

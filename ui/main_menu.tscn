@@ -1,13 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://ptlqojmt1nts"]
+[gd_scene load_steps=2 format=3 uid="uid://ptlqojmt1nts"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_6kcfx"]
-[ext_resource type="Script" path="res://classes/evolutions/evolution_child.gd" id="2_nxoc8"]
-[ext_resource type="Script" path="res://classes/evolutions/evolution_adult.gd" id="3_avduy"]
-[ext_resource type="Script" path="res://classes/evolutions/evolution_perfect.gd" id="4_5lqhd"]
-[ext_resource type="Script" path="res://classes/evolutions/evolution_ultimate.gd" id="5_rmfw8"]
-[ext_resource type="Script" path="res://classes/evolutions/evolution_crack_team.gd" id="6_fa8o0"]
-[ext_resource type="Script" path="res://classes/evolutions/evolution_hybrid.gd" id="7_0cq6j"]
-[ext_resource type="Script" path="res://classes/evolutions/evolution_armor.gd" id="8_okw2s"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -18,70 +11,28 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6kcfx")
 
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -159.0
-offset_top = -18.0
-offset_right = 160.0
-offset_bottom = 36.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "1"
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 71.0
+offset_right = 866.0
+offset_bottom = 277.0
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 423.0
-offset_top = -271.0
-offset_right = -425.0
-offset_bottom = -239.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 button_mask = 3
 text = "Generar mundo"
 
-[node name="Label" type="Label" parent="Button"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -47.0
-offset_top = 25.0
-offset_right = 49.0
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 text = "NS"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="child" type="Node" parent="Button/Label"]
-script = ExtResource("2_nxoc8")
-
-[node name="adult" type="Node" parent="Button/Label"]
-script = ExtResource("3_avduy")
-
-[node name="perfect" type="Node" parent="Button/Label"]
-script = ExtResource("4_5lqhd")
-
-[node name="ultimate" type="Node" parent="Button/Label"]
-script = ExtResource("5_rmfw8")
-
-[node name="crack_team" type="Node" parent="Button/Label"]
-script = ExtResource("6_fa8o0")
-
-[node name="hybrid" type="Node" parent="Button/Label"]
-script = ExtResource("7_0cq6j")
-
-[node name="armor" type="Node" parent="Button/Label"]
-script = ExtResource("8_okw2s")
-
-[connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]
-[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="button_down" from="VBoxContainer/Button" to="." method="_on_button_button_down"]

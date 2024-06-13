@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://qawg8f1t8rq5"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_h21te"]
-[ext_resource type="Shader" path="res://img/shader/digimon_hit.gdshader" id="2_2pdkg"]
+[ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_2pdkg"]
 [ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="2_pp3fa"]
 [ext_resource type="PackedScene" uid="uid://op7mnjxhk1cx" path="res://other scene/attack/attack_pasive.tscn" id="3_jk5kd"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://other scene/attack/attack_range.tscn" id="5_2uvug"]

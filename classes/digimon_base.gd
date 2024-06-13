@@ -5,6 +5,8 @@ enum level_evo{BABYI,BABYII,CHILD,ADULT,PERFECT,ULTIMATE,ARMOR,UNKNOW,NOLEVEL}
 var time:float=0.0
 var digimon_id:int
 var body:DigimonBody
+var generatiom:int=1
+var birth_locations:Array[Iniload.LOCATIONS]=[]
 @export var attribute:attribut
 @export var Evo_level:level_evo
 @export_group("stats")
@@ -35,9 +37,10 @@ var current_life:float=0:
 		if current_life>max_life:current_life=max_life
 		if current_life<=0:
 			if 70/(70+body.get_will()*0.1)<=randf():
-				current_life+=1
+				current_life=1
 				will+=0.1
 				body.no_dead()
+			else:body.dead_anim_and_queue_free()
 var current_energy:float=0:
 	set(v):
 		current_energy=v
@@ -75,6 +78,7 @@ func hit(damage:float,dir:Vector2,a:DigimonBody,physic:bool,area:bool=false)->vo
 			speed+=0.1/limit
 			body.flee()
 	#ded(a)
+
 func _hit(damage:float,atta_dir:Vector2,attri:attribut,physic:bool)->void:
 	var knockback=damage-(life/8)
 	if knockback>0:body.position+=atta_dir*(knockback/2)
@@ -107,7 +111,7 @@ func regen(delta:float)->void:
 	current_hunger-=delta/5
 	if current_hunger>=float(max_hunger)/2:
 		if current_energy<max_energy:current_energy+=delta/4
-		if current_life<max_life:current_life+=delta/4
+		if current_life<max_life and current_life>0 :current_life+=delta/4
 
 func evo()->void:
 	pass

@@ -28,26 +28,22 @@ func true_determinar_field():
 	Iniload.create_seed_regiser_file()
 
 func _on_text_edit_text_changed():
-	print("cambio texto")
-	if $TextEdit.text=="":$Button/Label.text=SEED_PREVIEW[0]# if$Button/Label.text!=SEED_PREVIEW[0]:
-	elif $TextEdit.text.is_valid_int():$Button/Label.text=SEED_PREVIEW[1]
-	else:$Button/Label.text=SEED_PREVIEW[2]
+	if $VBoxContainer/TextEdit.text=="":$VBoxContainer/Label.text=SEED_PREVIEW[0]# if$VBoxContainer/Label.text!=SEED_PREVIEW[0]:
+	elif $VBoxContainer/TextEdit.text.is_valid_int():$VBoxContainer/Label.text=SEED_PREVIEW[1]
+	else:$VBoxContainer/Label.text=SEED_PREVIEW[2]
 
 func _on_button_button_down():
-	if $TextEdit.text=="":
-		print("null")
+	if $VBoxContainer/TextEdit.text=="":
 		randomize()
 		Iniload.seed_string=""
 		Iniload.actual_seed=randi()
-	elif $TextEdit.text.is_valid_int():
-		print("int")
+	elif $VBoxContainer/TextEdit.text.is_valid_int():
 		Iniload.seed_string=""
-		Iniload.actual_seed=int($TextEdit.text)
+		Iniload.actual_seed=int($VBoxContainer/TextEdit.text)
 	else:
-		print("text")
-		Iniload.actual_seed=hash($TextEdit.text)
-		Iniload.seed_string=$TextEdit.text
+		Iniload.actual_seed=hash($VBoxContainer/TextEdit.text)
+		Iniload.seed_string=$VBoxContainer/TextEdit.text
 	if files.has(str(Iniload.actual_seed)+".ini"):
-		if $Button/Label.text==SEED_PREVIEW[2]:Iniload.add_seed_string_to_seed_file(Iniload.actual_seed,Iniload.seed_string)
-		$Button/Label.text=SEED_PREVIEW[3]
+		if $VBoxContainer/Label.text==SEED_PREVIEW[2]:Iniload.add_seed_string_to_seed_file(Iniload.actual_seed,Iniload.seed_string)
+		$VBoxContainer/Label.text=SEED_PREVIEW[3]
 	else:true_determinar_field()

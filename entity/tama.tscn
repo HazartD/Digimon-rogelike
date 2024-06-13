@@ -1,3 +1,34 @@
-[gd_scene format=3 uid="uid://cy0p0g0phfsjv"]
+[gd_scene load_steps=8 format=3 uid="uid://cy0p0g0phfsjv"]
+
+[ext_resource type="Script" path="res://classes/tama.gd" id="1_q732y"]
+[ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_if7ao"]
+[ext_resource type="Texture2D" uid="uid://b1xfe4ha18ft" path="res://img/shader/dead_noise_2.tres" id="3_fodpw"]
+[ext_resource type="Texture2D" uid="uid://dq3tjt388culg" path="res://img/shader/dead_noise_1.tres" id="4_t2lbt"]
+[ext_resource type="Texture2D" uid="uid://ppyqt3f8ng5u" path="res://img/400px-FolderContinent.jpeg" id="5_5k0pe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37oeo"]
+shader = ExtResource("2_if7ao")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 1.0
+shader_parameter/color = Vector3(0.7, 0.7, 0.7)
+shader_parameter/noise_tex_normal = ExtResource("4_t2lbt")
+shader_parameter/noise_tex = ExtResource("3_fodpw")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bq6qi"]
+radius = 95.0
+height = 276.0
 
 [node name="tama" type="RigidBody2D"]
+gravity_scale = 0.0
+inertia = 21.39
+script = ExtResource("1_q732y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.960784, 0.0784314, 1, 1)
+material = SubResource("ShaderMaterial_37oeo")
+position = Vector2(0.5, 18)
+scale = Vector2(0.997537, 0.911765)
+texture = ExtResource("5_5k0pe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_bq6qi")

@@ -84,7 +84,6 @@ func _ready()->void:
 		visual.connect("screen_entered",show)
 		visual.connect("screen_exited",hide)
 
-
 #aqui no se si meter que el impulse sea un dir que fuerce una direccion o que solo afecte la velocidad
 func _physics_process(delta)->void:
 	if player:_get_inputs()
@@ -100,26 +99,33 @@ func _get_inputs()->void:
 #func hurt():$hurt.play()
 func hited()->void:
 	$hurt.play()
-	if core.current_life<=0:dead_anim_and_queue_free()
-	else:sprite.play("hit_"+sprite.animation.erase(0,4))
-func dead_anim_and_queue_free():
-	if visual:visual.queue_free()
-	if attribute==DigimonCORE.attribut.FR:sprite.material.shader=Resouses.DEAD
-	else:
-		sprite.material.shader=Resouses.FREE_DEAD
-		match attribute:
-			DigimonCORE.attribut.VI: self_modulate=Color(1,0,0,1)
-			DigimonCORE.attribut.VA: self_modulate=Color(0,0,1,1)
-			DigimonCORE.attribut.DA: self_modulate=Color(0,1,1,1)
-			_: self_modulate=Color(0.14,0.14,0.14,1)
+	sprite.play("hit_"+sprite.animation.erase(0,4))
 
+func dead_anim_and_queue_free():
+	$patas.free()
+	$prepcion.free()
+	$sprite/Name/VBoxContainer.free()
+	if attribute==DigimonCORE.attribut.FR:sprite.material.shader=Resouses.FREE_DEAD
+	else:
+		sprite.material.shader=Resouses.DEAD
+		match attribute:
+			DigimonCORE.attribut.VI: sprite.modulate=Color(1,0,0)
+			DigimonCORE.attribut.VA: sprite.modulate=Color(0,0,1)
+			DigimonCORE.attribut.DA: sprite.modulate=Color(0,1,1)
+			_: sprite.modulate=Color(0.14,0.14,0.14,1)
 	sprite.material.set("shader_parameter/noise_tex_normal",Resouses.NOISE_NORMAL)
 	sprite.material.set("shader_parameter/noise_tex",Resouses.NOISE)
-	var tween=get_tree().create_tween()
-	tween.tween_property(sprite.material,"shader_parameter/progress",1,0.3)
+	sprite.material.set("resource_local_to_scene",true)
+	var tween=get_tree().create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT_IN)
+	tween.tween_method(set_progress,0,2,0.5)
+	#tween.tween_method(sprite.material.set_shader_parameter,0,2,0.3)
+	tween.play()
 	await tween.finished
 	for body in enemies:if body:body.core.data+=int(get_life()/enemies.size()*2)
+	if visual:visual.free()
 	queue_free()
+
+func set_progress(i:float):sprite.material.set("shader_parameter/progress",i)
 func flee()->void:
 	var e=STATE.instantiate()
 	add_child(e)

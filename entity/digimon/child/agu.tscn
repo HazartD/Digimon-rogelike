@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://b3hwgblcofgf2"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
-[ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_dmyfc"]
-[ext_resource type="Texture2D" uid="uid://b1xfe4ha18ft" path="res://img/shader/dead_noise_2.tres" id="3_m7v4o"]
+[ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_8ans4"]
+[ext_resource type="Texture2D" uid="uid://b1xfe4ha18ft" path="res://img/shader/dead_noise_2.tres" id="2_k8s1w"]
+[ext_resource type="Texture2D" uid="uid://dq3tjt388culg" path="res://img/shader/dead_noise_1.tres" id="3_mkfy5"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://other scene/attack/attack_range.tscn" id="4_1gvd5"]
-[ext_resource type="Texture2D" uid="uid://dq3tjt388culg" path="res://img/shader/dead_noise_1.tres" id="4_w7rln"]
 [ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://other scene/attack/attack_melee.tscn" id="5_nn6d5"]
 [ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://other scene/bar.tscn" id="6_77ohc"]
 [ext_resource type="Script" path="res://entity/visible.gd" id="8_vy12a"]
@@ -14,11 +14,12 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
 resource_local_to_scene = true
-shader = ExtResource("2_dmyfc")
-shader_parameter/progress = 0.0
+shader = ExtResource("2_8ans4")
+shader_parameter/progress = 1.196
 shader_parameter/strength = 1.0
-shader_parameter/noise_tex_normal = ExtResource("4_w7rln")
-shader_parameter/noise_tex = ExtResource("3_m7v4o")
+shader_parameter/color = Vector3(0, 0, 0)
+shader_parameter/noise_tex_normal = ExtResource("3_mkfy5")
+shader_parameter/noise_tex = ExtResource("2_k8s1w")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
 radius = 309.79
@@ -48,7 +49,7 @@ Da=amarillo"
 material = SubResource("ShaderMaterial_sto4q")
 position = Vector2(0, 2)
 sprite_frames = ExtResource("76_nxe34")
-animation = &"del_down"
+animation = &"new_animation"
 
 [node name="Name" type="Label" parent="sprite"]
 visible = false
@@ -106,9 +107,9 @@ layout_mode = 2
 type = 2
 
 [node name="prepcion" type="Area2D" parent="."]
+visible = false
 
 [node name="prepcion" type="CollisionShape2D" parent="prepcion"]
-visible = false
 shape = SubResource("CircleShape2D_tjlny")
 
 [node name="interaction_area" type="Area2D" parent="."]
@@ -131,7 +132,6 @@ position = Vector2(3.5, 6)
 shape = SubResource("RectangleShape2D_hvuf0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
 position = Vector2(-1.90735e-06, 103.25)
 scale = Vector2(14.7, -23.725)
 script = ExtResource("8_vy12a")

@@ -1,5 +1,6 @@
 class_name Player extends DigimonCORE
 #var data:Array[float]=[]
+const OPTIONS_MENU:PackedScene=preload("res://ui/opciones.tscn")
 var alive:bool=true
 var line_id:Array[int]=[0,16,3]
 func _init()->void:

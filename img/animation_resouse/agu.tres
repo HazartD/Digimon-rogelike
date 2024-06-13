@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=73 format=3 uid="uid://bqrs2no0y76k5"]
+[gd_resource type="SpriteFrames" load_steps=74 format=3 uid="uid://bqrs2no0y76k5"]
 
 [ext_resource type="Texture2D" uid="uid://bkumub3f6mbek" path="res://img/agu/melee/0.png" id="1_bqs54"]
 [ext_resource type="Texture2D" uid="uid://c5d2lsi6y6xjd" path="res://img/agu/melee/1.png" id="2_iyht5"]
@@ -57,6 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://bibivfa04sco" path="res://img/agu/idel/14.png" id="55_dp8b7"]
 [ext_resource type="Texture2D" uid="uid://da3gsvoltw8ge" path="res://img/agu/idel/15.png" id="56_kw0pw"]
 [ext_resource type="Texture2D" uid="uid://bck0qr6dq6igl" path="res://img/agu/run/0.png" id="57_nease"]
+[ext_resource type="Texture2D" uid="uid://dtxs5jlm14bkd" path="res://img/agu/0.png" id="57_pnvbu"]
 [ext_resource type="Texture2D" uid="uid://dv6fgej0bkk2f" path="res://img/agu/run/1.png" id="58_cu7sw"]
 [ext_resource type="Texture2D" uid="uid://b1u10qkmrwudi" path="res://img/agu/run/2.png" id="59_214a6"]
 [ext_resource type="Texture2D" uid="uid://bxwwbhjpq3sy" path="res://img/agu/run/3.png" id="60_etj5x"]
@@ -401,6 +402,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("57_pnvbu")
+}],
+"loop": true,
+"name": &"new_animation",
 "speed": 5.0
 }, {
 "frames": [{
