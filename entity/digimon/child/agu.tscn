@@ -15,7 +15,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
 resource_local_to_scene = true
 shader = ExtResource("2_8ans4")
-shader_parameter/progress = 1.196
+shader_parameter/progress = 0.0
 shader_parameter/strength = 1.0
 shader_parameter/color = Vector3(0, 0, 0)
 shader_parameter/noise_tex_normal = ExtResource("3_mkfy5")
@@ -40,7 +40,8 @@ groud_move = true
 Evo_level = 2
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
-editor_description = "el color del golpe depende del atrbuto.
+editor_description = "creo que el agumon siempre empieza a correr con el pie derecho delante
+el color del golpe depende del atrbuto.
 
 libre=blanco
 Va=azul
@@ -49,16 +50,15 @@ Da=amarillo"
 material = SubResource("ShaderMaterial_sto4q")
 position = Vector2(0, 2)
 sprite_frames = ExtResource("76_nxe34")
-animation = &"new_animation"
+animation = &"run_down"
 
 [node name="Name" type="Label" parent="sprite"]
-visible = false
 anchors_preset = -1
-anchor_top = 1.0
+anchor_top = 1.10268
 anchor_right = 1.0
 anchor_bottom = 1.10268
 offset_left = -132.0
-offset_top = -131.0
+offset_top = -166.425
 offset_right = -132.0
 offset_bottom = -108.0
 grow_horizontal = 2
@@ -71,29 +71,28 @@ metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="sprite/Name"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_right = 27.0
-offset_bottom = 190.0
+offset_left = -173.5
+offset_top = 1.57541
+offset_right = 174.5
+offset_bottom = 235.575
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="AtackBar" type="HBoxContainer" parent="sprite/Name/VBoxContainer"]
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Attack_range" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("4_1gvd5")]
-layout_mode = 2
-speed = 500
-spri = ExtResource("76_nxe34")
-max_sound_distanse = 1500
-power_atack = 0.5
-
 [node name="Attack_melee" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("5_nn6d5")]
 layout_mode = 2
-physic = true
-kooldown = 0
+
+[node name="Attack_range" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("4_1gvd5")]
+layout_mode = 2
+spri = ExtResource("76_nxe34")
 
 [node name="l" parent="sprite/Name/VBoxContainer" instance=ExtResource("6_77ohc")]
 layout_mode = 2

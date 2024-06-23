@@ -5,7 +5,7 @@ class_name AttackAction extends Attack
 @export var max_sound_distanse:int=500
 func action()->void:
 	digimon_owner.attack(accion)
-	await digimon_owner.sprite.frame_changed
+	await digimon_owner.sprite.frame_changed# de ser necesario, poner un export con los frames que espera antes de la animacion y poner:for i in frames_await:await digimon_owner.sprite.frame_changed
 	reposo=kooldown
 	digimon_owner.core.current_energy-=costo
 	$sound.play()

@@ -92,7 +92,7 @@ func _physics_process(delta)->void:
 	move_and_slide()
 #	velocity=(((dir+impulse)*(10000+get_speed())))*delta
 
-func _get_inputs()->void:
+func _get_inputs()->void:#tengo que hacegurarme que el vector sea de 1 entero para que si se usa joystick no se sume a 1.41
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
@@ -141,7 +141,7 @@ func attack(acc:String):#cuando haga las animaciones de embest quitare el if y l
 	var new_anim:String=acc+"_"+sprite.animation.erase(0,4)
 	if sprite.sprite_frames.has_animation(new_anim):sprite.play(new_anim)
 
-func _on_sprite_animation_finished()->void:
+func _on_sprite_animation_finished()->void:#el sprite sheet debe tener primero los idel, luego el run y de ultimo el hit, de ahi los ataques de cualquier orden, mejor si es el que tienen en numero
 	interaction_area.rotar(previus_dir)
 	var new_anim:String=sprite.animation
 	if dir==Vector2.ZERO:# and impulse==Vector2.ZERO:

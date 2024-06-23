@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpigardbidm8k"
-path="res://.godot/imported/10.png-ef50092fb72c085714eb5384a118d53f.ctex"
+uid="uid://bgxd44fadxqq0"
+path="res://.godot/imported/agu.png-e331a3c95ab156f7c9c76c4ad41e125e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://img/agu/melee/10.png"
-dest_files=["res://.godot/imported/10.png-ef50092fb72c085714eb5384a118d53f.ctex"]
+source_file="res://img/animation_resouse/image/agu.png"
+dest_files=["res://.godot/imported/agu.png-e331a3c95ab156f7c9c76c4ad41e125e.ctex"]
 
 [params]
 
