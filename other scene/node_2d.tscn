@@ -1,0 +1,132 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0dlga4525aar"]
+
+[ext_resource type="Texture2D" uid="uid://bd30f18iabaxy" path="res://img/la_caja_philip_baudelocque_8[1].jpg" id="1_nvvwt"]
+[ext_resource type="Texture2D" uid="uid://chi44afesmduy" path="res://img/fondo-escala-grises-textura-arbol-madera_872147-32211.png" id="2_haowo"]
+[ext_resource type="Texture2D" uid="uid://bpjihc2mmrh65" path="res://img/images.jpeg" id="3_xk8l2"]
+[ext_resource type="Texture2D" uid="uid://cqoicojfr4d7h" path="res://img/3530.jpg_wh860.jpg" id="4_c3d3h"]
+[ext_resource type="Texture2D" uid="uid://djegxlsg4csfq" path="res://img/88039095-fondo-abstracto-o-textura-grunge-blanco-y-negro-con-rasguño-de-la-desolación.jpg" id="5_5lxit"]
+
+[sub_resource type="GDScript" id="GDScript_1h1eb"]
+script/source = "extends Node2D
+func _ready():
+	await get_tree().create_timer(0.5).timeout
+	var _i=get_viewport().get_texture().get_image().save_png(\"res://i.png\")
+	
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_1h1eb")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+modulate = Color(0, 0, 1, 1)
+
+[node name="LaCajaPhilipBaudelocque8[1]" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(579, 79)
+scale = Vector2(0.875969, 0.475)
+texture = ExtResource("1_nvvwt")
+
+[node name="Fondo-escala-grises-textura-arbol-madera872147-32211" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(114.5, 78.2813)
+scale = Vector2(0.365815, 0.367956)
+texture = ExtResource("2_haowo")
+
+[node name="Images" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(795.375, 78.625)
+scale = Vector2(0.746364, 0.834699)
+texture = ExtResource("3_xk8l2")
+
+[node name="3530_jpgWh860" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(1024.5, 77.5625)
+scale = Vector2(0.29186, 0.270288)
+texture = ExtResource("4_c3d3h")
+
+[node name="88039095-fondo-abstracto-o-textura-grunge-blanco-y-negro-con-rasguño-de-la-desolación" type="Sprite2D" parent="CanvasGroup"]
+position = Vector2(347, 78)
+scale = Vector2(0.181538, 0.17552)
+texture = ExtResource("5_5lxit")
+
+[node name="CanvasGroup2" type="CanvasGroup" parent="."]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(0, 152)
+
+[node name="LaCajaPhilipBaudelocque8[1]" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(579, 79)
+scale = Vector2(0.875969, 0.475)
+texture = ExtResource("1_nvvwt")
+
+[node name="Fondo-escala-grises-textura-arbol-madera872147-32211" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(114.5, 78.2813)
+scale = Vector2(0.365815, 0.367956)
+texture = ExtResource("2_haowo")
+
+[node name="Images" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(795.375, 78.625)
+scale = Vector2(0.746364, 0.834699)
+texture = ExtResource("3_xk8l2")
+
+[node name="3530_jpgWh860" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(1024.5, 77.5625)
+scale = Vector2(0.29186, 0.270288)
+texture = ExtResource("4_c3d3h")
+
+[node name="88039095-fondo-abstracto-o-textura-grunge-blanco-y-negro-con-rasguño-de-la-desolación" type="Sprite2D" parent="CanvasGroup2"]
+position = Vector2(347, 78)
+scale = Vector2(0.181538, 0.17552)
+texture = ExtResource("5_5lxit")
+
+[node name="CanvasGroup3" type="CanvasGroup" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, 304)
+
+[node name="LaCajaPhilipBaudelocque8[1]" type="Sprite2D" parent="CanvasGroup3"]
+position = Vector2(579, 79)
+scale = Vector2(0.875969, 0.475)
+texture = ExtResource("1_nvvwt")
+
+[node name="Fondo-escala-grises-textura-arbol-madera872147-32211" type="Sprite2D" parent="CanvasGroup3"]
+position = Vector2(114.5, 78.2813)
+scale = Vector2(0.365815, 0.367956)
+texture = ExtResource("2_haowo")
+
+[node name="Images" type="Sprite2D" parent="CanvasGroup3"]
+position = Vector2(795.375, 78.625)
+scale = Vector2(0.746364, 0.834699)
+texture = ExtResource("3_xk8l2")
+
+[node name="3530_jpgWh860" type="Sprite2D" parent="CanvasGroup3"]
+position = Vector2(1024.5, 77.5625)
+scale = Vector2(0.29186, 0.270288)
+texture = ExtResource("4_c3d3h")
+
+[node name="88039095-fondo-abstracto-o-textura-grunge-blanco-y-negro-con-rasguño-de-la-desolación" type="Sprite2D" parent="CanvasGroup3"]
+position = Vector2(347, 78)
+scale = Vector2(0.181538, 0.17552)
+texture = ExtResource("5_5lxit")
+
+[node name="CanvasGroup4" type="CanvasGroup" parent="."]
+position = Vector2(0, 456)
+
+[node name="LaCajaPhilipBaudelocque8[1]" type="Sprite2D" parent="CanvasGroup4"]
+position = Vector2(579, 79)
+scale = Vector2(0.875969, 0.475)
+texture = ExtResource("1_nvvwt")
+
+[node name="Fondo-escala-grises-textura-arbol-madera872147-32211" type="Sprite2D" parent="CanvasGroup4"]
+position = Vector2(114.5, 78.2813)
+scale = Vector2(0.365815, 0.367956)
+texture = ExtResource("2_haowo")
+
+[node name="Images" type="Sprite2D" parent="CanvasGroup4"]
+position = Vector2(795.375, 78.625)
+scale = Vector2(0.746364, 0.834699)
+texture = ExtResource("3_xk8l2")
+
+[node name="3530_jpgWh860" type="Sprite2D" parent="CanvasGroup4"]
+position = Vector2(1024.5, 77.5625)
+scale = Vector2(0.29186, 0.270288)
+texture = ExtResource("4_c3d3h")
+
+[node name="88039095-fondo-abstracto-o-textura-grunge-blanco-y-negro-con-rasguño-de-la-desolación" type="Sprite2D" parent="CanvasGroup4"]
+position = Vector2(347, 78)
+scale = Vector2(0.181538, 0.17552)
+texture = ExtResource("5_5lxit")

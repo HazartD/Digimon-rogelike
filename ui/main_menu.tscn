@@ -1,38 +1,169 @@
-[gd_scene load_steps=2 format=3 uid="uid://ptlqojmt1nts"]
+[gd_scene load_steps=5 format=3 uid="uid://ptlqojmt1nts"]
 
-[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_6kcfx"]
+[ext_resource type="Theme" uid="uid://dfgp1bjmu7n1e" path="res://ui/main_theme.tres" id="1_exv0s"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="2_7e7rm"]
+[ext_resource type="Texture2D" uid="uid://dfleiw2dvr45d" path="res://i.png" id="2_ydkx8"]
+[ext_resource type="Texture2D" uid="uid://cjsi5e425m3mh" path="res://logo.png" id="3_d2die"]
 
-[node name="Main Menu" type="Control"]
-layout_mode = 3
+[node name="Main Menu" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_6kcfx")
+theme = ExtResource("1_exv0s")
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+script = ExtResource("2_7e7rm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 219.0
-offset_top = 71.0
-offset_right = 866.0
-offset_bottom = 277.0
+[node name="main" type="VBoxContainer" parent="."]
+layout_mode = 2
 
-[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+[node name="main" type="HBoxContainer" parent="main"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="selec_digi" type="VBoxContainer" parent="main/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="selec_digi" type="HBoxContainer" parent="main/main/selec_digi"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="digimon" type="TextureRect" parent="main/main/selec_digi/selec_digi"]
+editor_description = "mostrar digimon idel down"
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_ydkx8")
+expand_mode = 1
+
+[node name="VSeparator2" type="VSeparator" parent="main/main/selec_digi/selec_digi"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.09
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main/main/selec_digi/selec_digi"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.27
+
+[node name="TextureButton" type="TextureButton" parent="main/main/selec_digi/selec_digi/VBoxContainer"]
+editor_description = "cambiar digimon pa rriba"
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("3_d2die")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureButton2" type="TextureButton" parent="main/main/selec_digi/selec_digi/VBoxContainer"]
+editor_description = "cambiar digimon pa bajo
+"
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("3_d2die")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="main/main/selec_digi"]
+editor_description = "nombre del digimon y su zona"
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.27
+text = "asdfghyuicvb"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="main/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.09
+
+[node name="seed" type="VBoxContainer" parent="main/main"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="main/main/seed"]
+layout_mode = 2
+text = "PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="name" type="TextEdit" parent="main/main/seed"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.64
+
+[node name="VSeparator2" type="VSeparator" parent="main/main/seed"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.27
+
+[node name="Label2" type="Label" parent="main/main/seed"]
+layout_mode = 2
+text = "SEED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="main/main/seed"]
+editor_description = "semilla de generacion"
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.63
+text = "Digimon"
+
+[node name="Button" type="Button" parent="main/main/seed"]
 layout_mode = 2
 size_flags_vertical = 3
 button_mask = 3
 text = "Generar mundo"
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="main/main/seed"]
 layout_mode = 2
-text = "NS"
+text = "SS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_text_edit_text_changed"]
-[connection signal="button_down" from="VBoxContainer/Button" to="." method="_on_button_button_down"]
+[node name="VSeparator3" type="VSeparator" parent="main/main/seed"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.64
+
+[node name="other" type="HBoxContainer" parent="main"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.09
+
+[node name="config" type="Button" parent="main/other"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "config"
+
+[node name="VSeparator4" type="VSeparator" parent="main/other"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.64
+
+[node name="logros" type="Button" parent="main/other"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "data"
+
+[node name="VSeparator5" type="VSeparator" parent="main/other"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.64
+
+[node name="credi" type="Button" parent="main/other"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "credi"
+
+[connection signal="button_down" from="main/main/seed/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="main/other/config" to="." method="_on_config_button_down"]
+[connection signal="button_down" from="main/other/logros" to="." method="_on_logros_button_down"]
+[connection signal="button_down" from="main/other/credi" to="." method="_on_credi_button_down"]

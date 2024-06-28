@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://x2xjmh3pner5"]
+
+[ext_resource type="Script" path="res://other scene/event.gd" id="1_c2dpa"]
+
+[node name="flee" type="Label"]
+offset_right = 30.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 100
+text = "EVA"
+script = ExtResource("1_c2dpa")

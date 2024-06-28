@@ -3,6 +3,8 @@ NS,"No se ha ingresado texto, se usará semilla aleatoria","No text has been ent
 IS,"Se ingresó un número válido, se usará como semilla","A valid number was entered, it will be used as a seed"
 SS,"Se ingresó texto, se convertirá en número entero","Text was entered, it will be converted to an integer"
 ES,Ya has usado esta semilla,You have already used this seed
+PLAY,Introduce tu nombre:, Intro your name:
+SEED,Introduce una semilla de generacion de mundo:,Intro world generation seed:
 ACTUAL_MAP,Mapa actual,Actual map
 FINAL_MAP,Mapa final,Final map
 EVA,Evadir,Flee
@@ -13,3 +15,9 @@ exit,Salir,Quit
 lan,Languaje,Idioma
 yes,Si,Yes
 not,No,Not
+config,Configuracion,Settings
+credi,Creditos,Credits
+data,Tus Datos,Your Data
+UNL,Desbloqueados,Unlocked
+GAL,Galeria,Gallery
+LOG,Registro,Log

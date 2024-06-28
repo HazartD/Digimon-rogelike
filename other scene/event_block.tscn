@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7yklcpfaw30a"]
+
+[ext_resource type="Script" path="res://other scene/event.gd" id="1_o8d4p"]
+
+[node name="block" type="Label"]
+offset_right = 30.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 100
+text = "BLK"
+script = ExtResource("1_o8d4p")

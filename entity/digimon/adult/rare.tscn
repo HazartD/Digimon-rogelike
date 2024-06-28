@@ -14,8 +14,9 @@ size = Vector2(309, 272)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tp03o"]
 shader = ExtResource("2_2pdkg")
-shader_parameter/active = true
-shader_parameter/tint = Color(0.298039, 0, 0.305882, 1)
+shader_parameter/progress = null
+shader_parameter/strength = 1.0
+shader_parameter/color = Vector3(0, 0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5iick"]
 
@@ -68,7 +69,7 @@ radius = 737.01
 has_limit_level = true
 limit_level = 2
 physic = true
-power_atack = 1.0
+power_atack = 0.0
 
 [node name="Attack_range" parent="sprite/Name/VBoxContainer/AtackBar" instance=ExtResource("5_2uvug")]
 layout_mode = 2
@@ -101,5 +102,4 @@ stream = ExtResource("5_8g70x")
 max_distance = 3000.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-0.499955, -30.5)
 scale = Vector2(76.25, 73.35)

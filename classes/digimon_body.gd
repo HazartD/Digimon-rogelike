@@ -1,11 +1,10 @@
 class_name DigimonBody extends CharacterBody2D
-const STATE:PackedScene=preload("res://other scene/digimon_estate.tscn")
 const ANIMATIONDIR:PackedStringArray=["down","left","leftdown","leftup","right","rightdown","rightup","up"]
-const DIR_VECTOR:PackedVector2Array=[Vector2.DOWN,Vector2.LEFT,Vector2.LEFT+Vector2.DOWN,Vector2.LEFT+Vector2.UP,Vector2.RIGHT,Vector2.RIGHT+Vector2.DOWN,Vector2.RIGHT+Vector2.UP,Vector2.UP]
+const DIR_VECTOR:Array[Vector2i]=[Vector2i.DOWN,Vector2i.LEFT,Vector2i.LEFT+Vector2i.DOWN,Vector2i.LEFT+Vector2i.UP,Vector2i.RIGHT,Vector2i.RIGHT+Vector2i.DOWN,Vector2i.RIGHT+Vector2i.UP,Vector2i.UP]
 #de ser necesario, estas 2 se volveran un solo diccionario
-var previus_dir:Vector2=Vector2.DOWN
+var previus_dir:Vector2i=Vector2i.DOWN
 
-var dir:Vector2=Vector2.ZERO:
+var dir:Vector2i=Vector2i.ZERO:
 	set(value):
 		if !sprite.animation.begins_with("h") and !sprite.animation.begins_with("A"):_on_sprite_animation_finished()
 
@@ -69,9 +68,9 @@ func set_stats()->void:
 	if player:$sprite/Name.text=Iniload.player_name+"
 	("+digimon_name+"mon)"
 	else:$sprite/Name.text=digimon_name+"mon"
-	$sprite/Name/VBoxContainer/e._ready()
-	$sprite/Name/VBoxContainer/h._ready()
-	$sprite/Name/VBoxContainer/l._ready()
+	$sprite/Name/VBoxContainer/e.set_mode()
+	$sprite/Name/VBoxContainer/h.set_mode()
+	$sprite/Name/VBoxContainer/l.set_mode()
 
 func _ready()->void:
 	hide()
@@ -93,7 +92,9 @@ func _physics_process(delta)->void:
 #	velocity=(((dir+impulse)*(10000+get_speed())))*delta
 
 func _get_inputs()->void:#tengo que hacegurarme que el vector sea de 1 entero para que si se usa joystick no se sume a 1.41
+	@warning_ignore("narrowing_conversion")
 	dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	@warning_ignore("narrowing_conversion")
 	dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
 #func hurt():$hurt.play()
@@ -104,7 +105,7 @@ func hited()->void:
 func dead_anim_and_queue_free():
 	$patas.free()
 	$prepcion.free()
-	$sprite/Name/VBoxContainer.free()
+	$sprite/Name.free()
 	if attribute==DigimonCORE.attribut.FR:sprite.material.shader=Resouses.FREE_DEAD
 	else:
 		sprite.material.shader=Resouses.DEAD
@@ -126,25 +127,15 @@ func dead_anim_and_queue_free():
 	queue_free()
 
 func set_progress(i:float):sprite.material.set("shader_parameter/progress",i)
-func flee()->void:
-	var e=STATE.instantiate()
+func event(idx:int)->void: # 0=evadir. 1=block. 2=no morir
+	var e=Resouses.DIGIMON_EVENTS[idx].instantiate()
 	add_child(e)
-func block()->void:
-	var e=STATE.instantiate()
-	e.text="BLK"
-	add_child(e)
-func no_dead():
-	var e=STATE.instantiate()
-	e.text="NOD"
-	add_child(e)
-func attack(acc:String):#cuando haga las animaciones de embest quitare el if y lo dejare en una sola linea
-	var new_anim:String=acc+"_"+sprite.animation.erase(0,4)
-	if sprite.sprite_frames.has_animation(new_anim):sprite.play(new_anim)
+func attack(acc:String):sprite.play(acc+"_"+sprite.animation.erase(0,4))
 
 func _on_sprite_animation_finished()->void:#el sprite sheet debe tener primero los idel, luego el run y de ultimo el hit, de ahi los ataques de cualquier orden, mejor si es el que tienen en numero
 	interaction_area.rotar(previus_dir)
 	var new_anim:String=sprite.animation
-	if dir==Vector2.ZERO:# and impulse==Vector2.ZERO:
+	if dir==Vector2i.ZERO:# and impulse==Vector2.ZERO:
 		if !sprite.animation.begins_with("d"):new_anim="del_"+new_anim.erase(0,4)
 			#if sprite.animation!=new_anim:sprite.play(new_anim)
 	else:new_anim="run_"+ANIMATIONDIR[DIR_VECTOR.find(previus_dir)]
@@ -152,10 +143,10 @@ func _on_sprite_animation_finished()->void:#el sprite sheet debe tener primero l
 	#set_previus_dir_and_run_record()
 
 func set_previus_dir_and_run_record(delta:float)->void:
-	if dir !=Vector2.ZERO:
+	if dir !=Vector2i.ZERO:
 		run_record+=delta
 		if dir!=previus_dir:
 			await get_tree().process_frame
 			await get_tree().process_frame
 			await get_tree().process_frame
-			if dir!=previus_dir and dir !=Vector2.ZERO:previus_dir=dir
+			if dir!=previus_dir and dir !=Vector2i.ZERO:previus_dir=dir

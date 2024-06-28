@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1hhpun2njuva"]
+[gd_scene load_steps=13 format=3 uid="uid://c1hhpun2njuva"]
 
 [ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_lcl16"]
 [ext_resource type="PackedScene" uid="uid://b3hwgblcofgf2" path="res://entity/digimon/child/agu.tscn" id="2_y6abx"]
@@ -7,6 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://cijy8axnp86ko" path="res://entity/player.tscn" id="4_d0nwv"]
 [ext_resource type="PackedScene" uid="uid://c2b4yayqxx6qq" path="res://entity/digimon/adult/grey.tscn" id="5_cmemj"]
 [ext_resource type="PackedScene" uid="uid://cy0p0g0phfsjv" path="res://entity/tama.tscn" id="7_v02ov"]
+
+[sub_resource type="GDScript" id="GDScript_y8pqb"]
+script/source = "extends Node2D
+#const BODY=preload(\"res://entity/digimon/child/agu.tscn\")
+#func _ready():
+	#var _t=get_tree().create_timer(2).timeout.connect(instancier)
+#
+#func instancier():
+	#for i in 150:
+		#var core=DigimonCORE.new()
+		#add_child(core)
+		#var body=BODY.instantiate()
+		#core.add_child(body)
+		#body.position=Vector2(randi_range(-1000,1000),randi_range(-1000,1000))
+	##var _t=get_tree().create_timer(5).timeout.connect(instancier)
+"
 
 [sub_resource type="GDScript" id="GDScript_vl5ka"]
 script/source = "extends Area2D
@@ -31,6 +47,7 @@ func _on_body_entered(body):
 radius = 198.671
 
 [node name="room" type="Node2D"]
+script = SubResource("GDScript_y8pqb")
 
 [node name="rare" type="Node" parent="."]
 script = ExtResource("1_lcl16")
