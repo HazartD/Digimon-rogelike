@@ -1,0 +1,155 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqut3ubqbbaqp"]
+
+[ext_resource type="Texture2D" uid="uid://cjsi5e425m3mh" path="res://logo.png" id="1_7lsrg"]
+[ext_resource type="Texture2D" uid="uid://mdpgknjg2ub2" path="res://icon.svg" id="2_vl3xt"]
+
+[sub_resource type="GDScript" id="GDScript_dl8y4"]
+script/source = "extends Control
+var images:Dictionary={}#es diccionario para tener su path si la quieren borrar
+var key_size:int
+@onready var display:TextureRect=$TextureRect
+@onready var minus:TextureButton=$image_view/izquier
+@onready var plus:TextureButton=$image_view/dere
+@onready var label:Label=$Label
+@onready var dialog:NativeFileDialog=$NativeFileDialog
+var idx:int=-1:
+	set(value):
+		idx=value
+		update_texture()
+
+var con:ConfigFile=Iniload.con_screen
+var seccion_keys:PackedStringArray=[]
+var seed_:String
+#puedo hacer que el load album sea solo agarrar las secciones y keys. Y que al cambiar los botones el idx, se carga cada imagen, poner tipo la barra de carga, por lo de que es compu vieja.
+func load_image(path)->Texture:
+	var error=Image.load_from_file(path)
+	if error==null:return Resouses.ERROR_LOAD_IMAGE
+	else:return ImageTexture.create_from_image(error)
+
+#desconectar despues de que deje de probarla, que el user data se encarge de llamar el load cada vez
+func load_screenshot_album(seccion_seed:String=\"1923659980\")->void:#debera tener la seed como argumento para usarla de seccion
+	seed_=seccion_seed
+	images.clear()
+	#DirAccess.open(\"user://HazartD/DR/screenshot\")
+	seccion_keys=con.get_section_keys(seccion_seed)
+	var last=Resouses.last_10_screenshots.duplicate()
+	var _keys=last.keys()
+	if _keys.size()>0:
+		for img in seccion_keys:
+			var path=con.get_value(seccion_seed,img)
+			if _keys.has(path):images[path]=[last[path]]
+			else:images[path]=load_image(path)
+	else:
+		for img in seccion_keys:
+			var path=con.get_value(seccion_seed,img)
+			images[path]=load_image(path)
+	update_images_data()
+	plus.disabled=true
+	update_texture()
+
+func update_images_data():
+	key_size=images.keys().size()-1
+	idx=key_size
+
+func update_texture():
+	display.texture=images[images.keys()[idx]]
+	label.text=seccion_keys[idx]#tambien tengo que poner el nombre que tiene la key del ini, la cual tambien deberia de ponerle el Vector2i en el que esta
+
+func _on_dere_button_down():
+	idx+=1
+	if idx>=key_size:plus.disabled=true
+	minus.disabled=false
+
+func _on_izquier_button_down():
+	idx-=1
+	if idx<=0:minus.disabled=true
+	plus.disabled=false
+
+func _on_borrar_button_down():#aclararle al usuario de que la imagen se movera a la papelera, ahi la puede recuperar, pero ya no aparecera en la galeria
+	var path=images.keys()[idx]
+	if FileAccess.file_exists(path):
+		OS.move_to_trash(ProjectSettings.globalize_path(path))
+		images[path]=Resouses.ERROR_LOAD_IMAGE
+		update_texture()
+		con.erase_section_key(seed_,seccion_keys[idx])
+		con.save(Iniload.SCREENSHOT_FILE)
+		seccion_keys.remove_at(idx)
+
+func _on_native_file_dialog_file_selected(path:String):
+	if path.ends_with(\".png\"):images[images.keys()[idx]].get_image().save_png(path)
+	else:images[images.keys()[idx]].get_image().save_png(path+\".png\")
+"
+
+[node name="VBoxContainer" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("GDScript_dl8y4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="image_view" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.27
+
+[node name="borrar" type="TextureButton" parent="image_view"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_7lsrg")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VSeparator" type="VSeparator" parent="image_view"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="dere" type="TextureButton" parent="image_view"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_7lsrg")
+texture_disabled = ExtResource("2_vl3xt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="izquier" type="TextureButton" parent="image_view"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_7lsrg")
+texture_disabled = ExtResource("2_vl3xt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VSeparator2" type="VSeparator" parent="image_view"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="save" type="TextureButton" parent="image_view"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("1_7lsrg")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="NativeFileDialog" type="NativeFileDialog" parent="."]
+access = 2
+filters = PackedStringArray("*.png ; PNG Images")
+
+[connection signal="button_down" from="image_view/borrar" to="." method="_on_borrar_button_down"]
+[connection signal="button_down" from="image_view/dere" to="." method="_on_dere_button_down"]
+[connection signal="button_down" from="image_view/izquier" to="." method="_on_izquier_button_down"]
+[connection signal="button_down" from="image_view/save" to="NativeFileDialog" method="show"]
+[connection signal="file_selected" from="NativeFileDialog" to="." method="_on_native_file_dialog_file_selected"]

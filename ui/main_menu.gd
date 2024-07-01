@@ -1,4 +1,4 @@
-extends Control
+extends Control#estoy viendo como hacer que el jugador elija donde guardar los archivos, esta ruta se guardaria en el. En el menu compruebe si existe la wea, y si no, te muestra denuevo donde guardarlo
 const SEED_PREVIEW:PackedStringArray=["NS","IS","SS","ES"]
 const PATH:String="user://HazartD/DR/seed_register/"
 @onready var seed_into=$main/main/seed/TextEdit

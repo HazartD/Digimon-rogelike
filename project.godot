@@ -12,6 +12,8 @@ config_version=5
 
 config/name="Digimon rogelike"
 run/main_scene="res://other scene/debug_room.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="HazartD/DR"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/image="res://opening.png"
 config/icon="res://logo.png"
