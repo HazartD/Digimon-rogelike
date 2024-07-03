@@ -116,17 +116,17 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.63
 text = "Digimon"
 
-[node name="Button" type="Button" parent="main/main/seed"]
-layout_mode = 2
-size_flags_vertical = 3
-button_mask = 3
-text = "Generar mundo"
-
 [node name="Label" type="Label" parent="main/main/seed"]
 layout_mode = 2
 text = "SS"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Button" type="Button" parent="main/main/seed"]
+layout_mode = 2
+size_flags_vertical = 3
+button_mask = 3
+text = "NEW"
 
 [node name="VSeparator3" type="VSeparator" parent="main/main/seed"]
 layout_mode = 2
@@ -145,8 +145,9 @@ text = "config"
 
 [node name="VSeparator4" type="VSeparator" parent="main/other"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.64
+size_flags_stretch_ratio = 0.2
 
 [node name="logros" type="Button" parent="main/other"]
 layout_mode = 2
@@ -155,15 +156,22 @@ text = "data"
 
 [node name="VSeparator5" type="VSeparator" parent="main/other"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.64
+size_flags_stretch_ratio = 0.2
 
 [node name="credi" type="Button" parent="main/other"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "credi"
 
+[connection signal="mouse_entered" from="main/main/selec_digi/selec_digi/VBoxContainer/TextureButton" to="main/main/selec_digi/selec_digi/VBoxContainer/TextureButton" method="grab_focus"]
+[connection signal="mouse_entered" from="main/main/selec_digi/selec_digi/VBoxContainer/TextureButton2" to="main/main/selec_digi/selec_digi/VBoxContainer/TextureButton2" method="grab_focus"]
 [connection signal="button_down" from="main/main/seed/Button" to="." method="_on_button_button_down"]
+[connection signal="mouse_entered" from="main/main/seed/Button" to="main/main/seed/Button" method="grab_focus"]
 [connection signal="button_down" from="main/other/config" to="." method="_on_config_button_down"]
+[connection signal="mouse_entered" from="main/other/config" to="main/other/config" method="grab_focus"]
 [connection signal="button_down" from="main/other/logros" to="." method="_on_logros_button_down"]
+[connection signal="mouse_entered" from="main/other/logros" to="main/other/logros" method="grab_focus"]
 [connection signal="button_down" from="main/other/credi" to="." method="_on_credi_button_down"]
+[connection signal="mouse_entered" from="main/other/credi" to="main/other/credi" method="grab_focus"]

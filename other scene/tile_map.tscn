@@ -10,16 +10,16 @@ const Y=8
 const MAP_X_SIZE=25
 const MAP_Y_SIZE=25
 const EQUIVALENCIA:Dictionary={
-	Vector2i(0,0):Iniload.LOCATIONS.DS,
-	Vector2i(0,1):Iniload.LOCATIONS.DR,
-	Vector2i(0,2):Iniload.LOCATIONS.JT,
-	Vector2i(0,3):Iniload.LOCATIONS.ME,
-	Vector2i(0,4):Iniload.LOCATIONS.NSP,
-	Vector2i(0,5):Iniload.LOCATIONS.NSO,
-	Vector2i(0,6):Iniload.LOCATIONS.VB,
-	Vector2i(0,7):Iniload.LOCATIONS.WG
+	Vector2i(0,0):Base.LOCATIONS.DS,
+	Vector2i(0,1):Base.LOCATIONS.DR,
+	Vector2i(0,2):Base.LOCATIONS.JT,
+	Vector2i(0,3):Base.LOCATIONS.ME,
+	Vector2i(0,4):Base.LOCATIONS.NSP,
+	Vector2i(0,5):Base.LOCATIONS.NSO,
+	Vector2i(0,6):Base.LOCATIONS.VB,
+	Vector2i(0,7):Base.LOCATIONS.WG
 }
-const LOCAL=[Iniload.LOCATIONS.DS,Iniload.LOCATIONS.DR,Iniload.LOCATIONS.WG,Iniload.LOCATIONS.VB,Iniload.LOCATIONS.NSO,Iniload.LOCATIONS.NSP,Iniload.LOCATIONS.ME,Iniload.LOCATIONS.JT]
+const LOCAL=[Base.LOCATIONS.DS,Base.LOCATIONS.DR,Base.LOCATIONS.WG,Base.LOCATIONS.VB,Base.LOCATIONS.NSO,Base.LOCATIONS.NSP,Base.LOCATIONS.ME,Base.LOCATIONS.JT]
 var zones:Dictionary={
 	Vector2i(0, 0): 0,
 	Vector2i(0, 1): 0,

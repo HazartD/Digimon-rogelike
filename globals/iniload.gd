@@ -4,10 +4,10 @@ const CONFIG="user://Config.ini"
 const SCREENSHOT_PATH="user://screenshot/ss%s.png"
 const SEED_FILE_PATH="user://seed_register/%s.ini"
 const SCREENSHOT_FILE="user://screenshot.ini"
-signal screenshot(path, texture)
+signal screenshot(path:String, texture:Texture)
 
 var world_seeds:Dictionary={Vector2i.ZERO:34567890987}
-var statsplus:Dictionary={"life":2.200,"energy":500.000,"attack":40.005,"defend":400.000,"speed":200.001,"inteligent":400.000,"will":400.000}
+var statsplus:Dictionary={"life":2.200,"energy":500.000,"attack":40.005,"defend":400.000,"speed":2500.001,"inteligent":400.000,"will":400.000}
 var unlock_evo:Dictionary={"meca_data":false,6:false,7:false,8:false,9:false}#son los id del digimon desbloqueado y su true false
 var run_number:int=0
 var location:Base.LOCATIONS= Base.LOCATIONS.NSP
@@ -26,7 +26,7 @@ func _init()->void:
 		#var con=ConfigFile.new()
 		#var user:String=OS.get_data_dir().erase(0,9)
 		#user=user.erase(user.find("/"),16)
-		#con.set_value("first_run","why exist this section?","creo que necesita tener algo para crear el archivo y puse esto")
+		#con.set_value("first_run","why exist this section?","de inicio crei que necesita tener algo para crear el archivo y puse esto, pero mi error era durante la creacion de las carpetas")
 		#con.set_value("first_run","date",str(Time.get_datetime_dict_from_system()))
 		#con.set_value("first_run","system",OS.get_name())
 		#con.set_value("first_run","system_unique_id",OS.get_unique_id())
@@ -40,6 +40,17 @@ func _init()->void:
 	if FileAccess.file_exists(SCREENSHOT_FILE):con_screen.load(SCREENSHOT_FILE)
 
 func get_section_player() -> String:return player_name+"("+str(run_number)+")"
+func _input(event)->void:
+	if event.is_action_pressed("screenshot"):
+		var _name=Time.get_datetime_string_from_system()+"_ms"+str(Time.get_ticks_msec())
+		_name=_name.replace(":","-")
+		var path=SCREENSHOT_PATH % _name
+		var imagen=get_viewport().get_texture().get_image()
+		con_screen.set_value(str(actual_seed),get_section_player()+ "("+_name+")",path)
+		con_screen.save(SCREENSHOT_FILE)
+		imagen.save_png(path)
+		emit_signal("screenshot",path,ImageTexture.create_from_image(imagen))
+
 #
 #func save_config()->void:
 	#var con=ConfigFile.new()
@@ -102,14 +113,3 @@ func get_section_player() -> String:return player_name+"("+str(run_number)+")"
 		#number+=1
 	#con.set_value("seed data","text_%s"%number,stri)
 	#con.save(SEED_FILE_PATH % _seed)
-
-func _input(event)->void:
-	if event.is_action_pressed("screenshot"):
-		var _name=Time.get_datetime_string_from_system()+"_ms"+str(Time.get_ticks_msec())
-		_name=_name.replace(":","-")
-		var path=SCREENSHOT_PATH % _name
-		var imagen=get_viewport().get_texture().get_image()
-		imagen.save_png(path)
-		emit_signal("screenshot",path,ImageTexture.create_from_image(imagen))
-		con_screen.set_value(str(actual_seed),"("+get_section_player()+") "+_name,path)
-		con_screen.save(SCREENSHOT_FILE)

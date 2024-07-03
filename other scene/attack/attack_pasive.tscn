@@ -23,10 +23,10 @@ func pulse()->void:
 func timer()->void:
 	if kooldown==0:
 		pulse()
-		var _time=get_tree().create_timer(0.01).timeout.connect(timer)
+		var _time=get_tree().create_timer(0.01,false).timeout.connect(timer)
 	else:
 		pulse()
-		var _time=get_tree().create_timer(kooldown).timeout.connect(timer)
+		var _time=get_tree().create_timer(kooldown,false).timeout.connect(timer)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4pyk"]

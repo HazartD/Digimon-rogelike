@@ -1,7 +1,9 @@
 class_name Player extends DigimonCORE
+const MENU:PackedScene=preload("res://ui/pause_menu.tscn")
 #var data:Array[float]=[]
 var alive:bool=true
 var line_id:Array[int]=[0,16,3]
+@onready var ui=$UI
 func _init()->void:
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
@@ -11,13 +13,13 @@ func _on_child_entered_tree(node)->void:
 		line_id.append(node.Digimon_Id)
 		node.player=true
 		var cam=Camera2D.new()
-		var l=AudioListener2D.new()
+		#var l=AudioListener2D.new()
+		#l.make_current()
+		#node.add_child(l)
 		node.add_child(cam)
-		node.add_child(l)
 		cam.zoom=Vector2(0.5,0.5)
-		l.make_current()
 
-func dead(cause)->void:
+func dead(cause="exit game")->void:
 	var save_data={
 	"time":time,
 	"player_name":Iniload.player_name,
@@ -36,10 +38,7 @@ func dead(cause)->void:
 	line_id.clear()
 	alive=false
 
-func _on_tree_exiting()->void:
-#	if alive:dead("exit game")
-	pass
-
+func _on_tree_exiting()->void:pass#	if alive:dead()
 
 #func ded(a:DigimonBody)->void:
 	#await get_tree().process_frame

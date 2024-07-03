@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqut3ubqbbaqp"]
+[gd_scene load_steps=9 format=3 uid="uid://bqut3ubqbbaqp"]
 
 [ext_resource type="Texture2D" uid="uid://cjsi5e425m3mh" path="res://logo.png" id="1_7lsrg"]
+[ext_resource type="Texture2D" uid="uid://dfleiw2dvr45d" path="res://i.png" id="2_klsx4"]
 [ext_resource type="Texture2D" uid="uid://mdpgknjg2ub2" path="res://icon.svg" id="2_vl3xt"]
 
 [sub_resource type="GDScript" id="GDScript_dl8y4"]
 script/source = "extends Control
 var images:Dictionary={}#es diccionario para tener su path si la quieren borrar
 var key_size:int
-@onready var display:TextureRect=$TextureRect
+@onready var display:TextureRect=$HBoxContainer/TextureRect
 @onready var minus:TextureButton=$image_view/izquier
 @onready var plus:TextureButton=$image_view/dere
 @onready var label:Label=$Label
@@ -26,7 +27,6 @@ func load_image(path)->Texture:
 	if error==null:return Resouses.ERROR_LOAD_IMAGE
 	else:return ImageTexture.create_from_image(error)
 
-#desconectar despues de que deje de probarla, que el user data se encarge de llamar el load cada vez
 func load_screenshot_album(seccion_seed:String=\"1923659980\")->void:#debera tener la seed como argumento para usarla de seccion
 	seed_=seccion_seed
 	images.clear()
@@ -46,6 +46,8 @@ func load_screenshot_album(seccion_seed:String=\"1923659980\")->void:#debera ten
 	update_images_data()
 	plus.disabled=true
 	update_texture()
+	if key_size==0:for bu in [plus,minus]:bu.disabled=true
+	else:minus.disabled=false
 
 func update_images_data():
 	key_size=images.keys().size()-1
@@ -80,7 +82,15 @@ func _on_native_file_dialog_file_selected(path:String):
 	else:images[images.keys()[idx]].get_image().save_png(path+\".png\")
 "
 
-[node name="VBoxContainer" type="VBoxContainer"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_yvbm3"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_swtcg"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_grrn7"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1ymoi"]
+
+[node name="AlbumDisplay" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -90,8 +100,22 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = SubResource("GDScript_dl8y4")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource("1_7lsrg")
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 4
@@ -109,7 +133,10 @@ size_flags_stretch_ratio = 0.27
 [node name="borrar" type="TextureButton" parent="image_view"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../save")
 texture_normal = ExtResource("1_7lsrg")
+texture_pressed = SubResource("PlaceholderTexture2D_yvbm3")
+texture_focused = ExtResource("2_klsx4")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -121,7 +148,9 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("1_7lsrg")
+texture_pressed = SubResource("PlaceholderTexture2D_swtcg")
 texture_disabled = ExtResource("2_vl3xt")
+texture_focused = ExtResource("2_klsx4")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -129,7 +158,9 @@ stretch_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("1_7lsrg")
+texture_pressed = SubResource("PlaceholderTexture2D_grrn7")
 texture_disabled = ExtResource("2_vl3xt")
+texture_focused = ExtResource("2_klsx4")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -140,7 +171,10 @@ size_flags_horizontal = 3
 [node name="save" type="TextureButton" parent="image_view"]
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../borrar")
 texture_normal = ExtResource("1_7lsrg")
+texture_pressed = SubResource("PlaceholderTexture2D_1ymoi")
+texture_focused = ExtResource("2_klsx4")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -148,8 +182,14 @@ stretch_mode = 0
 access = 2
 filters = PackedStringArray("*.png ; PNG Images")
 
+[connection signal="button_down" from="HBoxContainer/Button" to="." method="hide"]
+[connection signal="mouse_entered" from="HBoxContainer/Button" to="HBoxContainer/Button" method="grab_focus"]
 [connection signal="button_down" from="image_view/borrar" to="." method="_on_borrar_button_down"]
+[connection signal="mouse_entered" from="image_view/borrar" to="image_view/borrar" method="grab_focus"]
 [connection signal="button_down" from="image_view/dere" to="." method="_on_dere_button_down"]
+[connection signal="mouse_entered" from="image_view/dere" to="image_view/dere" method="grab_focus"]
 [connection signal="button_down" from="image_view/izquier" to="." method="_on_izquier_button_down"]
+[connection signal="mouse_entered" from="image_view/izquier" to="image_view/izquier" method="grab_focus"]
 [connection signal="button_down" from="image_view/save" to="NativeFileDialog" method="show"]
+[connection signal="mouse_entered" from="image_view/save" to="image_view/save" method="grab_focus"]
 [connection signal="file_selected" from="NativeFileDialog" to="." method="_on_native_file_dialog_file_selected"]

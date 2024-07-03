@@ -103,9 +103,8 @@ func hited()->void:
 	sprite.play("hit_"+sprite.animation.erase(0,4))
 
 func dead_anim_and_queue_free():
-	$patas.free()
-	$prepcion.free()
-	$sprite/Name.free()
+	var frelear=[get_node_or_null("patas"),get_node_or_null("prepcion"),get_node_or_null("sprite/Name")]
+	for i in frelear:if i:i.queue_free()
 	if attribute==DigimonCORE.attribut.FR:sprite.material.shader=Resouses.FREE_DEAD
 	else:
 		sprite.material.shader=Resouses.DEAD

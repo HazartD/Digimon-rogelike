@@ -10,22 +10,17 @@
 
 [sub_resource type="GDScript" id="GDScript_y8pqb"]
 script/source = "extends Node2D
-
-func recent(_pa,im):
-	$TextureRect.texture=im
-func _ready():
-	Iniload.screenshot.connect(recent)
 #const BODY=preload(\"res://entity/digimon/child/agu.tscn\")
 #func _ready():
 	#var _t=get_tree().create_timer(2).timeout.connect(instancier)
 #
 #func instancier():
-	#for i in 150:
+	#for i in 10:
 		#var core=DigimonCORE.new()
 		#add_child(core)
 		#var body=BODY.instantiate()
 		#core.add_child(body)
-		#body.position=Vector2(randi_range(-1000,1000),randi_range(-1000,1000))
+		#body.position=Vector2(randi_range(0,-1000),randi_range(0,1000))#Vector2(randi_range(-1000,1000),randi_range(-1000,1000))
 	##var _t=get_tree().create_timer(5).timeout.connect(instancier)
 "
 
@@ -114,9 +109,6 @@ script = ExtResource("1_lcl16")
 
 [node name="tama" parent="DigimonCORE" instance=ExtResource("7_v02ov")]
 position = Vector2(-871, 343)
-
-[node name="TextureRect" type="Sprite2D" parent="."]
-position = Vector2(624.35, -1843.61)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]

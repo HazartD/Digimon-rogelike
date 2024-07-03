@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://u8dq51nt3rgu"]
+[gd_scene load_steps=5 format=3 uid="uid://u8dq51nt3rgu"]
 
 [ext_resource type="Theme" uid="uid://dfgp1bjmu7n1e" path="res://ui/main_theme.tres" id="1_i4tsa"]
 [ext_resource type="Script" path="res://ui/user_data.gd" id="2_elbpk"]
+[ext_resource type="Texture2D" uid="uid://cjsi5e425m3mh" path="res://logo.png" id="3_apqr0"]
 [ext_resource type="PackedScene" uid="uid://bqut3ubqbbaqp" path="res://ui/album_display.tscn" id="3_ys74u"]
 
 [node name="UserData" type="MarginContainer"]
@@ -19,10 +20,8 @@ script = ExtResource("2_elbpk")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2
-current_tab = 1
 
 [node name="UNL" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/UNL"]
@@ -32,19 +31,64 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 54
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = -12
+theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/UNL/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/UNL/MarginContainer"]
 layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
-[node name="Label" type="Label" parent="TabContainer/UNL/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/UNL/MarginContainer/ScrollContainer"]
 layout_mode = 2
-text = "jhrgefdasBMHFNGBDFSVDACSxa"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="TabContainer/UNL/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button3" type="Button" parent="TabContainer/UNL/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button4" type="Button" parent="TabContainer/UNL/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button5" type="Button" parent="TabContainer/UNL/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button6" type="Button" parent="TabContainer/UNL/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
 
 [node name="GAL" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/GAL"]
@@ -54,17 +98,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 53
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = 57
+theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" parent="TabContainer/GAL/MarginContainer" instance=ExtResource("3_ys74u")]
-visible = false
+[node name="AlbumDisplay" parent="TabContainer/GAL/MarginContainer" instance=ExtResource("3_ys74u")]
 layout_mode = 2
 
-[node name="albums" type="VBoxContainer" parent="TabContainer/GAL/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/GAL/MarginContainer"]
 layout_mode = 2
+follow_focus = true
+
+[node name="albums" type="VBoxContainer" parent="TabContainer/GAL/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="LOG" type="TabBar" parent="TabContainer"]
 visible = false
@@ -77,14 +126,60 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 53
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = 57
+theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/LOG/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/LOG/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
-[node name="Label" type="Label" parent="TabContainer/LOG/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/LOG/MarginContainer/ScrollContainer"]
 layout_mode = 2
-text = "jhrgefdasBMHFsrfdhnwsn srfga3qfvq3"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="TabContainer/LOG/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button3" type="Button" parent="TabContainer/LOG/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button4" type="Button" parent="TabContainer/LOG/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button5" type="Button" parent="TabContainer/LOG/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[node name="Button6" type="Button" parent="TabContainer/LOG/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "......"
+icon = ExtResource("3_apqr0")
+icon_alignment = 2
+expand_icon = true
+
+[connection signal="tab_hovered" from="TabContainer" to="TabContainer" method="set_current_tab"]
+[connection signal="hidden" from="TabContainer/GAL/MarginContainer/AlbumDisplay" to="TabContainer/GAL/MarginContainer/ScrollContainer" method="show"]
+[connection signal="hidden" from="TabContainer/GAL/MarginContainer/ScrollContainer" to="TabContainer/GAL/MarginContainer/AlbumDisplay" method="show"]
