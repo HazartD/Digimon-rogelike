@@ -7,7 +7,7 @@ const SCREENSHOT_FILE="user://screenshot.ini"
 signal screenshot(path:String, texture:Texture)
 
 var world_seeds:Dictionary={Vector2i.ZERO:34567890987}
-var statsplus:Dictionary={"life":2.200,"energy":500.000,"attack":40.005,"defend":400.000,"speed":2500.001,"inteligent":400.000,"will":400.000}
+var statsplus:Dictionary={"life":2.200,"energy":5.000,"attack":0,"defend":400.000,"speed":250.12,"inteligent":35434130,"will":400.000}
 var unlock_evo:Dictionary={"meca_data":false,6:false,7:false,8:false,9:false}#son los id del digimon desbloqueado y su true false
 var run_number:int=0
 var location:Base.LOCATIONS= Base.LOCATIONS.NSP
@@ -20,6 +20,8 @@ func _init()->void:
 	connect("screenshot",Resouses.add_screenshot)
 	DirAccess.make_dir_recursive_absolute("user://screenshot")
 	DirAccess.make_dir_recursive_absolute("user://seed_register")
+	process_mode=Node.PROCESS_MODE_ALWAYS
+	Resouses.process_mode=Node.PROCESS_MODE_ALWAYS
 	#connect("tree_exiting",save_config,CONNECT_ONE_SHOT)
 	#if FileAccess.file_exists(USERDATA):load_userdata()
 	#else:

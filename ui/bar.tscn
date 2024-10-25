@@ -17,12 +17,13 @@ fill_to = Vector2(1, 0.487179)
 [sub_resource type="GDScript" id="GDScript_tn57c"]
 script/source = "extends TextureProgressBar
 @export_enum(\"l\",\"e\",\"h\") var type:int=0
+@onready var label=$Label
 func set_mode()->void:
 	var TYPE=[\"life\",\"energy\",\"hunger\"]
 	var core:DigimonCORE=get_parent().get_parent().get_parent().get_parent().get_parent()
 	max_value=core.get(\"max_\"+TYPE[type])
 	value=core.get(\"current_\"+TYPE[type])
-	$Label.text=str(value)+\" / \"+str(max_value)
+	label.text=str(value)+\" / \"+str(max_value)
 	core.connect(TYPE[type]+\"_changed\",_update)
 	match type:
 		0:self_modulate=Color(1,0,0)
@@ -30,7 +31,7 @@ func set_mode()->void:
 		_:self_modulate=Color(0,0,1)
 func _update(new_value)->void:
 	value=new_value
-	$Label.text=str(value)+\"/\"+str(max_value)
+	label.text=str(value)+\"/\"+str(max_value)
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_3h285"]

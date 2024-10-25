@@ -21,11 +21,11 @@ var idx:int=-1:
 var con:ConfigFile=Iniload.con_screen
 var seccion_keys:PackedStringArray=[]
 var seed_:String
+
+func _ready():
+	await get_tree().create_timer(3).timeout
+	load_screenshot_album()
 #puedo hacer que el load album sea solo agarrar las secciones y keys. Y que al cambiar los botones el idx, se carga cada imagen, poner tipo la barra de carga, por lo de que es compu vieja.
-func load_image(path)->Texture:
-	var error=Image.load_from_file(path)
-	if error==null:return Resouses.ERROR_LOAD_IMAGE
-	else:return ImageTexture.create_from_image(error)
 
 func load_screenshot_album(seccion_seed:String=\"1923659980\")->void:#debera tener la seed como argumento para usarla de seccion
 	seed_=seccion_seed
@@ -37,12 +37,11 @@ func load_screenshot_album(seccion_seed:String=\"1923659980\")->void:#debera ten
 	if _keys.size()>0:
 		for img in seccion_keys:
 			var path=con.get_value(seccion_seed,img)
-			if _keys.has(path):images[path]=[last[path]]
-			else:images[path]=load_image(path)
+			images[path]=last[path] if _keys.has(path) else Resouses.load_image(path)
 	else:
 		for img in seccion_keys:
 			var path=con.get_value(seccion_seed,img)
-			images[path]=load_image(path)
+			images[path]=Resouses.load_image(path)
 	update_images_data()
 	plus.disabled=true
 	update_texture()
@@ -118,7 +117,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

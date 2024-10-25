@@ -27,10 +27,15 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 Base="*res://data base/Base.gd"
 Resouses="*res://globals/resouses.gd"
 Iniload="*res://globals/iniload.gd"
+Calculator="*res://globals/calculator.gd"
 
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom="res://ui/main_theme.tres"
 
 [input]
 
@@ -112,17 +117,12 @@ locale/translations=PackedStringArray("res://translation/UI.en.translation", "re
 
 [layer_names]
 
-2d_physics/layer_1="air3"
-2d_physics/layer_2="air2"
-2d_physics/layer_3="air1"
-2d_physics/layer_4="ground1"
-2d_physics/layer_5="ground0"
-2d_physics/layer_6="ground-1"
-2d_physics/layer_7="water1"
-2d_physics/layer_8="water2"
-2d_physics/layer_9="water3"
-2d_physics/layer_10="digimon"
-2d_physics/layer_11="attack"
+2d_physics/layer_1="ground_item"
+2d_physics/layer_2="gorund_entity"
+2d_physics/layer_3="water_item"
+2d_physics/layer_4="water_entity"
+2d_physics/layer_5="air_item"
+2d_physics/layer_6="air__entity"
 
 [rendering]
 

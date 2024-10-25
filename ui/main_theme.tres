@@ -1,16 +1,15 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://dfgp1bjmu7n1e"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://dfgp1bjmu7n1e"]
 
+[ext_resource type="Texture2D" uid="uid://p7y3m5qgooiy" path="res://img/ui/fondo_de_panell.png" id="1_j8d41"]
 [ext_resource type="Texture2D" uid="uid://dmpt3367h2w8j" path="res://img/ui/panel.png" id="1_yeiwe"]
-[ext_resource type="Texture2D" uid="uid://ddt5kiuliqioc" path="res://img/ui/scroll_cuadradito.png" id="2_cihli"]
-[ext_resource type="Texture2D" uid="uid://ce7vmtvypguvi" path="res://img/ui/scroll_gauge.png" id="3_2cbc7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bs6h7"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7t7gh"]
-load_path = "res://.godot/imported/IMG-20240702-WA0023.jpg-d9adf36c9b1282799d69dd8321f77c1b.ctex"
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ivw12"]
-texture = SubResource("CompressedTexture2D_7t7gh")
+texture = ExtResource("1_yeiwe")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gq473"]
+texture = ExtResource("1_j8d41")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q27mq"]
 texture = ExtResource("1_yeiwe")
@@ -25,14 +24,7 @@ border_width_right = 2
 border_color = Color(0.427451, 0.376471, 0.352941, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whj7r"]
-bg_color = Color(0.427451, 0.376471, 0.352941, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nxf2f"]
-texture = ExtResource("2_cihli")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t8n85"]
-texture = ExtResource("3_2cbc7")
-texture_margin_left = 78.0
+bg_color = Color(0.321569, 0.27451, 0.25098, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_mlp5b"]
 color = Color(0, 0.858824, 1, 1)
@@ -41,6 +33,7 @@ vertical = true
 [resource]
 Button/styles/normal = SubResource("StyleBoxTexture_bs6h7")
 Panel/styles/panel = SubResource("StyleBoxTexture_ivw12")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_gq473")
 TabBar/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabBar/colors/font_selected_color = Color(0, 0, 0, 1)
 TabBar/colors/font_unselected_color = Color(0, 0, 0, 1)
@@ -53,9 +46,4 @@ TabContainer/styles/panel = SubResource("StyleBoxTexture_q27mq")
 TabContainer/styles/tab_focus = SubResource("StyleBoxFlat_2ugk0")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_l76gr")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_whj7r")
-VScrollBar/styles/grabber = SubResource("StyleBoxTexture_nxf2f")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_nxf2f")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_nxf2f")
-VScrollBar/styles/scroll = SubResource("StyleBoxTexture_t8n85")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_t8n85")
 VSeparator/styles/separator = SubResource("StyleBoxLine_mlp5b")

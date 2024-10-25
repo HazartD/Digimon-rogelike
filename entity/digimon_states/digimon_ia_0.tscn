@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://cp6hbt8qubrvn"]
+
+[ext_resource type="Script" path="res://classes/state_machine/state_machine_digimon.gd" id="1_qysav"]
+[ext_resource type="Script" path="res://classes/state_machine/state_digimon.gd" id="2_f82sf"]
+[ext_resource type="Script" path="res://entity/digimon_states/diying.gd" id="3_vsmob"]
+[ext_resource type="Script" path="res://entity/digimon_states/evolving.gd" id="4_8p4mr"]
+[ext_resource type="Script" path="res://entity/digimon_states/hitted.gd" id="5_c78ec"]
+
+[node name="StateMachine" type="Node"]
+editor_description = "el estado de persecusion o escape deberia tener el parametro de ese digimon creo"
+script = ExtResource("1_qysav")
+default_state = NodePath("wandering")
+
+[node name="wandering" type="Node" parent="."]
+script = ExtResource("2_f82sf")
+
+[node name="Diying" type="Node" parent="."]
+script = ExtResource("3_vsmob")
+
+[node name="Evolving" type="Node" parent="."]
+script = ExtResource("4_8p4mr")
+
+[node name="Hitted" type="Node" parent="."]
+script = ExtResource("5_c78ec")

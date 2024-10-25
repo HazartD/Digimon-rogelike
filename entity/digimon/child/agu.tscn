@@ -1,28 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3hwgblcofgf2"]
+[gd_scene load_steps=14 format=3 uid="uid://b3hwgblcofgf2"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_yf17y"]
 [ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_8ans4"]
-[ext_resource type="Texture2D" uid="uid://b1xfe4ha18ft" path="res://img/shader/dead_noise_2.tres" id="2_k8s1w"]
-[ext_resource type="Texture2D" uid="uid://dq3tjt388culg" path="res://img/shader/dead_noise_1.tres" id="3_mkfy5"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://other scene/attack/attack_range.tscn" id="4_1gvd5"]
 [ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://other scene/attack/attack_melee.tscn" id="5_nn6d5"]
-[ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://other scene/bar.tscn" id="6_77ohc"]
+[ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://ui/bar.tscn" id="6_77ohc"]
 [ext_resource type="Script" path="res://entity/visible.gd" id="8_vy12a"]
 [ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="76_nxe34"]
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="76_wuekr"]
 [ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="77_05iou"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_axdia"]
 shader = ExtResource("2_8ans4")
-shader_parameter/progress = 0.0
+shader_parameter/progress = null
 shader_parameter/strength = 1.0
 shader_parameter/color = Vector3(0, 0, 0)
-shader_parameter/noise_tex_normal = ExtResource("3_mkfy5")
-shader_parameter/noise_tex = ExtResource("2_k8s1w")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjlny"]
-radius = 1435.0
+radius = 1309.7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_20vgc"]
 size = Vector2(305, 147)
@@ -31,9 +26,12 @@ size = Vector2(305, 147)
 size = Vector2(215, 214)
 
 [node name="agu" type="CharacterBody2D"]
+editor_description = "Ya se porque tendre que usar state machine.
+Tengo que tener una para el player y otra para las IA de cada digimon.
+Si se puede, poner la maquina como hija del core para que no tenga que cambiar con cada body"
 position = Vector2(0, 37)
-collision_layer = 61
-collision_mask = 57
+collision_layer = 2
+collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_yf17y")
 groud_move = true
@@ -47,7 +45,7 @@ libre=blanco
 Va=azul
 Vi=rojo
 Da=amarillo"
-material = SubResource("ShaderMaterial_sto4q")
+material = SubResource("ShaderMaterial_axdia")
 position = Vector2(0, 2)
 sprite_frames = ExtResource("76_nxe34")
 animation = &"del_down"
@@ -107,7 +105,6 @@ layout_mode = 2
 type = 2
 
 [node name="prepcion" type="Area2D" parent="."]
-visible = false
 
 [node name="prepcion" type="CollisionShape2D" parent="prepcion"]
 shape = SubResource("CircleShape2D_tjlny")

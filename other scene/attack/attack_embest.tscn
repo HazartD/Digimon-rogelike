@@ -22,7 +22,7 @@ func _physics_process(_delta)->void:
 	if digimon_owner.dir!=Vector2i.ZERO:digimon_owner.attack(accion)
 func search_digimon_in_range_and_hit_they()->void:
 	for digi in digimon_owner.interaction_area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner and !attacked.has(digi):
-		digi.core.hit(powered(),get_dir(),digimon_owner,physic)
+		digi.core.state_machine.hitted(powered(),get_dir(),digimon_owner,physic)
 		attacked.append(digi)
 "
 

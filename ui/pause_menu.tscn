@@ -1,25 +1,154 @@
-[gd_scene load_steps=3 format=3 uid="uid://csrathj060p2o"]
+[gd_scene load_steps=2 format=3 uid="uid://csrathj060p2o"]
 
 [ext_resource type="Script" path="res://ui/pause_menu.gd" id="1_4goeq"]
-[ext_resource type="Theme" uid="uid://dfgp1bjmu7n1e" path="res://ui/main_theme.tres" id="1_tq4sy"]
 
-[node name="PauseMenu" type="MarginContainer"]
+[node name="PauseMenu" type="Control"]
 process_mode = 3
 visible = false
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_tq4sy")
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 100
 script = ExtResource("1_4goeq")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -431.0
+offset_top = 38.0
+offset_right = -66.0
+offset_bottom = 61.0
+grow_horizontal = 0
+text = "last_screen"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -449.0
+offset_top = -287.0
+offset_right = -66.0
+offset_bottom = 288.0
+grow_horizontal = 0
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="0" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="1" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="2" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="3" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="4" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="5" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="6" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="7" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="8" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="9" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -58.0
+offset_right = 384.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+text = "esc"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 37.0
+offset_right = 99.0
+offset_bottom = 60.0
+text = "stats"
 
 [connection signal="ready" from="." to="." method="hide"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

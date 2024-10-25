@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2b4yayqxx6qq"]
+[gd_scene load_steps=15 format=3 uid="uid://c2b4yayqxx6qq"]
 
 [ext_resource type="Script" path="res://classes/digimon_body.gd" id="1_cb60m"]
 [ext_resource type="SpriteFrames" uid="uid://bqrs2no0y76k5" path="res://img/animation_resouse/agu.tres" id="2_etrb6"]
 [ext_resource type="PackedScene" uid="uid://bairja1m5stjv" path="res://other scene/attack/attack_range.tscn" id="3_2yfn6"]
 [ext_resource type="PackedScene" uid="uid://druvk3tfimras" path="res://other scene/attack/attack_melee.tscn" id="4_cdrri"]
 [ext_resource type="PackedScene" uid="uid://bvnkk5pbk51hq" path="res://other scene/attack/attack_embest.tscn" id="5_qa4lt"]
-[ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://other scene/bar.tscn" id="6_pcown"]
+[ext_resource type="PackedScene" uid="uid://c7o6wrw0713c5" path="res://ui/bar.tscn" id="6_pcown"]
 [ext_resource type="Script" path="res://entity/interaction_area.gd" id="6_xpetf"]
 [ext_resource type="AudioStream" uid="uid://dgixy5ck15jcp" path="res://audio/attack/Drash_-_Ahh_mi_ano1.mp3" id="7_1eq4t"]
+[ext_resource type="Script" path="res://entity/visible.gd" id="7_04fvi"]
 [ext_resource type="Texture2D" uid="uid://cwl3m7lsws8w1" path="res://img/150px-Greymon_New_Century.png" id="8_lt01e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sto4q"]
@@ -100,6 +101,7 @@ shape = SubResource("CircleShape2D_tjlny")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(26.8, 25)
 rect = Rect2(-5, -6, 18, 24)
+script = ExtResource("7_04fvi")
 
 [node name="interaction_area" type="Area2D" parent="."]
 script = ExtResource("6_xpetf")

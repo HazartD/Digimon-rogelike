@@ -1,28 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1hhpun2njuva"]
+[gd_scene load_steps=11 format=3 uid="uid://c1hhpun2njuva"]
 
 [ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_lcl16"]
 [ext_resource type="PackedScene" uid="uid://b3hwgblcofgf2" path="res://entity/digimon/child/agu.tscn" id="2_y6abx"]
-[ext_resource type="PackedScene" uid="uid://qawg8f1t8rq5" path="res://entity/digimon/adult/rare.tscn" id="3_6t5du"]
-[ext_resource type="Texture2D" uid="uid://d0di0atpgu4kx" path="res://img/Raremon.webp" id="3_urk74"]
+[ext_resource type="PackedScene" uid="uid://cp6hbt8qubrvn" path="res://entity/digimon_states/digimon_ia_0.tscn" id="3_5g23o"]
 [ext_resource type="PackedScene" uid="uid://cijy8axnp86ko" path="res://entity/player.tscn" id="4_d0nwv"]
 [ext_resource type="PackedScene" uid="uid://c2b4yayqxx6qq" path="res://entity/digimon/adult/grey.tscn" id="5_cmemj"]
 [ext_resource type="PackedScene" uid="uid://cy0p0g0phfsjv" path="res://entity/tama.tscn" id="7_v02ov"]
-
-[sub_resource type="GDScript" id="GDScript_y8pqb"]
-script/source = "extends Node2D
-#const BODY=preload(\"res://entity/digimon/child/agu.tscn\")
-#func _ready():
-	#var _t=get_tree().create_timer(2).timeout.connect(instancier)
-#
-#func instancier():
-	#for i in 10:
-		#var core=DigimonCORE.new()
-		#add_child(core)
-		#var body=BODY.instantiate()
-		#core.add_child(body)
-		#body.position=Vector2(randi_range(0,-1000),randi_range(0,1000))#Vector2(randi_range(-1000,1000),randi_range(-1000,1000))
-	##var _t=get_tree().create_timer(5).timeout.connect(instancier)
-"
 
 [sub_resource type="GDScript" id="GDScript_vl5ka"]
 script/source = "extends Area2D
@@ -47,32 +30,14 @@ func _on_body_entered(body):
 radius = 198.671
 
 [node name="room" type="Node2D"]
-script = SubResource("GDScript_y8pqb")
-
-[node name="rare" type="Node" parent="."]
-script = ExtResource("1_lcl16")
-attack = 3.5
-
-[node name="rare" parent="rare" instance=ExtResource("3_6t5du")]
-position = Vector2(1231, 349)
-
-[node name="Raremon" type="Sprite2D" parent="rare/rare"]
-position = Vector2(23, -1.99999)
-scale = Vector2(0.514286, 0.547778)
-texture = ExtResource("3_urk74")
-
-[node name="agu2" type="Node" parent="."]
-script = ExtResource("1_lcl16")
-
-[node name="digimon_body" parent="agu2" instance=ExtResource("2_y6abx")]
-position = Vector2(675, 408)
-attribute = 4
 
 [node name="grey" type="Node" parent="."]
 script = ExtResource("1_lcl16")
 
 [node name="grey" parent="grey" instance=ExtResource("5_cmemj")]
-position = Vector2(652.28, -252.69)
+position = Vector2(-343, 987)
+
+[node name="StateMachine" parent="grey" instance=ExtResource("3_5g23o")]
 
 [node name="player" parent="." instance=ExtResource("4_d0nwv")]
 
@@ -84,31 +49,44 @@ speed = 0.11
 [node name="digimon_body" parent="agu" instance=ExtResource("2_y6abx")]
 position = Vector2(-6975, -7959)
 
+[node name="StateMachine" parent="agu" instance=ExtResource("3_5g23o")]
+
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-965.839, -286.625)
 script = SubResource("GDScript_vl5ka")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-162.892, -558.252)
 shape = SubResource("CircleShape2D_uo1su")
 
 [node name="Area2D2" type="Area2D" parent="."]
-position = Vector2(-7144.55, -7514.85)
+position = Vector2(-5113, -7566)
 script = SubResource("GDScript_hkyxe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(-26, 0)
 shape = SubResource("CircleShape2D_r6mpt")
 
 [node name="DigimonCORE2" type="Node" parent="."]
 script = ExtResource("1_lcl16")
 
 [node name="tama" parent="DigimonCORE2" instance=ExtResource("7_v02ov")]
-position = Vector2(-158, 801)
+position = Vector2(382, 142)
 
 [node name="DigimonCORE" type="Node" parent="."]
 script = ExtResource("1_lcl16")
 
 [node name="tama" parent="DigimonCORE" instance=ExtResource("7_v02ov")]
-position = Vector2(-871, 343)
+position = Vector2(-830, 584)
+
+[node name="agu2" type="Node" parent="."]
+script = ExtResource("1_lcl16")
+life = 100.5
+speed = 0.11
+
+[node name="digimon_body" parent="agu2" instance=ExtResource("2_y6abx")]
+position = Vector2(-1671.32, 66.7686)
+
+[node name="StateMachine" parent="agu2" instance=ExtResource("3_5g23o")]
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]

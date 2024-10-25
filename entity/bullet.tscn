@@ -18,16 +18,17 @@ func set_data(powe,dig,spe,spr,phy:bool)->void:
 	$sprite.sprite_frames=spr
 
 func _physics_process(delta)->void:
-	position+=(dir*speed)*delta
+	position+=Calculator.movement_speed(dir,speed,delta,1)#(dir*speed)*delta
 func _on_sprite_sprite_frames_changed()->void:
-	$coli.shape.size=$sprite.sprite_frames.get_frame_texture($sprite.animation,0).get_size()
-	$Area2D/coli.shape.size=$sprite.sprite_frames.get_frame_texture($sprite.animation,0).get_size()
+	var sprite=$sprite
+	$coli.shape.size=sprite.sprite_frames.get_frame_texture(sprite.animation,0).get_size()
 func _on_body_entered(body)->void:
 	if body !=digimon_owner:
 		if body is DigimonBody:
 			#print(\"range attack of \",digimon_owner.name,digimon_owner.digimon_name,\" impact in \",body.name,body.digimon_name)
-			body.core.hit(power,dir,digimon_owner,physic)
+			body.core.state_machine.hitted(power,dir,digimon_owner,physic)
 			queue_free()
+		elif body is DigimonTama:body.hitted(int(power*0.01))
 		else:queue_free()
 "
 

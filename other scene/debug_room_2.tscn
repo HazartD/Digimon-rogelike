@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2cyl5v5cfb8e"]
+
+[ext_resource type="Script" path="res://classes/digimon_base.gd" id="1_6phi1"]
+[ext_resource type="PackedScene" uid="uid://b3hwgblcofgf2" path="res://entity/digimon/child/agu.tscn" id="2_n7veg"]
+[ext_resource type="PackedScene" uid="uid://cp6hbt8qubrvn" path="res://entity/digimon_states/digimon_ia_0.tscn" id="3_45twh"]
+[ext_resource type="PackedScene" uid="uid://cijy8axnp86ko" path="res://entity/player.tscn" id="4_yslaf"]
+
+[node name="DebugRoom2" type="Node2D"]
+
+[node name="DigimonBase" type="Node" parent="."]
+script = ExtResource("1_6phi1")
+
+[node name="agu" parent="DigimonBase" instance=ExtResource("2_n7veg")]
+position = Vector2(1349, -17)
+
+[node name="StateMachine" parent="DigimonBase" instance=ExtResource("3_45twh")]
+
+[node name="DigimonBase2" type="Node" parent="."]
+script = ExtResource("1_6phi1")
+
+[node name="agu" parent="DigimonBase2" instance=ExtResource("2_n7veg")]
+position = Vector2(-657, -16)
+
+[node name="StateMachine" parent="DigimonBase2" instance=ExtResource("3_45twh")]
+
+[node name="DigimonBase3" type="Node" parent="."]
+script = ExtResource("1_6phi1")
+
+[node name="agu" parent="DigimonBase3" instance=ExtResource("2_n7veg")]
+position = Vector2(550, 1493)
+
+[node name="StateMachine" parent="DigimonBase3" instance=ExtResource("3_45twh")]
+
+[node name="player" parent="." instance=ExtResource("4_yslaf")]

@@ -1,42 +1,29 @@
-[gd_scene load_steps=9 format=3 uid="uid://cy0p0g0phfsjv"]
+[gd_scene load_steps=4 format=3 uid="uid://cy0p0g0phfsjv"]
 
 [ext_resource type="Script" path="res://classes/tama.gd" id="1_q732y"]
-[ext_resource type="Shader" path="res://img/shader/dead.gdshader" id="2_if7ao"]
-[ext_resource type="Texture2D" uid="uid://b1xfe4ha18ft" path="res://img/shader/dead_noise_2.tres" id="3_fodpw"]
-[ext_resource type="Texture2D" uid="uid://dq3tjt388culg" path="res://img/shader/dead_noise_1.tres" id="4_t2lbt"]
-[ext_resource type="Texture2D" uid="uid://ppyqt3f8ng5u" path="res://img/400px-FolderContinent.jpeg" id="5_5k0pe"]
+[ext_resource type="Texture2D" uid="uid://bq86vxub8oy7q" path="res://img/test_tama.PNG" id="2_1tkcv"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4ebif"]
-friction = 0.34
-bounce = 0.4
-absorbent = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_37oeo"]
-shader = ExtResource("2_if7ao")
-shader_parameter/progress = 0.0
-shader_parameter/strength = 1.0
-shader_parameter/color = Vector3(0.7, 0.7, 0.7)
-shader_parameter/noise_tex_normal = ExtResource("4_t2lbt")
-shader_parameter/noise_tex = ExtResource("3_fodpw")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npsk1"]
-radius = 82.0
-height = 306.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k5yqc"]
+size = Vector2(82, 53)
 
 [node name="tama" type="RigidBody2D"]
-mass = 0.1
-physics_material_override = SubResource("PhysicsMaterial_4ebif")
+collision_layer = 0
+collision_mask = 3
 gravity_scale = 0.0
-linear_damp = 1.0
-angular_damp = 1.0
+max_contacts_reported = 10
+contact_monitor = true
 script = ExtResource("1_q732y")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.960784, 0.0784314, 1, 1)
-material = SubResource("ShaderMaterial_37oeo")
-position = Vector2(0.5, 18)
+editor_description = "debe tener una sola imagen y se le ponen los frames, no tiene tanta alteracion como para meterle un animated.
+En filas estan los tipos de tama, solo se avanza la coordenada x."
 scale = Vector2(0.997537, 0.911765)
-texture = ExtResource("5_5k0pe")
+texture = ExtResource("2_1tkcv")
+hframes = 5
+vframes = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_npsk1")
+shape = SubResource("RectangleShape2D_k5yqc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

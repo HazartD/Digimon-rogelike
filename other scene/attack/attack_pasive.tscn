@@ -17,8 +17,8 @@ func positioning()->void:
 
 func pulse()->void:
 	for digi in $area.get_overlapping_bodies():if digi is DigimonBody and digi !=digimon_owner:
-		if has_limit_level: if digi.Evo_level<=limit_level: digi.core.hit(powered()*plus_power_multipicator,Vector2.ZERO,digimon_owner,physic,true)
-		else:digi.core.hit(powered()/2,Vector2.ZERO,digimon_owner,physic)
+		if has_limit_level: if digi.Evo_level<=limit_level: digi.core.state_machine.hitted(powered()*plus_power_multipicator,Vector2.ZERO,digimon_owner,physic,true)
+		else:digi.core.state_machine.hitted(powered()/2,Vector2.ZERO,digimon_owner,physic)
 
 func timer()->void:
 	if kooldown==0:

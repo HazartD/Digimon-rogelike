@@ -1,12 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cijy8axnp86ko"]
+[gd_scene load_steps=9 format=3 uid="uid://cijy8axnp86ko"]
 
 [ext_resource type="Script" path="res://entity/player.gd" id="1_5f2fg"]
 [ext_resource type="PackedScene" uid="uid://b3hwgblcofgf2" path="res://entity/digimon/child/agu.tscn" id="2_ayi4k"]
 [ext_resource type="PackedScene" uid="uid://csrathj060p2o" path="res://ui/pause_menu.tscn" id="3_ss7tv"]
+[ext_resource type="Script" path="res://classes/state_machine/state_machine_digimon.gd" id="4_m00qr"]
+[ext_resource type="Script" path="res://entity/digimon_states/diying.gd" id="5_5qc44"]
+[ext_resource type="Script" path="res://entity/digimon_states/evolving.gd" id="6_0ptpg"]
+[ext_resource type="Script" path="res://entity/digimon_states/hitted.gd" id="8_w2uex"]
+
+[sub_resource type="GDScript" id="GDScript_dlhs3"]
+script/source = "extends StateDigimon
+func on_physics_process(_delta)->void:
+	@warning_ignore(\"narrowing_conversion\")
+	digimon.dir.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
+	@warning_ignore(\"narrowing_conversion\")
+	digimon.dir.y = Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\")
+func on_input(event)->void:#puede que haga que cada ataque sea un state, tambien creo que con eso se podrian hacer rompibles los ataques
+	for i in digimon.accions.keys():if event.is_action_pressed(i) and !digimon.sprite.animation.begins_with(\"A\"):if digimon.accions[i].reposo<=0.0 and digimon.core.current_energy>=digimon.accions[i].costo:digimon.accions[i].action()
+"
 
 [node name="player" type="Node"]
 script = ExtResource("1_5f2fg")
-Evo_level = 2
 
 [node name="agu" parent="." instance=ExtResource("2_ayi4k")]
 
@@ -15,6 +29,26 @@ process_mode = 3
 layer = 2
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("3_ss7tv")]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -64.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_m00qr")
+default_state = NodePath("free")
+
+[node name="Diying" type="Node" parent="StateMachine"]
+script = ExtResource("5_5qc44")
+
+[node name="free" type="Node" parent="StateMachine"]
+script = SubResource("GDScript_dlhs3")
+
+[node name="Evolving" type="Node" parent="StateMachine"]
+script = ExtResource("6_0ptpg")
+
+[node name="Hitted" type="Node" parent="StateMachine"]
+script = ExtResource("8_w2uex")
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

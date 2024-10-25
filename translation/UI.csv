@@ -16,9 +16,11 @@ exit,Salir,Quit
 lan,Languaje,Idioma
 yes,Si,Yes
 not,No,Not
+esc,Presiona "esc" para volver,Press "esc" to resume
 config,Configuracion,Settings
 credi,Creditos,Credits
 data,Tus Datos,Your Data
 UNL,Desbloqueados,Unlocked
 GAL,Galeria,Gallery
 LOG,Registro,Log
+last_screen,Ultimas capturas de pantalla,Last screenshots

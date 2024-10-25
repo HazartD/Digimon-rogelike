@@ -1,9 +1,8 @@
 class_name Player extends DigimonCORE
 const MENU:PackedScene=preload("res://ui/pause_menu.tscn")
 #var data:Array[float]=[]
-var alive:bool=true
 var line_id:Array[int]=[0,16,3]
-@onready var ui=$UI
+#@onready var ui=$UI
 func _init()->void:
 	var plus=Iniload.statsplus
 	for i in plus.keys(): set(i,plus[i])
@@ -11,13 +10,20 @@ func _init()->void:
 func _on_child_entered_tree(node)->void:
 	if node is DigimonBody:
 		line_id.append(node.Digimon_Id)
-		node.player=true
 		var cam=Camera2D.new()
 		#var l=AudioListener2D.new()
 		#l.make_current()
 		#node.add_child(l)
 		node.add_child(cam)
-		cam.zoom=Vector2(0.5,0.5)
+		cam.zoom=Vector2(0.25,0.25)
+
+
+func _on_tree_exiting()->void:pass#	if alive:dead()
+
+#func ded(a:DigimonBody)->void:
+	#await get_tree().process_frame
+	#await get_tree().process_frame
+	#if current_life<=0:dead(a.Digimon_Id)
 
 func dead(cause="exit game")->void:
 	var save_data={
@@ -36,11 +42,3 @@ func dead(cause="exit game")->void:
 	"dead cause":cause}
 	Iniload.savedead(save_data)
 	line_id.clear()
-	alive=false
-
-func _on_tree_exiting()->void:pass#	if alive:dead()
-
-#func ded(a:DigimonBody)->void:
-	#await get_tree().process_frame
-	#await get_tree().process_frame
-	#if current_life<=0:dead(a.Digimon_Id)
